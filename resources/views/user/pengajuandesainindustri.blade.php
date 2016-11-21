@@ -71,7 +71,7 @@
           <div class="row">
             <label class="col-xs-2 control-label">Pengajuan dengan hak prioritas? :</label>
             <div class="col-xs-10">
-              <input type="checkbox" name="denganprioritas" id="denganprioritas" <i>*) centang jika menggunakan</i>
+              <input type="checkbox" name="denganprioritas" id="denganprioritas"> <i>*) centang jika menggunakan hak prioritas</i>
             </div>
           </div>
           <div class="row form-group">
