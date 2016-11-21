@@ -13,4 +13,14 @@
 
 Route::get('/', function () {
     return view('welcome');
-});		
+});
+Route::get('/login', function(){
+  return view('layouts.loginlayout');
+});
+Route::get('/beranda', function(){
+  return view('layouts.userlayout');
+});
+
+Route::get('/pengajuanindustri', function(){
+  return view('user.pengajuandesainindustri');
+});
