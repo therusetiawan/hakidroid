@@ -24,3 +24,12 @@ Route::get('/beranda', function(){
 Route::get('/pengajuanindustri', function(){
   return view('user.pengajuandesainindustri');
 });
+
+// Administrator
+Route::get('/administrator', function() {
+  return view('admin.index');
+});
+
+Route::get('/administrator/pengajuanindustri', function() {
+  return view('admin.pengajuanindustri');
+});
