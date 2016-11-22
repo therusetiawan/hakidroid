@@ -51,7 +51,7 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          
+
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -62,7 +62,7 @@
               <!-- User image -->
               <li class="user-header">
                 <img src="/images/default.jpg" class="img-circle" alt="User Image"/>
-                
+
                 <p>
                   Admin
                   <small>Admin</small>
@@ -96,33 +96,39 @@
         <div class="pull-left info">
           <p>Admin
           <br><strong>Admin</strong></p>
-          
+
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MENU</li>
-        <li>
+        <li class="treeview">
           <a href="/administrator">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li>
-          <a href="/administrator/usulan">
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-cubes"></i> <span>Usulan</span>
+            <ul class="treeview-menu">
+                <li><a href="{{ url('/administrator/pengajuanindustri') }}"><i class="fa fa-circle-o"></i>Desain Industri</a></li>
+            </ul>
           </a>
         </li>
         <li>
           <a href="/administrator/input-usulan">
             <i class="fa fa-database"></i> <span>[Test] Input Usulan</span>
           </a>
+
         </li>
       </ul>
     </section>
     <!-- /.sidebar -->
   </aside>
 
-  @yield('content')
+  <div class="content-wrapper">
+    @yield('content')
+  </div>
 
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
