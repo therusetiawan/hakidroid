@@ -1,0 +1,11 @@
+.web-header {
+  margin-bottom: 20px;
+  margin-top: -10px;
+}
+body {
+  background-color: #ecf0f5;
+}
+.white-box {
+  background-color: #fff;
+  padding: 10px;
+}

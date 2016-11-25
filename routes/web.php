@@ -12,13 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.index');
 });
 Route::get('/login', function(){
   return view('layouts.loginlayout');
 });
 Route::get('/beranda', function(){
-  return view('layouts.userlayout');
+  return view('user.beranda');
 });
 
 Route::get('/pengajuanindustri', function(){
@@ -32,4 +32,8 @@ Route::get('/administrator', function() {
 
 Route::get('/administrator/pengajuanindustri', function() {
   return view('admin.pengajuanindustri');
+});
+
+Route::get('/administrator/pengajuanindustri/1', function() {
+  return view('admin.detailpengajuanindustri');
 });

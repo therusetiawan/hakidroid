@@ -1,7 +1,8 @@
 @extends('layouts.userlayout')
 
 @section('header')
-  {{-- <link rel="stylesheet" href="http://designmodo.github.io/Flat-UI/dist/css/flat-ui.css" media="screen" title="no title"> --}}
+  <link rel="stylesheet" href="{{ asset('/admin/plugins/datepicker/datepicker3.css') }}">
+
   <style media="screen">
     body {
       background-color: #ecf0f5;
@@ -33,7 +34,9 @@
               Konsultan Haki :
             </label>
             <div class="col-sm-10">
-              <input type="checkbox" name="dengankonsultan" id="dengankonsultan" value=""> <i>*) Centang jika menggunakan konsultan HAKI</i>
+              <div class="checkbox">
+                <label> <input type="checkbox" name="dengankonsultan" id="dengankonsultan"> <i>*) Centang jika menggunakan konsultan HAKI</i></label>
+              </div>
               <input class="form-control" type="text" id="konsultanid" name="konsultan" value="" placeholder="Nama Konsultan HAKI">
             </div>
           </div>
@@ -71,7 +74,9 @@
           <div class="row">
             <label class="col-xs-2 control-label">Pengajuan dengan hak prioritas? :</label>
             <div class="col-xs-10">
-              <input type="checkbox" name="denganprioritas" id="denganprioritas"> <i>*) centang jika menggunakan hak prioritas</i>
+              <div class="checkbox">
+                <label><input type="checkbox" name="denganprioritas" id="denganprioritas"> <i>*) centang jika menggunakan hak prioritas</i></label>
+              </div>
             </div>
           </div>
           <div class="row form-group">
@@ -89,7 +94,7 @@
                     Tanggal penerimaan permohonan pertama kali:
                   </label>
                   <div class="col-sm-12">
-                    <input class="form-control" type="text"  name="tglpermohonan" placeholder="Tanggal penerimaan permohonan">
+                    <input class="datepicker form-control" type="text"  name="tglpermohonan" placeholder="Tanggal penerimaan permohonan">
                   </div>
                 </div>
                 <div class="col-sm-4">
@@ -101,6 +106,18 @@
                   </div>
                 </div>
               </div>
+          </div>
+
+          <div class="row form-group">
+            <label class="col-sm-2 label-control">Kelas Industri</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="kelasindusri">
+                <option value="">--- Pilih Kelas Industri ---</option>
+                <option value="">Hardware</option>
+                <option value="">Software</option>
+                <option value="">Kerajinan</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -177,6 +194,8 @@
 @endsection
 
 @section('js')
+  <script src="{{ asset('/admin/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
+
   <script type="text/javascript">
     $('.add-orang').click(function() {
       var form1 = '<td><input type="text" class="form-control" name="namadesainer[]" placeholder="Nama Desainer"></td>';
@@ -210,5 +229,10 @@
       }
     });
 
+
+    //datepciker
+    $('.datepicker').datepicker({
+       autoclose: true
+    });
   </script>
 @endsection
