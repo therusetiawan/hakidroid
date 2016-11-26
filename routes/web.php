@@ -11,25 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/login', function(){
-  return view('layouts.loginlayout');
-});
-Route::get('/beranda', function(){
-  return view('layouts.userlayout');
-});
 
-Route::get('/pengajuanindustri', function(){
-  return view('user.pengajuandesainindustri');
+
+Route::group(array('prefix'=>'/'), function(){
+	Route::get('/', 'PengusulController@getIndex')->name('pengusul_index');
+	Route::get('login', 'PengusulController@getLogin')->name('pengusul_login');
+	Route::post('login', 'PengusulController@postLogin')->name('pengusul_login_post');
+	Route::get('beranda', 'PengusulController@getBeranda')->name('pengusul_beranda');
+	Route::get('pengajuan-industri', 'PengusulController@getPengajuanDesainIndustri')->name('pengusul_desain_industri_pengajuan');
+	Route::post('pengajuan-industri', 'PengusulController@postPengajuanDesainIndustri')->name('pengusul_desain_industri_pengajuan_post');
 });
 
 // Administrator
 Route::get('/administrator', function() {
-  return view('admin.index');
+  	return view('admin.index');
 });
 
 Route::get('/administrator/pengajuanindustri', function() {
-  return view('admin.pengajuanindustri');
+  	return view('admin.pengajuanindustri');
+});
+
+Route::get('/administrator/pengajuanindustri/1', function() {
+  	return view('admin.detailpengajuanindustri');
 });

@@ -32,8 +32,9 @@ class CreateTableDesainIndustri extends Migration
             $table->string('lampiran_bukti_pemilikan_hak')->nullable();
             $table->string('lampiran_bukti_prioritas_dan_terjemahan')->nullable();
             $table->string('lampiran_dokumen_desain_industri')->nullable();
-            $table->text('uraian_desian_industri');
-            $table->text('contoh_fisik')->nullable();
+            $table->string('gambar_desain_industri', 255)->nullable();
+            $table->string('uraian_desian_industri', 255)->nullable();
+            $table->string('contoh_fisik', 255)->nullable();
             $table->timestamps();
 
             $table->foreign('biodata_id')->references('id')->on('biodata')->onUpdate('cascade')->onDelete('cascade');

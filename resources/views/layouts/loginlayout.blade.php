@@ -38,19 +38,20 @@
   <div class="login-box-body">
     <p class="login-box-msg">Masuk untuk menggunakan HakiDroid</p>
 
-    <form action="#" method="post">
+    <form action="{{Route('pengusul_login_post')}}" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="email" class="form-control" placeholder="Email" name="email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" class="form-control" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
 
         <!-- /.col -->
         <div class="col-xs-4">
+          {{csrf_field()}}
           <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
         </div>
         <!-- /.col -->
@@ -59,7 +60,7 @@
 
     <!-- /.social-auth-links -->
 
-    <a href="{{url('/registernew')}}" class="text-center">Daftar Akun</a>
+    <a href="" class="text-center">Daftar Akun</a>
 
   </div>
   <!-- /.login-box-body -->
