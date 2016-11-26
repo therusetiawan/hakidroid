@@ -21,7 +21,9 @@ Route::group(array('prefix'=>'/'), function(){
 	Route::get('pengajuan-industri', 'PengusulController@getPengajuanDesainIndustri')->name('pengusul_desain_industri_pengajuan');
 	Route::post('pengajuan-industri', 'PengusulController@postPengajuanDesainIndustri')->name('pengusul_desain_industri_pengajuan_post');
 });
-
+Route::get('/pengajuanpaten', function(){
+  return view('user.pengajuanpaten');
+});
 // Administrator
 Route::get('/administrator', function() {
   	return view('admin.index');
@@ -31,6 +33,14 @@ Route::get('/administrator/pengajuanindustri', function() {
   	return view('admin.pengajuanindustri');
 });
 
+Route::get('/administrator/pengajuanpaten', function() {
+  return view('admin.pengajuanpaten');
+});
+
 Route::get('/administrator/pengajuanindustri/1', function() {
   	return view('admin.detailpengajuanindustri');
+});
+
+Route::get('/administrator/pengajuanpaten/1', function() {
+  return view('admin.detailpengajuanpaten');
 });

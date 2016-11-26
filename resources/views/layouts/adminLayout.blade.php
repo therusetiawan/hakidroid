@@ -112,6 +112,7 @@
             <i class="fa fa-cubes"></i> <span>Usulan</span>
             <ul class="treeview-menu">
                 <li><a href="{{ url('/administrator/pengajuanindustri') }}"><i class="fa fa-circle-o"></i>Desain Industri</a></li>
+                <li><a href="{{ url('/administrator/pengajuanpaten') }}"><i class="fa fa-circle-o"></i>Hak Paten</a></li>
             </ul>
           </a>
         </li>
