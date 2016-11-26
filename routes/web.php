@@ -24,7 +24,9 @@ Route::get('/beranda', function(){
 Route::get('/pengajuanindustri', function(){
   return view('user.pengajuandesainindustri');
 });
-
+Route::get('/pengajuanpaten', function(){
+  return view('user.pengajuanpaten');
+});
 // Administrator
 Route::get('/administrator', function() {
   return view('admin.index');
@@ -34,6 +36,14 @@ Route::get('/administrator/pengajuanindustri', function() {
   return view('admin.pengajuanindustri');
 });
 
+Route::get('/administrator/pengajuanpaten', function() {
+  return view('admin.pengajuanpaten');
+});
+
 Route::get('/administrator/pengajuanindustri/1', function() {
   return view('admin.detailpengajuanindustri');
+});
+
+Route::get('/administrator/pengajuanpaten/1', function() {
+  return view('admin.detailpengajuanpaten');
 });
