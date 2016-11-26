@@ -6,6 +6,55 @@
     <h3 class="title">Detail Pengajuan : Scantour <small class="label bg-red pull-right"><i class="fa fa-close"></i> Belum Terverifikasi</small></h3>
   </div>
   <div class="content">
+
+    {{--  Boox Data Diri --}}
+    <div class="box box-primary">
+      <div class="box-header">
+        <h3 class="box-title">Data Diri Pengaju</h3>
+      </div>
+      <div class="box-body">
+        <div class="row form-group">
+          <label class="col-sm-2 control-label">
+            Nama :
+          </label>
+          <div class="col-sm-10">
+            <p>Kokas</p>
+          </div>
+          <label class="col-sm-2 control-label">
+            Alamat :
+          </label>
+          <div class="col-sm-10">
+            <p>Kokas</p>
+          </div>
+          <label class="col-sm-2 control-label">
+            Kewarganegaraan :
+          </label>
+          <div class="col-sm-10">
+            <p>Kokas</p>
+          </div>
+          <label class="col-sm-2 control-label">
+            Telepon :
+          </label>
+          <div class="col-sm-10">
+            <p>Kokas</p>
+          </div>
+          <label class="col-sm-2 control-label">
+            NPWP :
+          </label>
+          <div class="col-sm-10">
+            <p>Kokas</p>
+          </div>
+          <label class="col-sm-2 control-label">
+            Nomor Permohonan :
+          </label>
+          <div class="col-sm-10">
+            <p>Kokas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{-- Box Data Pengajuan --}}
     <div class="box box-primary">
       <div class="box-header with-border">
         <h3 class="box-title">Data Desain Industri</h3>
@@ -34,16 +83,9 @@
             Desainer
           </label>
           <div class="col-sm-10">
-            <table class="table table-bordered">
-              <tr>
-                <td>
-                  Anjasmoro Adi Nugroho
-                </td>
-                <td>
-                  Indonesia
-                </td>
-              </tr>
-            </table>
+            <ol>
+              <li>Anjasmoro Adi Nugroho (Indonesia)</li>
+            </ol>
           </div>
         </div>
 
