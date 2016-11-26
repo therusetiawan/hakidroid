@@ -17,11 +17,13 @@ class CreateTableBiodata extends Migration
             $table->increments('id');
             $table->string('nama', 100);
             $table->string('kewarganegaraan', 50);
+            $table->string('npwp', 50)->nullable();
             $table->text('alamat');
             $table->string('email', 80);
             $table->string('no_hp', 12);
-            $table->string('telepon_fax', 20);
-            $table->string('username', 50);
+            $table->string('telepon_fax', 20)->nullable();
+            $table->string('username', 50)->nullable();
+            $table->string('api_token', 60);
             $table->string('password');
             $table->timestamps();
         });

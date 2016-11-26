@@ -32,7 +32,7 @@ class CreateTableDesainIndustriPendesain extends Migration
     public function down()
     {
         Schema::table('desain_industri_pendesain', function($table){
-            $table->dropForeign('desain_industri_id');
+            $table->dropForeign(['desain_industri_id']);
         });
         
         Schema::dropIfExists('desain_industri_pendesain');

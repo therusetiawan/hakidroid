@@ -45,6 +45,17 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        'pengusul' => [
+            'driver' => 'session',
+            'provider' => 'pengusul',
+        ],
+
+        'api_pengusul' => [
+            'driver' => 'token',
+            'provider' => 'pengusul',
+        ],
+
     ],
 
     /*
@@ -68,6 +79,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'pengusul' => [
+            'driver' => 'eloquent',
+            'model' => App\Biodata::class,
         ],
 
         // 'users' => [

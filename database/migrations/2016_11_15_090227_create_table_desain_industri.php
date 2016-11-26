@@ -19,22 +19,21 @@ class CreateTableDesainIndustri extends Migration
             $table->date('tanggal_penerimaan');
             $table->text('nomor_permohonan');
             $table->integer('biodata_id')->unsigned();
-            $table->string('npwp', 50);
             $table->boolean('konsultan_hki');
             $table->integer('konsultan_hki_id')->unsigned();
             $table->text('judul_desain_industri');
             $table->boolean('hak_prioritas');
-            $table->string('negara', 50);
-            $table->date('tanggal_penerimaan_permohonan_pertama_kali');
-            $table->string('nomor_prioritas', 50);
+            $table->string('negara', 50)->nullable();
+            $table->date('tanggal_penerimaan_permohonan_pertama_kali')->nullable();
+            $table->string('nomor_prioritas', 50)->nullable();
             $table->string('kelas_desain_industri', 200);
-            $table->string('lampiran_surat_kuasa');
-            $table->string('lampiran_surat_pernyataan_pengalihan_hak');
-            $table->string('lampiran_bukti_pemilikan_hak');
-            $table->string('lampiran_bukti_prioritas_dan_terjemahan');
-            $table->string('lampiran_dokumen_desain_industri');
-            $table->string('uraian_desian_industri');
-            $table->string('contoh_fisik');
+            $table->string('lampiran_surat_kuasa')->nullable();
+            $table->string('lampiran_surat_pernyataan_pengalihan_hak')->nullable();
+            $table->string('lampiran_bukti_pemilikan_hak')->nullable();
+            $table->string('lampiran_bukti_prioritas_dan_terjemahan')->nullable();
+            $table->string('lampiran_dokumen_desain_industri')->nullable();
+            $table->text('uraian_desian_industri');
+            $table->text('contoh_fisik')->nullable();
             $table->timestamps();
 
             $table->foreign('biodata_id')->references('id')->on('biodata')->onUpdate('cascade')->onDelete('cascade');
@@ -52,10 +51,10 @@ class CreateTableDesainIndustri extends Migration
     public function down()
     {
         Schema::table('desain_industri', function($table){
-            $table->dropForeign('biodata_id');
-            $table->dropForeign('konsultan_hki_id');
+            $table->dropForeign(['biodata_id']);
+            $table->dropForeign(['konsultan_hki_id']);
         });
 
-        Schema::dropIfExists('desain_industri');
+        
     }
 }

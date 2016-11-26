@@ -8,6 +8,9 @@ class DesainIndustri extends Model
 {
     protected $table = 'desain_industri';
 
+    protected $dates = array('tanggal_permohonan', 'tanggal_penerimaan',
+        'tanggal_penerimaan_permohonan_pertama_kali');
+
     public function biodata(){
     	return $this->belongsTo('Biodata');
     }
