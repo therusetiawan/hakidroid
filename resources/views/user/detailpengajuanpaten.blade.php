@@ -4,26 +4,26 @@
   Detail "Scantour" - Detail Pengajuan Paten
 @endsection
 @section('header')
-  <link rel="stylesheet" href="{{ asset('/css/dataTables.bootstrap.min.css') }}" media="screen" title="no title">
 @endsection
 
 @section('content')
   <div class="container">
     <div class="content-header">
-      {{-- <h3 class="title">Detail Pengajuan : Scantour --}}
-      <h3 class="title">Detail Pengajuan Hak Paten : Scantour</h3>
-    </div>
-
-    <div class="content">
       <div>
-        <ol class="breadcrumb">
+        <ol class="breadcrumb" style="margin-bottom: 0px;">
           <li><a href="#"><i class="fa fa-dashboard left"></i> Ajuan</a></li>
           <li><a href="#">Hak Paten</a></li>
           <li class="active">Scantour</li>
-          <li><small class="label bg-red"><i class="fa fa-close"></i> Belum Terverifikasi</small></li>
-          {{-- <li> <small class="label bg-green "><i class="fa fa-check"></i> Terverifikasi</small></h3></li> --}}
         </ol>
       </div>
+    </div>
+    <div class="content-header">
+      {{-- <h3 class="title">Detail Pengajuan : Scantour <small class="label bg-green pull-right"><i class="fa fa-check"></i> Terverifikasi</small></h3> --}}
+      <h3 class="title">Detail Pengajuan Hak Paten : Scantour <small class="label bg-red pull-right"><i class="fa fa-close"></i> Belum Terverifikasi</small></h3>
+    </div>
+
+    <div class="content">
+
       {{-- Box Data Pengajuan --}}
       {{-- Box Data Pengajuan --}}
       <div class="box box-primary">

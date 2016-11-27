@@ -130,6 +130,7 @@
 @section('js')
   <script type="text/javascript">
     $(document).ready(function() {
+      $('#sunting-profil').hide();
       $('.btn-default').click(function() {
         if ($(this).hasClass('btn-edit-profile')) {
           $('#sunting-profil').slideDown('fast');

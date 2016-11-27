@@ -4,26 +4,24 @@
   Detail "Scantour" - Detail Pengajuan Industri
 @endsection
 @section('header')
-  <link rel="stylesheet" href="{{ asset('/css/dataTables.bootstrap.min.css') }}" media="screen" title="no title">
 @endsection
 
 @section('content')
   <div class="container">
+    <div class="col-sm-12">
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Ajuan</a></li>
+        <li><a href="#">Desain Industri</a></li>
+        <li class="active">Scantour</li>
+      </ol>
+    </div>
     <div class="content-header">
       {{-- <h3 class="title">Detail Pengajuan : Scantour <small class="label bg-green pull-right"><i class="fa fa-check"></i> Terverifikasi</small></h3> --}}
-      <h3 class="title">Detail Pengajuan Desain Indutri : Scantour </h3>
+      <h3 class="title">Detail Pengajuan Desain Indutri : Scantour <small class="label bg-red pull-right"><i class="fa fa-close"></i> Belum Terverifikasi</small></h3>
     </div>
 
     <div class="content">
-      <div>
-        <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Ajuan</a></li>
-          <li><a href="#">Desain Industri</a></li>
-          <li class="active">Scantour</li>
-          {{-- <li><small class="label bg-red"><i class="fa fa-close"></i> Belum Terverifikasi</small></li> --}}
-          <li> <small class="label bg-green "><i class="fa fa-check"></i> Terverifikasi</small></h3></li>
-        </ol>
-      </div>
+
       {{-- Box Data Pengajuan --}}
       <div class="box box-primary">
         <div class="box-header with-border">
