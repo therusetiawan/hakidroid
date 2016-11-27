@@ -6,8 +6,37 @@
   </div>
   <div class="content body">
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-4">
+        <div class="small-box bg-yellow">
+          <div class="inner">
+            <h3>10</h3>
+            <p>Permintaan HAKI Baru</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-file"></i>
+          </div>
+          <a href="#" class="small-box-footer">
+             Info Selanjutnya <i class="fa fa-arrow-circle-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
         <div class="small-box bg-green">
+          <div class="inner">
+            <h3>30</h3>
+            <p>HAKI telah terivikasi</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-check"></i>
+          </div>
+          <a href="#" class="small-box-footer">
+             Info Selanjutnya <i class="fa fa-arrow-circle-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="small-box bg-aqua">
           <div class="inner">
             <h3>20</h3>
             <p>Konsultan HAKI</p>
@@ -16,21 +45,7 @@
             <i class="fa fa-user"></i>
           </div>
           <a href="#" class="small-box-footer">
-             Info Selanjutnya <i class="fa fa-arrow-circle-right"></i>
-          </a>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="small-box bg-red">
-          <div class="inner">
-            <h3>10</h3>
-            <p>Permintaan HAKI</p>
-          </div>
-          <div class="icon">
-            <i class="fa fa-file"></i>
-          </div>
-          <a href="#" class="small-box-footer">
-             Info Selanjutnya <i class="fa fa-arrow-circle-right"></i>
+            Info Selanjutnya <i class="fa fa-arrow-circle-right"></i>
           </a>
         </div>
       </div>
@@ -41,16 +56,19 @@
       <div class="col-sm-6">
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title"><i class="fa fa-pie-chart"></i> Permintaan masuk</h3>
+            <h3 class="box-title"><i class="fa fa-paper-plane"></i> Pengajuan Usulan HAKI Baru</h3>
           </div>
           <div class="box-body">
+          </div>
+          <div class="box-footer">
+            <a href="#" class="btn btn-primary pull-right">Lihat Semua</a>
           </div>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="box box-warning">
           <div class="box-header with-border">
-            <h3 class="box-title"><i class="fa fa-pie-chart"></i> Statistik Perbandingan</h3>
+            <h3 class="box-title"><i class="fa fa-pie-chart"></i> Statistik Perbandingan Pengajuan</h3>
           </div>
           <div class="box-body">
             <canvas id="pieChart" style="height:250px"></canvas>
