@@ -14,12 +14,27 @@
 Route::get('/', function () {
     return view('user.index');
 });
+
 Route::get('/login', function(){
   return view('layouts.loginlayout');
 });
 Route::get('/beranda', function(){
   return view('user.beranda');
 });
+
+Route::get('/ajuan', function(){
+  return view('user.daftarusulan');
+});
+
+Route::get('/ajuan/desainindustri', function(){
+  return view('user.detailpengajuanindustri');
+});
+
+Route::get('/ajuan/paten', function(){
+  return view('user.detailpengajuanpaten');
+});
+
+
 
 Route::get('/pengajuanindustri', function(){
   return view('user.pengajuandesainindustri');
