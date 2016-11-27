@@ -58,8 +58,11 @@
           <div class="box-header with-border">
             <h3 class="box-title"><i class="fa fa-paper-plane"></i> Pengajuan Usulan HAKI Baru</h3>
           </div>
-          <div class="box-body">
-          </div>
+            <ul class="nav nav-stacked">
+              <li><a href="#">Scantour <span class="pull-right badge bg-orange"><i class="fa fa-close"></i> Belum terverifikasi</span></a></li>
+              <li><a href="#">GOku: GO <span class="pull-right badge bg-orange"><i class="fa fa-close"></i> Belum terverifikasi</span></a></li>
+              <li><a href="#">Math Eater <span class="pull-right badge bg-orange"><i class="fa fa-close"></i> Belum terverifikasi</span></a></li>
+            </ul>
           <div class="box-footer">
             <a href="#" class="btn btn-primary pull-right">Lihat Semua</a>
           </div>
