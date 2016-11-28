@@ -17,13 +17,14 @@ Route::group(array('prefix'=>'/'), function(){
 	Route::get('/', 'PengusulController@getIndex')->name('pengusul_index');
 	Route::get('login', 'PengusulController@getLogin')->name('pengusul_login');
 	Route::post('login', 'PengusulController@postLogin')->name('pengusul_login_post');
+	Route::get('logout', 'PengusulController@getLogout')->name('pengusul_logout');
 	Route::get('beranda', 'PengusulController@getBeranda')->name('pengusul_beranda');
 	Route::get('pengajuan-industri', 'PengusulController@getPengajuanDesainIndustri')->name('pengusul_desain_industri_pengajuan');
 	Route::post('pengajuan-industri', 'PengusulController@postPengajuanDesainIndustri')->name('pengusul_desain_industri_pengajuan_post');
+	Route::get('pengajuan-paten', 'PengusulController@getPengajuanPaten')->name('pengusul_paten_pengajuan');
+	Route::post('pengajuan-paten', 'PengusulController@postPengajuanPaten')->name('pengusul_paten_pengajuan_post');
 });
-Route::get('/pengajuanpaten', function(){
-  return view('user.pengajuanpaten');
-});
+
 // Administrator
 Route::get('/administrator', function() {
   	return view('admin.index');

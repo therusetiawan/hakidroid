@@ -16,7 +16,7 @@
                 <img class="img-circle" src="{{asset('/img/Batman.jpg')}}" alt="User Avatar">
               </div>
               <!-- /.widget-user-image -->
-              <h3 class="widget-user-username">Anjasmoro Adi Nugroho</h3>
+              <h3 class="widget-user-username">{{auth('pengusul')->user()->nama}}</h3>
               <h5>&nbsp;</h5>
             </div>
             <div class="box-body">

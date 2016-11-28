@@ -12,6 +12,10 @@ class Biodata extends Authenticatable
     protected $hidden = array('password', 'api_token');
 
     public function desain_industri(){
-    	return $this->hasMany('desain_industri');
+    	return $this->hasMany('App\DesainIndustri');
+    }
+
+    public function paten(){
+    	return $this->hasMany('App\Paten');
     }
 }

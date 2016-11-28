@@ -197,8 +197,8 @@
 
   <script type="text/javascript">
     $('.add-orang').click(function() {
-      var form1 = '<td><input type="text" class="form-control" name="namadesainer[]" placeholder="Nama Desainer"></td>';
-      var form2 = '<td><input type="text" class="form-control" name="wndesainer[]" placeholder="Asal Negara Desainer"></td>';
+      var form1 = '<td><input type="text" class="form-control" name="nama_desainer[]" placeholder="Nama Desainer"></td>';
+      var form2 = '<td><input type="text" class="form-control" name="kewarganegaraan[]" placeholder="Asal Negara Desainer"></td>';
       var btndel = '<td><button type="button" class="btn-delete btn btn-danger" name="button"><i class="fa fa-close"></i></button></td>'
       $(this).parent().parent().before('<tr>' + form1 + form2 + btndel +'</tr>')
       .fadeIn('slow');

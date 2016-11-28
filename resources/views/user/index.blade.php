@@ -45,16 +45,18 @@
           <div class="box-header">
             <h4 class="box-title"><i class="fa fa-lock"></i>  Masuk Ke Hakidroid UNY</h4>
           </div>
+          <form action="{{Route('pengusul_login_post')}}" method='post'>
           <div class="box-body">
               <div class="form-group">
                 <label>Email:</label>
-                <input type="text" name="" class="form-control" value="">
+                <input type="text" name="email" class="form-control" value="">
               </div>
               <div class="form-group">
                 <label>Password:</label>
-                <input type="password" name="" class="form-control" value="">
+                <input type="password" name="password" class="form-control" value="">
               </div>
               <div class="form-group">
+                {{csrf_field()}}
                 <button type="submit" name="button" class="btn btn-primary">Login</button>
               </div>
           </div>

@@ -11,12 +11,12 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
         <ul class="nav navbar-nav">
-          <li><a href="{{url('user/')}}">Beranda</a></li>
+          <li><a href="{{Route('pengusul_beranda')}}">Beranda</a></li>
           <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Pengajuan</a>
             <ul class="dropdown-menu" role="menupengajuan">
-              <li><a href="{{url('/usulan/new')}}">Pengajuan HAKI baru</a></li>
-              <li><a href="{{url('/usulan/pengajuan')}}">Daftar HAKI</a></li>
+              <li><a href="{{Route('pengusul_desain_industri_pengajuan')}}">Desain Industri</a></li>
+              <li><a href="{{Route('pengusul_paten_pengajuan')}}">Paten</a></li>
             </ul>
           </li>
         </ul>
@@ -94,13 +94,13 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Anjasmoro Adi Nugroho</span>
+              <span class="hidden-xs">{{auth('pengusul')->user()->nama}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Keluar</a>
+                  <a href="{{Route('pengusul_logout')}}" class="btn btn-default btn-flat">Keluar</a>
                 </div>
               </li>
             </ul>

@@ -116,12 +116,6 @@
             </ul>
           </a>
         </li>
-        <li>
-          <a href="/administrator/input-usulan">
-            <i class="fa fa-database"></i> <span>[Test] Input Usulan</span>
-          </a>
-
-        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

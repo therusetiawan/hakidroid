@@ -16,7 +16,7 @@
 @section('content')
   <div class="container">
     <h2>Formulir Pengajuan Paten</h2>
-    <form class="" action="index.html" method="post">
+    <form class="" action="{{Route('pengusul_paten_pengajuan_post')}}" method="post" enctype="multipart/form-data">
       {{-- Beginning Box Form --}}
       <div class="box box-primary">
         <div class="box-header with-border">
@@ -28,7 +28,18 @@
               Judul Invensi :
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text"  name="judul" placeholder="Judul Invensi" required="true">
+              <input class="form-control" type="text"  name="judul_invensi" placeholder="Judul Invensi" required="true">
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 control-label">
+              Paten Sederhana :
+            </label>
+            <div class="col-sm-3">
+              <select name="paten_sederhana" class="form-control">
+                <option value="Paten">Paten</option>
+                <option value="Paten Sederhana">Paten Sederhana</option>
+              </select>
             </div>
           </div>
 
@@ -37,7 +48,7 @@
               Nomor Pecahan Paten :
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text"  name="judul" placeholder="Nomor Paten" required="true">
+              <input class="form-control" type="text"  name="permohonan_pecahan_paten" placeholder="Nomor Paten" required="true">
             </div>
           </div>
 
@@ -47,7 +58,7 @@
             </label>
             <div class="col-sm-10">
               <div class="checkbox">
-                <label> <input type="checkbox" name="dengankonsultan" id="dengankonsultan"> <i>*) Centang jika menggunakan konsultan HAKI</i></label>
+                <label> <input type="checkbox" name="konsultan_hki" id="dengankonsultan"> <i>*) Centang jika menggunakan konsultan HAKI</i></label>
               </div>
               <input class="form-control" type="text" id="konsultanid" name="konsultan" value="" placeholder="Nama Konsultan HAKI">
             </div>
@@ -55,21 +66,21 @@
 
           <div class="row form-group">
             <label class="col-sm-2 control-label">
-              Investor
+              Inventor
             </label>
             <div class="col-sm-10">
               <table class="table table-desainer-with-asal">
                 <tr>
                   <td>
-                    Nama Investor
+                    Nama Inventor
                   </td>
                   <td>
                     Negara Asal
                   </td>
                 </tr>
                 <tr>
-                  <td><input type="text" class="form-control" name="namadesainer[]" placeholder="Nama Investor"></td>
-                  <td><input type="text" class="form-control" name="wndesainer[]" placeholder="Asal Negara Investor"></td>
+                  <td><input type="text" class="form-control" name="nama_inventor[]" placeholder="Nama Inventor"></td>
+                  <td><input type="text" class="form-control" name="kewarganegaraan[]" placeholder="Asal Negara Inventor"></td>
                   <td>
                     <button type="button" class="btn-delete btn btn-danger" name="button"><i class="fa fa-close"></i></button>
                   </td>
@@ -87,7 +98,7 @@
             <label class="col-xs-2 control-label">Pengajuan dengan hak prioritas? :</label>
             <div class="col-xs-10">
               <div class="checkbox">
-                <label><input type="checkbox" name="denganprioritas" id="denganprioritas"> <i>*) centang jika menggunakan hak prioritas</i></label>
+                <label><input type="checkbox" name="hak_prioritas" id="denganprioritas"> <i>*) centang jika menggunakan hak prioritas</i></label>
               </div>
             </div>
           </div>
@@ -95,10 +106,10 @@
               <div class="row" id="form-prioritas">
                 <div class="col-sm-4">
                   <label class="col-sm-12 control-label">
-                    Negara:
+                    Nama:
                   </label>
                   <div class="col-sm-12">
-                    <input class="form-control" type="text"  name="negara" placeholder="Negara">
+                    <input class="form-control" type="text"  name="hak_prioritas_nama" placeholder="Negara">
                   </div>
                 </div>
                 <div class="col-sm-4">
@@ -106,7 +117,7 @@
                     Tanggal penerimaan permohonan pertama kali:
                   </label>
                   <div class="col-sm-12">
-                    <input class="datepicker form-control" type="text"  name="tglpermohonan" placeholder="Tanggal penerimaan permohonan">
+                    <input class="datepicker form-control" type="text"  name="hak_prioritas_tanggal" placeholder="Tanggal penerimaan permohonan">
                   </div>
                 </div>
                 <div class="col-sm-4">
@@ -114,7 +125,7 @@
                     Nomor prioritas:
                   </label>
                   <div class="col-sm-12">
-                    <input class="form-control" type="text"  name="noprioritas" placeholder="Nomor Prioritas ">
+                    <input class="form-control" type="text"  name="hak_prioritas_nomor" placeholder="Nomor Prioritas ">
                   </div>
                 </div>
               </div>
@@ -131,7 +142,7 @@
           <div class="row form-group">
             <label class="col-sm-3">Surat kuasa</label>
             <div class="col-sm-9">
-              <input type="file" name="name" value="">
+              <input type="file" name="surat_kuasa" value="">
             </div>
           </div>
 
@@ -200,20 +211,27 @@
           <div class="row form-group">
             <label class="col-sm-3">File Gambar</label>
             <div class="col-sm-9">
-              <input type="file" name="gambar_file" value="">
+              <input type="file" name="gambar" value="">
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <label class="col-sm-3">Abstrak</label>
+            <div class="col-sm-9">
+              <input type="file" name="abstrak" value="">
             </div>
           </div>
 
           <div class="row form-group">
             <label class="col-sm-3">Dokumen Lain</label>
             <div class="col-sm-9">
-              <input type="file" name="gambar_file" value="">
+              <input type="file" name="dokumen_lain" value="">
             </div>
           </div>
 
         </div>
       </div>
-
+      {{csrf_field()}}
       <button class="btn btn-primary" name="button">Submit</button>
 
       {{-- End Box Form --}}
@@ -226,8 +244,8 @@
 
   <script type="text/javascript">
     $('.add-orang').click(function() {
-      var form1 = '<td><input type="text" class="form-control" name="namadesainer[]" placeholder="Nama Investor"></td>';
-      var form2 = '<td><input type="text" class="form-control" name="wndesainer[]" placeholder="Asal Negara Investor"></td>';
+      var form1 = '<td><input type="text" class="form-control" name="nama_inventor[]" placeholder="Nama Inventor"></td>';
+      var form2 = '<td><input type="text" class="form-control" name="kewarganegaraan[]" placeholder="Asal Negara Inventor"></td>';
       var btndel = '<td><button type="button" class="btn-delete btn btn-danger" name="button"><i class="fa fa-close"></i></button></td>'
       $(this).parent().parent().before('<tr>' + form1 + form2 + btndel +'</tr>')
       .fadeIn('slow');

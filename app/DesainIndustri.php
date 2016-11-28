@@ -8,27 +8,26 @@ class DesainIndustri extends Model
 {
     protected $table = 'desain_industri';
 
-    protected $dates = array('tanggal_permohonan', 'tanggal_penerimaan',
-        'tanggal_penerimaan_permohonan_pertama_kali');
+    protected $dates = array('tanggal_permohonan', 'tanggal_penerimaan');
 
     public function biodata(){
-    	return $this->belongsTo('Biodata');
+    	return $this->belongsTo('App\Biodata');
     }
 
     public function konsultan_hki(){
-    	return $this->belongsTo('KonsultanHki');
+    	return $this->belongsTo('App\KonsultanHki');
     }
 
     public function dokumen_lain(){
-    	return $this->belongsTo('DesainIndustriDokumenLain');
+    	return $this->hasMany('App\DesainIndustriDokumenLain');
     }
 
     public function gambar_foto(){
-    	return $this->belongsTo('DesainIndustriGambarFoto');
+    	return $this->hasMany('App\DesainIndustriGambarFoto');
     }
 
     public function pendesain(){
-    	return $this->belongsTo('DesainIndustriPendesain');
+    	return $this->hasMany('App\DesainIndustriPendesain');
     }
 
 }
