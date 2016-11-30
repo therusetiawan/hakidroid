@@ -38,28 +38,45 @@
   <div class="login-box-body">
     <p class="login-box-msg">Daftar akun untuk menggunakan HakiDroid</p>
 
-    <form action="#" method="post">
+    <form action="{{Route('pengusul_register_post')}}" method="post">
       <div class="form-group has-feedback">
         <input name="nama" type="text" class="form-control" placeholder="Nama Lengkap">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="email" class="form-control" placeholder="Email" name="email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
-
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" class="form-control" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password"2 class="form-control" placeholder="Ulang Password">
+        <input type="password" class="form-control" placeholder="Ulang Password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="NPWP (opsional)" name="npwp">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <select name="kewarganegaraan" class="form-control">
+          <option>-- Pilih Kewarganegaraan --</option>
+          <option value="WNI">WNI (Warga Negara Indonesia)</option>
+          <option value="WNA">WNI (Warga Negara Asing)</option>
+        </select>
+      </div>
+      <div class="form-group has-feedback">
+        <textarea class="form-control" name="alamat" placeholder="Alamat"></textarea>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="No Telepon" name="no_hp">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
-
-        <!-- /.col -->
         <div class="col-xs-4">
+          {{csrf_field()}}
           <button type="submit" class="btn btn-primary btn-block btn-flat">Daftar</button>
         </div>
         <!-- /.col -->
@@ -69,7 +86,7 @@
     <!-- /.social-auth-links -->
 
     <div class="radio">
-      <a href="{{url('loginnew')}}" class="text-center">Masuk jika sudah punya akun</a>
+      <a href="{{Route('pengusul_login')}}" class="text-center">Masuk jika sudah punya akun</a>
     </div>
 
   </div>

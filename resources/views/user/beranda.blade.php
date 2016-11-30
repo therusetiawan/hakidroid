@@ -20,10 +20,57 @@
               <h5>&nbsp;</h5>
             </div>
             <div class="box-body">
-              <a href="#" class="btn btn-default"><i class="fa fa-pencil"></i> Sunting Profil</a>
+              <a href="#" class="btn btn-default btn-edit-profile"><i class="fa fa-pencil"></i> Sunting Profil</a>
+            </div>
+            <div id="sunting-profil" class="box-body">
+              <form class="" action="index.html" method="post">
+                <div class="row form-group">
+                  <label class="col-sm-12 control-label">
+                    Nama :
+                  </label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" name="" value="">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <label class="col-sm-12 control-label">
+                    Alamat :
+                  </label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" name="" value="">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <label class="col-sm-12 control-label">
+                    Kewarganegaraan :
+                  </label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" name="" value="">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <label class="col-sm-12 control-label">
+                    Telepon :
+                  </label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" name="" value="">
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <label class="col-sm-12 control-label">
+                    NPWP :
+                  </label>
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" name="" value="">
+                  </div>
+                </div>
+
+                <button type="submit" name="button" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Perubahan</button>
+              </form>
             </div>
           </div>
       </div>
+
 
       <div class="col-sm-8">
         <div class="white-box">
@@ -78,4 +125,24 @@
     </div>
   </div>
 
+@endsection
+
+@section('js')
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#sunting-profil').hide();
+      $('.btn-default').click(function() {
+        if ($(this).hasClass('btn-edit-profile')) {
+          $('#sunting-profil').slideDown('fast');
+          $(this).addClass('btn-close-box-edit');
+          $(this).removeClass('btn-edit-profile');
+        } else {
+          $('#sunting-profil').slideUp('fast');
+          $(this).addClass('btn-edit-profile');
+          $(this).removeClass('btn-close-box-edit');
+        }
+
+      });
+    });
+  </script>
 @endsection

@@ -12,11 +12,12 @@
       <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="{{Route('pengusul_beranda')}}">Beranda</a></li>
+          <li><a href="{{Route('pengusul_pengajuan')}}">Ajuan HAKI</a></li>
           <li>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Pengajuan</a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Pengajuan HAKI Baru</a>
             <ul class="dropdown-menu" role="menupengajuan">
               <li><a href="{{Route('pengusul_desain_industri_pengajuan')}}">Desain Industri</a></li>
-              <li><a href="{{Route('pengusul_paten_pengajuan')}}">Paten</a></li>
+              <li><a href="{{Route('pengusul_paten_pengajuan')}}">Hak Paten</a></li>
             </ul>
           </li>
         </ul>

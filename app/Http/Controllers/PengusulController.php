@@ -22,12 +22,35 @@ use Carbon\Carbon;
 class PengusulController extends Controller
 {
 	public function __construct(){
-		$sites = array('getIndex', 'getLogin', 'postLogin');
+		$sites = array('getIndex', 'getLogin', 'postLogin', 'getRegister', 'postRegister');
 		$this->middleware('auth:pengusul', ['except' => $sites]);
 	}
 
     public function getIndex(){
     	return view('user.index');
+    }
+
+    public function getRegister(){
+        return view('layouts.registerlayout');
+    }
+
+    public function postRegister(Request $request){
+        $biodata = new Biodata;
+        $biodata->nama = $request->input('nama');
+        $biodata->kewarganegaraan = $request->input('kewarganegaraan');
+        $biodata->npwp = $request->input('npwp');
+        $biodata->alamat = $request->input('alamat');
+        $biodata->email = $request->input('email');
+        $biodata->no_hp = $request->input('no_hp');
+        $biodata->telepon_fax = '';
+        $biodata->username = '';
+        $biodata->password = Hash::make($request->input('password'));
+        $biodata->api_token = str_random(60);
+
+        $biodata->save();
+
+        Session::flash('messageSuccess', 'Registrasi berhasil');
+        return redirect(Route('pengusul_login'));
     }
 
     public function getLogin(){
@@ -46,6 +69,9 @@ class PengusulController extends Controller
         if($auth->attempt($credential)){
             Session::flash('loginSuccess', 'Login berhasil');
             return redirect(Route('pengusul_beranda'));
+        }else if(auth('')){
+            Session::flash('loginSuccess', 'Login berhasil');
+            return redirect(Route('admin_beranda'));
         }else{
             Session::flash('loginFailed', 'Login Gagal');
             return redirect(Route('pengusul_login'));
@@ -55,6 +81,7 @@ class PengusulController extends Controller
 
     public function getLogout(){
         auth('pengusul')->logout();
+        auth('admin')->logout();
 
         return redirect(Route('pengusul_index'));
     }
@@ -63,8 +90,24 @@ class PengusulController extends Controller
     	return view('user.beranda');
     }
 
+    public function getPengajuan(){
+        $dataPaten = Paten::orderby('created_at', 'desc')->get();
+
+        $dataDesainIndustri = DesainIndustri::orderby('created_at', 'desc')->get();
+
+        return view('user.daftarusulan')->withPaten($dataPaten)->withDesainIndustri($dataDesainIndustri);
+    }
+
     public function getPengajuanDesainIndustri(){
     	return view('user.pengajuandesainindustri');
+    }
+
+    public function getDetailDesainIndustri(){
+        return view('user.detailpengajuanindustri');
+    }
+
+    public function getDetailPaten(){
+        return view('user.detailpengajuanpaten');
     }
 
     public function postPengajuanDesainIndustri(Request $request){

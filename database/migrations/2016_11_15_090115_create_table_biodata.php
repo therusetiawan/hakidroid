@@ -23,6 +23,7 @@ class CreateTableBiodata extends Migration
             $table->string('no_hp', 12);
             $table->string('telepon_fax', 20)->nullable();
             $table->string('username', 50)->nullable();
+            $table->rememberToken();
             $table->string('api_token', 60);
             $table->string('password');
             $table->timestamps();

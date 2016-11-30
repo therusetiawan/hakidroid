@@ -18,37 +18,37 @@
             Nama :
           </label>
           <div class="col-sm-10">
-            <p>Kokas</p>
+            <p>Anjasmoro Adi Nugroho</p>
           </div>
           <label class="col-sm-2 control-label">
             Alamat :
           </label>
           <div class="col-sm-10">
-            <p>Kokas</p>
+            <p>Jagoan 3, Magelang</p>
           </div>
           <label class="col-sm-2 control-label">
             Kewarganegaraan :
           </label>
           <div class="col-sm-10">
-            <p>Kokas</p>
+            <p>WNI (Warga Negara Indonesia)</p>
           </div>
           <label class="col-sm-2 control-label">
             Telepon :
           </label>
           <div class="col-sm-10">
-            <p>Kokas</p>
+            <p>085601004454</p>
           </div>
           <label class="col-sm-2 control-label">
             NPWP :
           </label>
           <div class="col-sm-10">
-            <p>Kokas</p>
+            <p>000001</p>
           </div>
           <label class="col-sm-2 control-label">
             Nomor Permohonan :
           </label>
           <div class="col-sm-10">
-            <p>Kokas</p>
+            <p>000001</p>
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@
             Konsultan Haki :
           </label>
           <div class="col-sm-10">
-            <p>Kokas</p>
+            <p>Tidak ada</p>
           </div>
         </div>
 
@@ -110,7 +110,7 @@
                   Tanggal penerimaan permohonan pertama kali:
                 </label>
                 <div class="col-sm-10">
-                  <p>tanggal</p>
+                  <p>27 Agustus 2016</p>
                 </div>
               </div>
               <div class="col-sm-12">
@@ -118,7 +118,7 @@
                   Nomor prioritas:
                 </label>
                 <div class="col-sm-10">
-                  <p>ksdask</p>
+                  <p>000001</p>
                 </div>
               </div>
             </div>
@@ -127,7 +127,7 @@
         <div class="row form-group">
           <label class="col-sm-2 label-control">Kelas Industri</label>
           <div class="col-sm-10">
-            test
+            Software
           </div>
         </div>
       </div>
@@ -142,7 +142,7 @@
           <div class="row form-group">
             <label class="col-sm-6">Surat kuasa</label>
             <div class="col-sm-6">
-              <a href="#" class="btn btn-success"><i class="fa fa-download"></i></a>
+              <a href="/download/lampiran" class="btn btn-success"><i class="fa fa-download"></i></a>
             </div>
           </div>
 

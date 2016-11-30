@@ -9,15 +9,15 @@
     <h3>Pengajuan Paten</h3>
   </div>
   <div class="content body">
-    <p>
+    <!-- <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
+    </p> -->
     <div class="row">
       <div class="col-xs-12">
         <div class="box box-success">
-          <div class="box-header">
+          <!-- <div class="box-header">
             test
-          </div>
+          </div> -->
           <div class="box-body">
             <table id="tableindustri" class="table table-bordered">
               <thead>
@@ -38,8 +38,8 @@
                       Menunggu
                     </td>
                     <td>
-                      <a data-id="1" href="#" class="btn-view btn bg-green"><i class="fa fa-eye"></i></a>
-                      <a href="#" class="btn bg-blue"><i class="fa fa-edit"></i></a>
+                      <a data-id="1" href="{{Route('admin_paten_detail')}}" class="btn-view btn bg-green"><i class="fa fa-eye"></i></a>
+                      <a href="#" class="btn bg-blue"><i class="fa fa-check"></i></a>
                       <a data-id="1" href="#" class="btn-delete btn bg-red"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>

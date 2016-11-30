@@ -55,16 +55,14 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/images/default.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Admin</span>
+              <span class="hidden-xs"> Admin <i class="fa fa-caret-down pull-right"></i></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="/images/default.jpg" class="img-circle" alt="User Image"/>
 
-                <p>
-                  Admin
+                <p>Admin
+                  
                   <small>Admin</small>
                 </p>
               </li>
@@ -74,7 +72,7 @@
                   <a href="/administrator/profil" class="btn btn-default btn-flat">Profil</a>
                 </div>
                 <div class="pull-right">
-                  <a href="/logoutAdmin" class="btn btn-default btn-flat">Log Out</a>
+                  <a href="/logout" class="btn btn-default btn-flat">Log Out</a>
                 </div>
               </li>
             </ul>
@@ -91,7 +89,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/images/default.jpg" class="img-circle" alt="User Image">
+          <img src="{{asset('/img/Batman.jpg')}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Admin
@@ -111,8 +109,8 @@
           <a href="#">
             <i class="fa fa-cubes"></i> <span>Usulan</span>
             <ul class="treeview-menu">
-                <li><a href="{{ url('/administrator/pengajuanindustri') }}"><i class="fa fa-circle-o"></i>Desain Industri</a></li>
-                <li><a href="{{ url('/administrator/pengajuanpaten') }}"><i class="fa fa-circle-o"></i>Hak Paten</a></li>
+                <li><a href="{{ Route('admin_desain_industri') }}"><i class="fa fa-circle-o"></i>Desain Industri</a></li>
+                <li><a href="{{ Route('admin_paten') }}"><i class="fa fa-circle-o"></i>Hak Paten</a></li>
             </ul>
           </a>
         </li>
