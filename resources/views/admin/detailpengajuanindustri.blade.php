@@ -18,37 +18,37 @@
             Nama :
           </label>
           <div class="col-sm-10">
-            <p>Kokas</p>
+            <p>Anjasmoro</p>
           </div>
           <label class="col-sm-2 control-label">
             Alamat :
           </label>
           <div class="col-sm-10">
-            <p>Kokas</p>
+            <p>Magelang, Jateng, Jabar</p>
           </div>
           <label class="col-sm-2 control-label">
             Kewarganegaraan :
           </label>
           <div class="col-sm-10">
-            <p>Kokas</p>
+            <p>Indonesia</p>
           </div>
           <label class="col-sm-2 control-label">
             Telepon :
           </label>
           <div class="col-sm-10">
-            <p>Kokas</p>
+            <p>08927381923</p>
           </div>
           <label class="col-sm-2 control-label">
             NPWP :
           </label>
           <div class="col-sm-10">
-            <p>Kokas</p>
+            <p>127361723891239</p>
           </div>
           <label class="col-sm-2 control-label">
             Nomor Permohonan :
           </label>
           <div class="col-sm-10">
-            <p>Kokas</p>
+            <p>35</p>
           </div>
         </div>
       </div>
