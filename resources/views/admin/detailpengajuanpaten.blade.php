@@ -18,37 +18,37 @@
             Nama :
           </label>
           <div class="col-sm-10">
-            <p>Anjasmoro Adi Nugroho</p>
+            <p>Anjasmoro</p>
           </div>
           <label class="col-sm-2 control-label">
             Alamat :
           </label>
           <div class="col-sm-10">
-            <p>Jagoan 3, Magelang</p>
+            <p>Magelang, Jawa Tengah</p>
           </div>
           <label class="col-sm-2 control-label">
             Kewarganegaraan :
           </label>
           <div class="col-sm-10">
-            <p>WNI (Warga Negara Indonesia)</p>
+            <p>Indonesia</p>
           </div>
           <label class="col-sm-2 control-label">
             Telepon :
           </label>
           <div class="col-sm-10">
-            <p>085601004454</p>
+            <p>089172378129</p>
           </div>
           <label class="col-sm-2 control-label">
             NPWP :
           </label>
           <div class="col-sm-10">
-            <p>00001</p>
+            <p>1254263172898172673</p>
           </div>
           <label class="col-sm-2 control-label">
             Nomor Permohonan :
           </label>
           <div class="col-sm-10">
-            <p>000001</p>
+            <p>25</p>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
             Judul Invensi :
           </label>
           <div class="col-sm-10">
-            <p>Go Cook Your Self</p>
+            <p>Scantour</p>
           </div>
         </div>
 

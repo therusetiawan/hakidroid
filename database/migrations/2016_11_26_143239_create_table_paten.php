@@ -18,15 +18,14 @@ class CreateTablePaten extends Migration
             $table->integer('biodata_id')->unsigned();
             $table->enum('jenis_paten', ['paten', 'paten_sederhana']);
             $table->string('permohonan_paten_nomor', 50);
-            $table->boolean('konsultan_hki');
+            $table->string('konsultan');
             $table->text('judul_invensi');
             $table->string('paten_pecahan_nomor')->nullable();
-            $table->boolean('hak_prioritas');
             $table->string('surat_kuasa')->nullable();
             $table->string('surat_kepemilikan_invensi_oleh_inventor')->nullable();
             $table->string('surat_pernyataan_invensi_oleh_lembaga')->nullable();
             $table->string('dokumen_prioritas_terjemahan')->nullable();
-            $table->integer('reviewer_id')->unsigned();
+            $table->integer('reviewer_id')->unsigned()->nullable();
             $table->enum('status', ['Diterima', 'Proses']);
             $table->timestamps();
         });

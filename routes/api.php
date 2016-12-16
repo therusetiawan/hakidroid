@@ -23,4 +23,6 @@ Route::group(array('prefix'=> '/v1'), function(){
 	Route::get('desain-industri', 'ApiController@getDesainIndustri');
 	Route::post('desain-industri/pengajuan', 'ApiController@postDesainIndustri');
 	Route::get('test', 'ApiController@getTest');
+
+	Route::post('paten', 'ApiController@postPaten');
 });

@@ -19,8 +19,7 @@ class CreateTableDesainIndustri extends Migration
             $table->date('tanggal_penerimaan');
             $table->text('nomor_permohonan');
             $table->integer('biodata_id')->unsigned();
-            $table->boolean('konsultan');
-            $table->integer('konsultan_id')->unsigned();
+            $table->string('konsultan');
             $table->text('judul_desain_industri');
             $table->boolean('hak_prioritas');
             $table->string('negara', 50)->nullable();
@@ -38,7 +37,6 @@ class CreateTableDesainIndustri extends Migration
 
             $table->foreign('biodata_id')->references('id')->on('biodata')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('kelas_desain_industri_id')->references('id')->on('kelas_desain_industri')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('konsultan_id')->references('id')->on('konsultan')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
