@@ -57,7 +57,7 @@
       </div>
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="NPWP (opsional)" name="npwp">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <span class="glyphicon glyphicon-info-sign form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <select name="kewarganegaraan" class="form-control">
@@ -68,11 +68,11 @@
       </div>
       <div class="form-group has-feedback">
         <textarea class="form-control" name="alamat" placeholder="Alamat"></textarea>
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <span class="glyphicon glyphicon-home form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="No Telepon" name="no_hp">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-4">

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTablePatenDokumenLain extends Migration
+class CreateTablePatenDokumenSubtantifDeskripsi extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateTablePatenDokumenLain extends Migration
      */
     public function up()
     {
-        Schema::create('paten_dokumen_lain', function (Blueprint $table) {
+        Schema::create('paten_dokumen_subtantif_deskripsi', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nama_dokumen_lain', 100);
-            $table->string('file_dokumen_lain');
+            $table->string('nama_file');
             $table->integer('paten_id')->unsigned();
             $table->timestamps();
 
@@ -31,10 +30,10 @@ class CreateTablePatenDokumenLain extends Migration
      */
     public function down()
     {
-        Schema::table('paten_dokumen_lain', function($table){
+        Schema::table('paten_dokumen_subtantif_deskripsi', function($table){
             $table->dropForeign(['paten_id']);
         });
         
-        Schema::dropIfExists('paten_dokumen_lain');
+        Schema::dropIfExists('paten_dokumen_subtantif_deskripsi');
     }
 }
