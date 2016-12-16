@@ -12,12 +12,14 @@
       <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="{{url('beranda/')}}">Beranda</a></li>
-          <li><a href="{{url('ajuan/')}}">Ajuan HAKI</a></li>
+          <li><a href="{{url('ajuan/')}}">Daftar Ajuan HAKI</a></li>
           <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Pengajuan HAKI Baru</a>
             <ul class="dropdown-menu" role="menupengajuan">
               <li><a href="{{url('pengajuanindustri')}}">Desain Industri</a></li>
-              <li><a href="{{url('pengajuanpaten')}}">Hak Paten</a></li>
+              <li><a href="{{url('pengajuanpaten')}}">Paten</a></li>
+              <li class="disabled"><a style="color: rgb(185, 185, 185)" href="{{url('pengajuanpaten')}}">Hak Cipta</a></li>
+              <li class="disabled"><a style="color: rgb(185, 185, 185)" href="{{url('pengajuanpaten')}}">Merk</a></li>
             </ul>
           </li>
         </ul>

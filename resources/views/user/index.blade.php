@@ -14,6 +14,8 @@
         <img src="{{ asset('/img/gedung-baru.jpg') }}" class="img-responsive" alt="Gedung LPPM UNY">
       </div>
     </div>
+
+    {{-- Berita --}}
     <div class="row">
       <div class="col-sm-8">
         <div class="box box-primary">
@@ -21,7 +23,6 @@
               <h4 class="box-title"><i class="fa fa-newspaper-o"></i> Berita</h4>
           </div>
           <div class="box-body">
-            @for ($i=0; $i < 5; $i++)
               <div class="media">
                 <div class="media-left">
                   <a href="#">
@@ -36,7 +37,36 @@
                   <a href="#">Baca Selengkapnya...</a>
                 </div>
               </div>
-            @endfor
+
+              <div class="media">
+                <div class="media-left">
+                  <a href="#">
+                    <img class="media-object" src="https://uny.ac.id/sites/www2.uny.ac.id/files/styles/thumbberita/public/field/image/Anggang-anggang%20indikator%20pencemaran%20air.jpg?itok=6AoDSVJX">
+                  </a>
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">ANGGANG-ANGGANG SEBAGAI BIOINDIKATOR PENCEMARAN AIR SUNGAI</h4>
+                  <p>
+                    Sungai saat ini masih menjadi kebutuhan sebagian manusia seperti untuk sarana transportasi, pembangkit listrik, sarana irigasi pertanian, dan keperluan rumah tangga untuk minum...
+                  </p>
+                  <a href="#">Baca Selengkapnya...</a>
+                </div>
+              </div>
+
+              <div class="media">
+                <div class="media-left">
+                  <a href="#">
+                    <img class="media-object" src="https://uny.ac.id/sites/www2.uny.ac.id/files/styles/thumbberita/public/field/image/Chiang%20Mai%20University.jpg?itok=Dsy2VQJp">
+                  </a>
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">CHIANG MAI UNIVERSITY AKHIRI PROGRAM ASEAN COMMUNITY FAMILIARIZATION DI UNY</h4>
+                  <p>
+                    Setelah menjalani Program “ASEAN Community Familiarization” di Universitas Negeri Yogyakarta selama sepuluh hari, akhirnya para mahasiswa Chiang Mai University...
+                  </p>
+                  <a href="#">Baca Selengkapnya...</a>
+                </div>
+              </div>
           </div>
         </div>
       </div>
