@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Daftar | HakiDroid UNY</title>
+  <title>Daftar | IPON UNY</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -32,11 +32,11 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#">HakiDroid UNY</a>
+    <a href="#">IPON UNY</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Daftar akun untuk menggunakan HakiDroid</p>
+    <p class="login-box-msg">Daftar akun untuk menggunakan IPON</p>
 
     <form action="#" method="post">
       <div class="form-group has-feedback">

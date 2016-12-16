@@ -43,7 +43,7 @@
       <div class="col-sm-4">
         <div class="box box-primary">
           <div class="box-header">
-            <h4 class="box-title"><i class="fa fa-lock"></i>  Masuk Ke Hakidroid UNY</h4>
+            <h4 class="box-title"><i class="fa fa-lock"></i>  Masuk Ke IPON UNY</h4>
           </div>
           <div class="box-body">
               <div class="form-group">

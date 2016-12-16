@@ -5,7 +5,7 @@
 @section('content')
   <div class="container">
     <section class="content-header">
-      <h3>Beranda <small>HAKIdroid UNY</small></h3>
+      <h3>Beranda <small>IPON UNY</small></h3>
     </section>
     <div class="row">
       <div class="col-sm-4">
