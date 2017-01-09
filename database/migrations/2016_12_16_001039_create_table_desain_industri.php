@@ -19,7 +19,7 @@ class CreateTableDesainIndustri extends Migration
             $table->date('tanggal_penerimaan');
             $table->text('nomor_permohonan');
             $table->integer('biodata_id')->unsigned();
-            $table->string('konsultan');
+            $table->string('konsultan')->nullable();
             $table->text('judul_desain_industri');
             $table->boolean('hak_prioritas');
             $table->string('negara', 50)->nullable();
@@ -49,7 +49,6 @@ class CreateTableDesainIndustri extends Migration
     {
         Schema::table('desain_industri', function($table){
             $table->dropForeign(['biodata_id']);
-            $table->dropForeign(['konsultan_id']);
             $table->dropForeign(['kelas_desain_industri_id']);
         });
         Schema::dropIfExists('desain_industri');

@@ -5,7 +5,7 @@
 @section('content')
   <div class="container">
     <section class="content-header">
-      <h3>Beranda <small>HAKIdroid UNY</small></h3>
+      <h3>Beranda <small>IPON UNY</small></h3>
     </section>
     <div class="row">
       <div class="col-sm-4">
@@ -76,7 +76,7 @@
         <div class="white-box">
           <div class="row">
             {{-- Begin  --}}
-              <div class="col-sm-4">
+              <div class="col-sm-6">
                 <div class="small-box bg-red">
                   <div class="inner">
                     <h3>1.</h3>
@@ -90,7 +90,7 @@
                   </a>
                 </div>
               </div>
-              <div class="col-sm-4">
+              <div class="col-sm-6">
                 <div class="small-box bg-yellow">
                   <div class="inner">
                     <h3>2.</h3>
@@ -104,20 +104,7 @@
                   </a>
                 </div>
               </div>
-              <div class="col-sm-4">
-                <div class="small-box bg-aqua">
-                  <div class="inner">
-                    <h3>3.</h3>
-                    <p>Jenis Jenis HAKI</p>
-                  </div>
-                  <div class="icon">
-                    <i class="fa fa-file-pdf-o"></i>
-                  </div>
-                  <a href="#" class="small-box-footer">
-                     Info Selanjutnya <i class="fa fa-arrow-circle-right"></i>
-                  </a>
-                </div>
-              </div>
+            
             </div>
           </div>
         </div>

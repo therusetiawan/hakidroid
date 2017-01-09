@@ -121,7 +121,7 @@
           </div>
 
           <div class="row form-group">
-            <label class="col-sm-6">Surat pernyataan pengalihan hak atas desain industri</label>
+            <label class="col-sm-6">Surat pernyataan pengalihan hak atas penemuan</label>
             <div class="col-sm-6">
               <a href="#" class="btn btn-success"><i class="fa fa-download"></i></a>
             </div>

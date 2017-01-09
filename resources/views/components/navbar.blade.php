@@ -2,7 +2,7 @@
   <nav class="navbar navbar-static-top">
     <div class="container">
       <div class="navbar-header">
-        <a href="{{url('/')}}" class="navbar-brand">Hakidroid UNY</a>
+        <a href="{{url('/')}}" class="navbar-brand">IPON UNY</a>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
           <i class="fa fa-bars"></i>
         </button>
@@ -12,12 +12,14 @@
       <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="{{Route('pengusul_beranda')}}">Beranda</a></li>
-          <li><a href="{{Route('pengusul_pengajuan')}}">Ajuan HAKI</a></li>
+          <li><a href="{{Route('pengusul_pengajuan')}}">Daftar Ajuan HAKI</a></li>
           <li>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Pengajuan HAKI Baru</a>
             <ul class="dropdown-menu" role="menupengajuan">
-              <li><a href="{{Route('pengusul_desain_industri_pengajuan')}}">Desain Industri</a></li>
-              <li><a href="{{Route('pengusul_paten_pengajuan')}}">Hak Paten</a></li>
+              <li><a href="{{Route('pengusul_paten_pengajuan')}}">Paten</a></li>
+              <li class="disabled"><a href="#">Desain Industri</a></li>
+              <li class="disabled"><a style="color: rgb(185, 185, 185)" href="{{url('pengajuanpaten')}}">Hak Cipta</a></li>
+              <li class="disabled"><a style="color: rgb(185, 185, 185)" href="{{url('pengajuanpaten')}}">Merk</a></li>
             </ul>
           </li>
         </ul>
@@ -31,10 +33,10 @@
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
+              <span class="label label-success">2</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
+              <li class="header">2 Pesan baru</li>
               <li>
                 <!-- inner menu: contains the messages -->
                 <ul class="menu">
@@ -42,22 +44,37 @@
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="img/Batman.jpg" class="img-circle" alt="User Image">
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
-                        Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                        Reviewer IPON
+                        <small><i class="fa fa-clock-o"></i> 1 menit yang lalu</small>
                       </h4>
                       <!-- The message -->
-                      <p>Why not buy a new awesome theme?</p>
+                      <p>Pengajuan Paten Anda telah diterima.</p>
+                    </a>
+                  </li>
+                  <li><!-- start message -->
+                    <a href="#">
+                      <div class="pull-left">
+                        <!-- User Image -->
+                        <img src="img/Batman.jpg" class="img-circle" alt="User Image">
+                      </div>
+                      <!-- Message title and timestamp -->
+                      <h4>
+                        Reviewer IPON
+                        <small><i class="fa fa-clock-o"></i> 5 hari yang lalu</small>
+                      </h4>
+                      <!-- The message -->
+                      <p>Revisi Deskripsi Dokumen Subtantif.</p>
                     </a>
                   </li>
                   <!-- end message -->
                 </ul>
                 <!-- /.menu -->
               </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
+              <li class="footer"><a href="#">Lihat Semua</a></li>
             </ul>
           </li>
           <!-- /.messages-menu -->
@@ -67,22 +84,27 @@
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
+              <span class="label label-warning">1</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
+              <li class="header">1 Notifikasi baru</li>
               <li>
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
                   <li><!-- start notification -->
                     <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                      <i class="fa fa-file text-aqua"></i> Pengajuan haki telah diterima
+                    </a>
+                  </li>
+                  <li><!-- start notification -->
+                    <a href="#">
+                      <i class="fa fa-file text-warning"></i> Pengajuan haki baru
                     </a>
                   </li>
                   <!-- end notification -->
                 </ul>
               </li>
-              <li class="footer"><a href="#">View all</a></li>
+              <li class="footer"><a href="#">Lihat Semua</a></li>
             </ul>
           </li>
           <!-- Tasks Menu -->

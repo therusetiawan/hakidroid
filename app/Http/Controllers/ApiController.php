@@ -119,19 +119,25 @@ class ApiController extends Controller
         $paten->jenis_paten = $request->input('jenis_paten');
         $paten->permohonan_paten_nomor = '';
         $paten->konsultan = $request->input('konsultan');
-
-        if($request->input('konsultan')){
-            $paten->konsultan_hki_id = $request->input('konsultan_id');
-        }else{
-            $paten->konsultan_hki_id = 1;
-        }
-
         $paten->judul_invensi = $request->input('judul_invensi');
-        $paten->pecahan_paten_nomor = '';
-        $paten->hak_prioritas = 0;
+        $paten->paten_pecahan_nomor = '';
+        $paten->hak_prioritas_id = null;
         $paten->status = 'Proses';
 
-        // $paten->save();
+        $inventor = $request->input('nama_inventor');
+        $kewarganegaraan = $request->input('kewarganegaraan');
+
+        $paten->save();
+
+        foreach ($inventor as $i => $d) {
+            $dataInventor = new PatenInventor;
+            $dataInventor->nama = $d;
+            $dataInventor->kewarganegaraan = $kewarganegaraan[$i];
+            $dataInventor->paten_id = $paten->id;
+            $dataInventor->save();
+        }
+
+        $paten->save();
 
         return array(
                 'status' => 'success',

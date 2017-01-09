@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>@yield('title') - HakiDroid Web</title>
+  <title>@yield('title') - IPON Web</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -56,7 +56,6 @@
   <script src="{{ asset('/admin/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
   <!-- ChartJS 1.0.1 -->
 
-   AdminLTE dashboard demo (This is only for demo purposes) -->
   <!--<script src="{{ asset('/admin/dist/js/pages/dashboard2.js') }}"></script>-->
   <!-- AdminLTE for demo purposes -->
   <script src="{{ asset('/admin/dist/js/demo.js') }}"></script>

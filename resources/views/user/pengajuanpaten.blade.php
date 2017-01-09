@@ -33,24 +33,12 @@
           </div>
           <div class="row form-group">
             <label class="col-sm-2 control-label">
-              Paten Sederhana :
-            </label>
-            <div class="col-sm-3">
-              <select name="paten_sederhana" class="form-control">
-                <option value="Paten">Paten</option>
-                <option value="Paten Sederhana">Paten Sederhana</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="row form-group">
-            <label class="col-sm-2 control-label">
               Jenis Paten :
             </label>
             <div class="col-sm-3">
               <select name="jenis_paten" class="form-control">
                 <option value="Paten">Paten</option>
-                <option value="Paten Sederhana">Paten Sederhana</option>
+                <option value="Paten_Sederhana">Paten Sederhana</option>
               </select>
             </div>
           </div>
@@ -60,9 +48,9 @@
             </label>
             <div class="col-sm-10">
               <div class="checkbox">
-                <label> <input type="checkbox" name="dengannomorpecahan" id="denganpecahan"> <i>*) Centang jika menggunakan pecahan Paten</i></label>
+                <label> <input type="checkbox" name="nomor_pecahan_check" id="denganpecahan"> <i>*) Centang jika menggunakan pecahan Paten</i></label>
               </div>
-              <input class="form-control" type="text" id="formpecahan" name="pecahan" placeholder="Nomor Paten" required="true">
+              <input class="form-control" type="text" id="formpecahan" name="nomor_pecahan" placeholder="Nomor Paten">
             </div>
           </div>
 
@@ -72,7 +60,7 @@
             </label>
             <div class="col-sm-10">
               <div class="checkbox">
-                <label> <input type="checkbox" name="konsultan_hki" id="dengankonsultan"> <i>*) Centang jika menggunakan konsultan HAKI</i></label>
+                <label> <input type="checkbox" name="konsultan_check" id="dengankonsultan"> <i>*) Centang jika menggunakan konsultan HAKI</i></label>
               </div>
               <input class="form-control" type="text" id="konsultanid" name="konsultan" value="" placeholder="Nama Konsultan HAKI">
             </div>
@@ -210,7 +198,7 @@
         </div>
       </div>
       {{csrf_field()}}
-      <button class="btn btn-primary" name="button">Submit</button>
+      <button type="submit" class="btn btn-primary" name="button">Submit</button>
 
       <div class="" style="height: 20px">
 

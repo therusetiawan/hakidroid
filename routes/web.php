@@ -24,12 +24,22 @@ Route::group(array('prefix'=>'/'), function(){
 	Route::get('pengajuan-industri', 'PengusulController@getPengajuanDesainIndustri')->name('pengusul_desain_industri_pengajuan');
 	Route::post('pengajuan-industri', 'PengusulController@postPengajuanDesainIndustri')->name('pengusul_desain_industri_pengajuan_post');
 	Route::get('pengajuan-industri/1', 'PengusulController@getDetailDesainIndustri')->name('pengusul_desain_industri_detail');
-	Route::get('pengajuan-paten/1', 'PengusulController@getDetailPaten')->name('pengusul_desain_industri_detail');
+	Route::get('pengajuan-paten/{id}', 'PengusulController@getDetailPaten')->name('pengusul_desain_industri_detail');
 	Route::get('pengajuan-paten', 'PengusulController@getPengajuanPaten')->name('pengusul_paten_pengajuan');
 	Route::post('pengajuan-paten', 'PengusulController@postPengajuanPaten')->name('pengusul_paten_pengajuan_post');
 	Route::get('pengajuan', 'PengusulController@getPengajuan')->name('pengusul_pengajuan');
 });
 
+Route::group(array('prefix'=>'download'), function(){
+	Route::get('paten/surat-kuasa/{{filename}}', 'DownloadController@getPatenSuratKuasa');
+	Route::get('paten/surat-pengalihan-hak-penemuan/{{filename}}', 'DownloadController@getPatenSuratPengalihanHakPenemaun');
+	Route::get('paten/surat-kepemilikan-inventor/{{filename}}', 'DownloadController@getPatenSuratKepemilikanInventor');
+	Route::get('paten/surat-kepemilikan-lembaga/{{filename}}', 'DownloadController@getPatenSuratkepemilikanLembaga');
+
+	Route::get('paten/dokumen-subtantif-deskripsi/{{filename}}', 'DownloadController@getPatenDokumenSubtantifDeskripsi');
+	Route::get('paten/dokumen-subtantif-gambar/{{filename}}', 'DownloadController@getPatenDokumenSubtantifGambar');
+
+});
 // Administrator
 Route::get('/administrator', function() {
   	return view('admin.index');
