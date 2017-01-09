@@ -25,8 +25,7 @@
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#desain_industri" data-toggle="tab">Desain Industri</a></li>
-                <li><a href="#hak_paten" data-toggle="tab">Hak Paten</a></li>
+                <li class="active"><a href="#desain_industri" data-toggle="tab">Daftar Pengajuan</a></li>
                 <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
               </ul>
               <div class="tab-content">
@@ -40,7 +39,7 @@
                           Judul
                         </th>
                         <th>
-                          Kelas Desain Industri
+                          Jenis Usulan
                         </th>
                         <th>
                           Tanggal
@@ -55,58 +54,19 @@
                     </thead>
                     <tbody>
                       <?php $c =1; ?>
-                      @foreach($desain_industri as $d)
+                      @foreach($data as $d)
                       <tr>
                         <td>{{ $c++ }}</td>
-                        <td>{{ $d->judul_desain_industri}}</td>
-                        <td>{{ $d->kelas_desain_industri}}</td>
-                        <td>{{ $d->tanggal_permohonan}}</td>
-                        <td>Belum Terverifikasi</td>
+                        <td>{{ $d['judul']}}</td>
+                        <td>{{ $d['jenis']}}</td>
+                        <td>{{ $d['tanggal']}}</td>
+                        <td>{{ $d['status']}}</td>
                         <td>
-                          <a href="/pengajuan-industri/1" class="btn btn-success"><i class="fa fa-eye"></i></a>
-                          <a href="#" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                          <a href="#" class="btn btn-danger"><i class="fa fa-remove"></i></a>
-                        </td>
-                      </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-                </div>
-                <!-- /.tab-pane -->
-                {{-- Hak Paten Tab --}}
-                <div class="tab-pane" id="hak_paten">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>
-                          Judul
-                        </th>
-                        <th>
-                          Jenis Paten
-                        </th>
-                        <th>
-                          Tanggal
-                        </th>
-                        <th>
-                          Status
-                        </th>
-                        <th>
-                          Operasi
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php $c =1; ?>
-                      @foreach($paten as $p)
-                      <tr>
-                        <td>{{ $c++ }}</td>
-                        <td>{{ $p->judul_invensi}}</td>
-                        <td>{{ $p->paten_sederhana}}</td>
-                        <td>{{ $p->tanggal_permohonan}}</td>
-                        <td>Belum Terverifikasi</td>
-                        <td>
-                          <a href="/pengajuan-paten/1" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                          @if($d['jenis']  == 'Paten' )
+                            <a href="/pengajuan-paten/{{$d['id']}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                          @elseif($d['jenis'] == 'Desain Industri')
+                            <a href="/pengajuan-industri/{{$d['id']}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                          @endif
                           <a href="#" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                           <a href="#" class="btn btn-danger"><i class="fa fa-remove"></i></a>
                         </td>

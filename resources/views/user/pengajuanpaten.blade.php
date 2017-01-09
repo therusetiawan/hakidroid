@@ -33,22 +33,24 @@
           </div>
           <div class="row form-group">
             <label class="col-sm-2 control-label">
-              Paten Sederhana :
+              Jenis Paten :
             </label>
             <div class="col-sm-3">
-              <select name="paten_sederhana" class="form-control">
+              <select name="jenis_paten" class="form-control">
                 <option value="Paten">Paten</option>
-                <option value="Paten Sederhana">Paten Sederhana</option>
+                <option value="Paten_Sederhana">Paten Sederhana</option>
               </select>
             </div>
           </div>
-
           <div class="row form-group">
             <label class="col-sm-2 control-label">
               Nomor Pecahan Paten :
             </label>
             <div class="col-sm-10">
-              <input class="form-control" type="text"  name="permohonan_pecahan_paten" placeholder="Nomor Paten" required="true">
+              <div class="checkbox">
+                <label> <input type="checkbox" name="nomor_pecahan_check" id="denganpecahan"> <i>*) Centang jika menggunakan pecahan Paten</i></label>
+              </div>
+              <input class="form-control" type="text" id="formpecahan" name="nomor_pecahan" placeholder="Nomor Paten">
             </div>
           </div>
 
@@ -58,7 +60,7 @@
             </label>
             <div class="col-sm-10">
               <div class="checkbox">
-                <label> <input type="checkbox" name="konsultan_hki" id="dengankonsultan"> <i>*) Centang jika menggunakan konsultan HAKI</i></label>
+                <label> <input type="checkbox" name="konsultan_check" id="dengankonsultan"> <i>*) Centang jika menggunakan konsultan HAKI</i></label>
               </div>
               <input class="form-control" type="text" id="konsultanid" name="konsultan" value="" placeholder="Nama Konsultan HAKI">
             </div>
@@ -136,13 +138,33 @@
 
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Lampiran Karya</h3>
+          <h3 class="box-title">Lampiran Subtantif</h3>
+        </div>
+        <div class="box-body">
+          <div class="row form-group">
+            <label class="col-sm-3">File Uraian</label>
+            <div class="col-sm-9">
+              <input type="file" name="uraian_file" value="">
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-3">File Gambar</label>
+            <div class="col-sm-9">
+              <input type="file" name="gambar_file" value="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Lampiran Formatif</h3>
         </div>
         <div class="box-body">
           <div class="row form-group">
             <label class="col-sm-3">Surat kuasa</label>
             <div class="col-sm-9">
-              <input type="file" name="surat_kuasa" value="">
+              <input type="file" name="name" value="">
             </div>
           </div>
 
@@ -154,15 +176,16 @@
           </div>
 
           <div class="row form-group">
-            <label class="col-sm-3">Bukti Pemilikan Hak atas Penemuan</label>
+            <label class="col-sm-3">Surat kepemilikan invensi atas Inventor</label>
             <div class="col-sm-9">
-              <input type="file" name="bukti_pemilikan_hak_atas_penemuan" value="">
+              <input type="file" name="bukti_pemilikan_hak_atas_penemuan_inventor" value="">
             </div>
           </div>
+
           <div class="row form-group">
-            <label class="col-sm-3">Bukti Penunjukan Negara Tujuan</label>
+            <label class="col-sm-3">Surat pernyataan invensi oleh lembaga</label>
             <div class="col-sm-9">
-              <input type="file" name="bukti_penunjukan_negara_tujuan" value="">
+              <input type="file" name="bukti_pemilikan_hak_atas_penemuan_lembaga" value="">
             </div>
           </div>
 
@@ -172,68 +195,14 @@
               <input type="file" name="dokumen_prioritas_terjemahan" value="">
             </div>
           </div>
-
-          <div class="row form-group">
-            <label class="col-sm-3">Dokumen Permohonan Paten Internasional</label>
-            <div class="col-sm-9">
-              <input type="file" name="dokumen_permohonan_paten_internasional" value="">
-            </div>
-          </div>
-
-          <div class="row form-group">
-            <label class="col-sm-3">Sertifikat Penyimpanan Jasad Renik Terjemahan</label>
-            <div class="col-sm-9">
-              <input type="file" name="sertifikat_penyimpanan_jasad_renik_terjemahan" value="">
-            </div>
-          </div>
-
-          <div class="row form-group">
-            <label class="col-sm-3">Dokumen Prioritas Terjemahan</label>
-            <div class="col-sm-9">
-              <input type="file" name="dokumen_prioritas_terjemahan" value="">
-            </div>
-          </div>
-
-          <div class="row form-group">
-            <label class="col-sm-3">File Uraian</label>
-            <div class="col-sm-9">
-              <input type="file" name="uraian_file" value="">
-            </div>
-          </div>
-
-          <div class="row form-group">
-            <label class="col-sm-3">File Klaim</label>
-            <div class="col-sm-9">
-              <input type="file" name="klaim_file" value="">
-            </div>
-          </div>
-
-          <div class="row form-group">
-            <label class="col-sm-3">File Gambar</label>
-            <div class="col-sm-9">
-              <input type="file" name="gambar" value="">
-            </div>
-          </div>
-
-          <div class="row form-group">
-            <label class="col-sm-3">Abstrak</label>
-            <div class="col-sm-9">
-              <input type="file" name="abstrak" value="">
-            </div>
-          </div>
-
-          <div class="row form-group">
-            <label class="col-sm-3">Dokumen Lain</label>
-            <div class="col-sm-9">
-              <input type="file" name="dokumen_lain" value="">
-            </div>
-          </div>
-
         </div>
       </div>
       {{csrf_field()}}
-      <button class="btn btn-primary" name="button">Submit</button>
+      <button type="submit" class="btn btn-primary" name="button">Submit</button>
 
+      <div class="" style="height: 20px">
+
+      </div>
       {{-- End Box Form --}}
     </form>
   </div>
@@ -258,6 +227,7 @@
 
     $('#form-prioritas').hide();
     $('#konsultanid').hide();
+    $('#formpecahan').hide();
 
     $('#denganprioritas').change(function() {
       if (this.checked) {
@@ -272,6 +242,14 @@
         $('#konsultanid').slideDown(300);
       } else {
         $('#konsultanid').slideUp(300);
+      }
+    });
+
+    $('#denganpecahan').change(function() {
+      if (this.checked) {
+        $('#formpecahan').slideDown(300);
+      } else {
+        $('#formpecahan').slideUp(300);
       }
     });
 

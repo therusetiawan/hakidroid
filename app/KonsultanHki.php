@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class KonsultanHki extends Model
 {
-    protected $table = 'konsultan_hki';
+    protected $table = 'konsultan';
 
     public function desain_industri(){
     	return $this->hasMany('App\DesainIndustri');

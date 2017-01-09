@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Biodata;
 use App\DesainIndustri;
+use App\Paten;
+use App\PatenHakPrioritas;
+use App\PatenInventor;
+use App\PatenSubtantiDeskripsi;
+use App\PatenSubtantifGambar;
 
 use Hash;
 use Carbon\Carbon;
@@ -106,5 +111,38 @@ class ApiController extends Controller
         		'status' => 'success',
         		'data' => $desainIndustri
         		);
+    }
+
+    public function postPaten(Request $request){
+        $paten = new Paten;
+        $paten->biodata_id = auth('api_pengusul')->user()->id;
+        $paten->jenis_paten = $request->input('jenis_paten');
+        $paten->permohonan_paten_nomor = '';
+        $paten->konsultan = $request->input('konsultan');
+        $paten->judul_invensi = $request->input('judul_invensi');
+        $paten->paten_pecahan_nomor = '';
+        $paten->hak_prioritas_id = null;
+        $paten->status = 'Proses';
+
+        $inventor = $request->input('nama_inventor');
+        $kewarganegaraan = $request->input('kewarganegaraan');
+
+        $paten->save();
+
+        foreach ($inventor as $i => $d) {
+            $dataInventor = new PatenInventor;
+            $dataInventor->nama = $d;
+            $dataInventor->kewarganegaraan = $kewarganegaraan[$i];
+            $dataInventor->paten_id = $paten->id;
+            $dataInventor->save();
+        }
+
+        $paten->save();
+
+        return array(
+                'status' => 'success',
+                'data' => $paten
+                );
+
     }
 }

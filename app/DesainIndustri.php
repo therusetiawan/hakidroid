@@ -14,10 +14,6 @@ class DesainIndustri extends Model
     	return $this->belongsTo('App\Biodata');
     }
 
-    public function konsultan_hki(){
-    	return $this->belongsTo('App\KonsultanHki');
-    }
-
     public function dokumen_lain(){
     	return $this->hasMany('App\DesainIndustriDokumenLain');
     }

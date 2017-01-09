@@ -2,8 +2,8 @@
 
 @section('content')
   <div class="content-header">
-    {{-- <h3 class="title">Detail Pengajuan : Scantour <small class="label bg-green pull-right"><i class="fa fa-check"></i> Terverifikasi</small></h3> --}}
-    <h3 class="title">Detail Pengajuan Paten: Scantour <small class="label bg-red pull-right"><i class="fa fa-close"></i> Belum Terverifikasi</small></h3>
+    {{-- <h3 class="title">Detail Pengajuan : {{$data->judul_invensi}} <small class="label bg-green pull-right"><i class="fa fa-check"></i> Terverifikasi</small></h3> --}}
+    <h3 class="title">Detail Pengajuan Paten: {{$data->judul_invensi}} <small class="label bg-red pull-right"><i class="fa fa-close"></i> {{$data->status}}</small></h3>
   </div>
   <div class="content">
 
@@ -18,37 +18,37 @@
             Nama :
           </label>
           <div class="col-sm-10">
-            <p>Anjasmoro Adi Nugroho</p>
+            <p>{{$data->biodata->nama}}</p>
           </div>
           <label class="col-sm-2 control-label">
             Alamat :
           </label>
           <div class="col-sm-10">
-            <p>Jagoan 3, Magelang</p>
+            <p>{{$data->biodata->alamat}}</p>
           </div>
           <label class="col-sm-2 control-label">
             Kewarganegaraan :
           </label>
           <div class="col-sm-10">
-            <p>WNI (Warga Negara Indonesia)</p>
+            <p>{{$data->biodata->kewarganegaraan}}</p>
           </div>
           <label class="col-sm-2 control-label">
             Telepon :
           </label>
           <div class="col-sm-10">
-            <p>085601004454</p>
+            <p>{{$data->biodata->telepon}}</p>
           </div>
           <label class="col-sm-2 control-label">
             NPWP :
           </label>
           <div class="col-sm-10">
-            <p>00001</p>
+            <p>{{$data->biodata->npwp}}</p>
           </div>
           <label class="col-sm-2 control-label">
             Nomor Permohonan :
           </label>
           <div class="col-sm-10">
-            <p>000001</p>
+            <p>{{$data->id}}</p>
           </div>
         </div>
       </div>
@@ -65,10 +65,10 @@
             Judul Invensi :
           </label>
           <div class="col-sm-10">
-            <p>Go Cook Your Self</p>
+            <p>{{$data->judul_invensi}}</p>
           </div>
         </div>
-
+        @if($data->paten_pecahana_nomor != null)
         <div class="row form-group">
           <label class="col-sm-2 control-label">
             Nomor Pecahan Paten :
@@ -77,16 +77,18 @@
             <p>000001</p>
           </div>
         </div>
+        @endif
 
+        @if($data->konsultan != null)
         <div class="row form-group">
           <label class="col-sm-2 control-label">
             Konsultan Haki :
           </label>
           <div class="col-sm-10">
-            <p>Tidak ada</p>
+            <p>{{$data->konsultan}}</p>
           </div>
         </div>
-
+        @endif
         <div class="row form-group">
           <label class="col-sm-2 control-label">
             Investor

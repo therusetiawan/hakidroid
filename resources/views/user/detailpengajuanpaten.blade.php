@@ -12,14 +12,18 @@
       <div>
         <ol class="breadcrumb" style="margin-bottom: 0px;">
           <li><a href="#"><i class="fa fa-dashboard left"></i> Ajuan</a></li>
-          <li><a href="#">Hak Paten</a></li>
-          <li class="active">Scantour</li>
+          <li><a href="#">Paten</a></li>
+          <li class="active">{{$data->judul_invensi}}</li>
         </ol>
       </div>
     </div>
     <div class="content-header">
-      {{-- <h3 class="title">Detail Pengajuan : Scantour <small class="label bg-green pull-right"><i class="fa fa-check"></i> Terverifikasi</small></h3> --}}
-      <h3 class="title">Detail Pengajuan Hak Paten : Scantour <small class="label bg-red pull-right"><i class="fa fa-close"></i> Belum Terverifikasi</small></h3>
+      @if($data->status == 'Diterima')
+      <h3 class="title">Detail Pengajuan Paten : {{$data->judul_invensi}} <small class="label label-warning pull-right"><i class="fa fa-close"></i> Proses Pengajuan</small></h3>
+      @else if($data->status == 'Proses')
+      
+      @endif
+
     </div>
 
     <div class="content">
@@ -36,39 +40,47 @@
               Judul Invensi :
             </label>
             <div class="col-sm-10">
-              <p>Lorem</p>
+              <p>{{$data->judul_invensi}}</p>
             </div>
           </div>
 
+          @if($data->paten_pecahana_nomor != null)
           <div class="row form-group">
             <label class="col-sm-2 control-label">
               Nomor Pecahan Paten :
             </label>
             <div class="col-sm-10">
-              <p>Lorem</p>
+              <p>{{$data->paten_pecahana_nomor}}</p>
             </div>
           </div>
-
+          @endif
+          @if($data->konsultan != '' and $data->konsultan != null)
           <div class="row form-group">
             <label class="col-sm-2 control-label">
               Konsultan Haki :
             </label>
             <div class="col-sm-10">
-              <p>lorem</p>
+              <p>{{$data->konsultan}}</p>
             </div>
           </div>
+          @endif
 
+          
           <div class="row form-group">
             <label class="col-sm-2 control-label">
-              Investor
+              Inventor
             </label>
             <div class="col-sm-10">
               <ol>
-                <li>Microsoft (United States)</li>
+                @foreach($data->inventor as $d)
+                  <li>{{$d->nama}}</li>
+                @endforeach
               </ol>
             </div>
           </div>
+          
 
+          {{--
           <div class="row form-group">
             <label class="col-xs-2 control-label">Pengajuan dengan hak prioritas? :</label>
             <div class="col-xs-10">
@@ -106,13 +118,14 @@
 
             </div>
           </div>
+          --}}
         </div>
-      </div>
+      </div> 
       {{-- Box Lampiran --}}
 
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Lampiran Karya</h3>
+          <h3 class="box-title">Lampiran Dokumen Formatif</h3>
         </div>
         <div class="box-body">
           <div class="row form-group">
@@ -130,13 +143,14 @@
           </div>
 
           <div class="row form-group">
-            <label class="col-sm-3">Bukti Pemilikan Hak atas Penemuan</label>
+            <label class="col-sm-3">Surat Kepemilikan Invensi oleh Inventor</label>
             <div class="col-sm-9">
               <a href="#" class="btn btn-success"><i class="fa fa-check"></i> Sudah terunggah</a>
             </div>
           </div>
+
           <div class="row form-group">
-            <label class="col-sm-3">Bukti Penunjukan Negara Tujuan</label>
+            <label class="col-sm-3">Surat Kepemilikan Invensi oleh Lembaga</label>
             <div class="col-sm-9">
               <a href="#" class="btn btn-success"><i class="fa fa-check"></i> Sudah terunggah</a>
             </div>
@@ -148,28 +162,11 @@
               <a href="#" class="btn btn-success"><i class="fa fa-check"></i> Sudah terunggah</a>
             </div>
           </div>
-
-          <div class="row form-group">
-            <label class="col-sm-3">Dokumen Permohonan Paten Internasional</label>
-            <div class="col-sm-9">
-              <a href="#" class="btn btn-success"><i class="fa fa-check"></i> Sudah terunggah</a>
-            </div>
-          </div>
-
-          <div class="row form-group">
-            <label class="col-sm-3">Sertifikat Penyimpanan Jasad Renik Terjemahan</label>
-            <div class="col-sm-9">
-              <a href="#" class="btn btn-success"><i class="fa fa-check"></i> Sudah terunggah</a>
-            </div>
-          </div>
-
-          <div class="row form-group">
-            <label class="col-sm-3">Dokumen Prioritas Terjemahan</label>
-            <div class="col-sm-9">
-              <a href="#" class="btn btn-success"><i class="fa fa-check"></i> Sudah terunggah</a>
-            </div>
-          </div>
-
+        </div>
+      </div>
+      <div  class="box box-primary">
+        <div class="box-header"><h3>Lampiran Dokumen Subtantif</h3></div>
+        <div class='box-body'>
           <div class="row form-group">
             <label class="col-sm-3">File Uraian</label>
             <div class="col-sm-9">
@@ -178,26 +175,11 @@
           </div>
 
           <div class="row form-group">
-            <label class="col-sm-3">File Klaim</label>
-            <div class="col-sm-9">
-              <a href="#" class="btn btn-success"><i class="fa fa-check"></i> Sudah terunggah</a>
-            </div>
-          </div>
-
-          <div class="row form-group">
             <label class="col-sm-3">File Gambar</label>
             <div class="col-sm-9">
-              <a href="#" class="btn btn-success"><i class="fa fa-check"></i> Sudah terunggah</a>
+              <a href="/download/paten/dokumen-subtantif-gambar/{{$data->dokumen_subtantif_gambar[0]->nama_file}}" class="btn btn-success"><i class="fa fa-check"></i> Sudah terunggah</a>
             </div>
           </div>
-
-          <div class="row form-group">
-            <label class="col-sm-3">Dokumen Lain</label>
-            <div class="col-sm-9">
-              <a href="#" class="btn btn-success"><i class="fa fa-check"></i> Sudah terunggah</a>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>

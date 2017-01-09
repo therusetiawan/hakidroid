@@ -13,7 +13,7 @@ class CreateTableKonsultan extends Migration
      */
     public function up()
     {
-        Schema::create('konsultan', function (Blueprint $table) {
+        /*Schema::create('konsultan', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nama_konsultan', 100);
             $table->text('alamat');
@@ -23,7 +23,7 @@ class CreateTableKonsultan extends Migration
             $table->string('email', 80);
             $table->string('telepon_fax', 20);
             $table->timestamps();
-        });
+        });*/
     }
 
     /**

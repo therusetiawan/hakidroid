@@ -30,6 +30,6 @@ class CreateTablePesan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExist('pesan');
+        Schema::dropIfExists('pesan');
     }
 }
