@@ -7,7 +7,7 @@
 
 @section('content')
   <div class="content-header">
-    <h3>Pengajuan Industri</h3>
+    <h3>Pengajuan Desain Industri</h3>
   </div>
   <div class="content body">
   

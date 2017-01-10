@@ -60,3 +60,25 @@ Route::get('/administrator/pengajuanindustri/1', function() {
 Route::get('/administrator/pengajuanpaten/1', function() {
   return view('admin.detailpengajuanpaten');
 })->name('admin_paten_detail');
+
+
+// Route list for admin by herusetiawan
+
+Route::get('administrator', function () {
+    return redirect()->route('admin.getLogin');
+});
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], function () {
+    Route::get('login', 'AuthController@showLogin')->name('getLogin');
+    Route::post('login', 'AuthController@postLogin')->name('postLogin');
+    Route::get('logout', 'AuthController@getLogout')->name('getLogout');
+
+    Route::group(['middleware' => 'auth:web'], function () {
+	   
+        Route::get('home', 'HomeController@index')->name('home');
+        Route::resource('desainindustri', 'DesainIndustriController', ['except' => ['create', 'store']]);
+        Route::resource('paten', 'PatenController', ['except' => ['create', 'show', 'store']]);
+	});
+});
+
+// End route list for admin by heru setiawan
