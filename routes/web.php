@@ -62,3 +62,8 @@ Route::get('/administrator/pengajuanindustri/1', function() {
 Route::get('/administrator/pengajuanpaten/1', function() {
   return view('admin.detailpengajuanpaten');
 });
+
+//route test
+Route::get('/formulir/paten', function (){
+  return view('formulir.paten');
+});
