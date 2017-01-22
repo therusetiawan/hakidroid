@@ -31,6 +31,13 @@
           margin: 0px;
           padding: 0px;
         }
+        table.unsolid {
+          border: 0px;
+        }
+
+        table.unsolid {
+          border: 0px;
+        }
     </style>
     @yield('css')
   </head>
