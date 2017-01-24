@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>IPON Web</title>
+  <title>Admin IPON Web</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -37,9 +37,9 @@
     <!-- Logo -->
     <a href="/administrator" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>HD</b></span>
+      <span class="logo-mini"><b>Admin</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>IPON Web</b></span>
+      <span class="logo-lg"><b>Admin IPON Web</b></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
@@ -55,7 +55,7 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="hidden-xs"> Admin <i class="fa fa-caret-down pull-right"></i></span>
+              <span class="hidden-xs"> {{  Auth::guard('web')->user()->email }} <i class="fa fa-caret-down pull-right"></i></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -63,8 +63,7 @@
 
                 <p>Admin
                   
-                  <small>Admin</small>
-                </p>
+                  <small>{{  Auth::guard('web')->user()->email }}</small>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
@@ -72,7 +71,7 @@
                   <a href="/administrator/profil" class="btn btn-default btn-flat">Profil</a>
                 </div>
                 <div class="pull-right">
-                  <a href="/logout" class="btn btn-default btn-flat">Log Out</a>
+                  <a href="{{ route('admin.getLogout') }}" class="btn btn-default btn-flat">Log Out</a>
                 </div>
               </li>
             </ul>
@@ -92,25 +91,30 @@
           <img src="{{asset('/img/Batman.jpg')}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Admin
-          <br><strong>Admin</strong></p>
+          <br><strong>Admin</strong>
 
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MENU</li>
-        <li class="treeview">
-          <a href="/administrator">
+        <li class="treeview {{{ (Request::is('admin/home') ? 'active' : '') }}}" >
+          <a href="{{ route('admin.home') }}">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li class="treeview">
+        <li class="treeview {{{ (Request::is('admin/desainindustri*' || Request::is('admin/paten')) ? 'active open' : '') }}}">
           <a href="#">
-            <i class="fa fa-cubes"></i> <span>Usulan</span>
+            <i class="fa fa-cubes"></i> <span>Pengajuan</span>
             <ul class="treeview-menu">
-                <li><a href="{{ Route('admin_desain_industri') }}"><i class="fa fa-circle-o"></i>Desain Industri</a></li>
-                <li><a href="{{ Route('admin_paten') }}"><i class="fa fa-circle-o"></i>Hak Paten</a></li>
+                <li {{{ (Request::is('admin/paten') ? 'class=active' : '') }}}>
+                  <a href="{{ route('admin.paten.index') }}"><i class="fa fa-circle-o"></i>Paten</a>
+                </li>
+                <li {{{ (Request::is('admin/desainindustri') ? 'class=active' : '') }}}>
+                  <a href="{{ route('admin.desainindustri.index') }}"><i class="fa fa-circle-o">
+                  </i>Desain Industri</a>
+                </li>
+                
             </ul>
           </a>
         </li>

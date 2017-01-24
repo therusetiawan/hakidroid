@@ -27,19 +27,22 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php $i = 1; ?>
+                @foreach($patens as $paten)
                   <tr>
-                    <td>1</td>
-                    <td>Scantour: Aplikasi Pariwisata dengan Augmented Reality</td>
-                    <td>Abdur Rofi Zihni</td>
+                    <td>{{ $i++ }}</td>
+                    <td>{{ $paten->judul_invensi }}</td>
+                    <td>{{ $paten->nama }}</td>
                     <td>
-                      Menunggu
+                      {{ $paten->status }}
                     </td>
                     <td>
-                      <a data-id="1" href="{{Route('admin_paten_detail')}}" class="btn-view btn bg-green"><i class="fa fa-eye"></i></a>
+                      <a data-id="1" href="{{Route('admin.paten.show', $paten->id)}}" class="btn-view btn bg-green"><i class="fa fa-eye"></i></a>
                       <a href="#" class="btn bg-blue"><i class="fa fa-check"></i></a>
                       <a data-id="1" href="#" class="btn-delete btn bg-red"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
+                @endforeach
                 </tbody>
             </table>
           </div>
