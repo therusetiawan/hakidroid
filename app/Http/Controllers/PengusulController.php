@@ -79,9 +79,6 @@ class PengusulController extends Controller
         if($auth->attempt($credential)){
             Session::flash('loginSuccess', 'Login berhasil');
             return redirect(Route('pengusul_beranda'));
-        }else if(auth('admin')){
-            Session::flash('loginSuccess', 'Login berhasil');
-            return redirect(Route('admin_beranda'));
         }else{
             Session::flash('loginFailed', 'Login Gagal');
             return redirect(Route('pengusul_login'));

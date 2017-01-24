@@ -32,12 +32,12 @@ Route::group(array('prefix'=>'/'), function(){
 
 Route::group(array('prefix'=>'download'), function(){
 	Route::get('paten/surat-kuasa/{{filename}}', 'DownloadController@getPatenSuratKuasa');
-	Route::get('paten/surat-pengalihan-hak-penemuan/{{filename}}', 'DownloadController@getPatenSuratPengalihanHakPenemaun');
-	Route::get('paten/surat-kepemilikan-inventor/{{filename}}', 'DownloadController@getPatenSuratKepemilikanInventor');
-	Route::get('paten/surat-kepemilikan-lembaga/{{filename}}', 'DownloadController@getPatenSuratkepemilikanLembaga');
+	Route::get('paten/surat-pengalihan-hak-penemuan/{filename}', 'DownloadController@getPatenSuratPengalihanHakPenemaun');
+	Route::get('paten/surat-kepemilikan-inventor/{filename}', 'DownloadController@getPatenSuratKepemilikanInventor');
+	Route::get('paten/surat-kepemilikan-lembaga/{filename}', 'DownloadController@getPatenSuratkepemilikanLembaga');
 
-	Route::get('paten/dokumen-subtantif-deskripsi/{{filename}}', 'DownloadController@getPatenDokumenSubtantifDeskripsi');
-	Route::get('paten/dokumen-subtantif-gambar/{{filename}}', 'DownloadController@getPatenDokumenSubtantifGambar');
+	Route::get('paten/dokumen-subtantif-deskripsi/{filename}', 'DownloadController@getPatenDokumenSubtantifDeskripsi');
+	Route::get('paten/dokumen-subtantif-gambar/{filename}', 'DownloadController@getPatenDokumenSubtantifGambar');
 
 });
 // Administrator
