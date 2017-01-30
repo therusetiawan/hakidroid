@@ -256,8 +256,13 @@ class PengusulController extends Controller
     }
 
     public function getEditPengajuanIndustri($id){
-        // UNDONE
-        return view('');
+        $data = PengajuanIndustri::with('biodata')->where('id', $id)->first();
+
+        if($data->biodata->id != auth('pengusul')->user()->id){
+            return abort('404');
+        }
+
+        return view('user.editpengajuandesainindustri')->withData($data);
     }
 
     public function postEditPengajuanIndustri($id){

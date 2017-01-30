@@ -39,7 +39,6 @@ Route::group(array('prefix'=>'download'), function(){
 	Route::get('paten/dokumen-subtantif-deskripsi/{filename}', 'DownloadController@getPatenDokumenSubtantifDeskripsi');
 	Route::get('paten/dokumen-subtantif-gambar/{filename}', 'DownloadController@getPatenDokumenSubtantifGambar');
 
-});
 // Administrator
 Route::get('/administrator', function() {
   	return view('admin.index');

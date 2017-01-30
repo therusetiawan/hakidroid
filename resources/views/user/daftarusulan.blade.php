@@ -62,12 +62,17 @@
                         <td>{{ $d['tanggal']}}</td>
                         <td>{{ $d['status']}}</td>
                         <td>
+<<<<<<< HEAD
                           @if($d['jenis']  == 'Paten' )
                             <a href="/pengajuan-paten/{{$d['id']}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
                           @elseif($d['jenis'] == 'Desain Industri')
                             <a href="/pengajuan-industri/{{$d['id']}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
                           @endif
                           <a href="#" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+=======
+                          <a href="{{url('/usulan/detail')}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                          <a href="{{ url('/ajuan/edit/industri') }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+>>>>>>> f43c364085a5f810ef80a73f24cb10a49e79283c
                           <a href="#" class="btn btn-danger"><i class="fa fa-remove"></i></a>
                         </td>
                       </tr>
