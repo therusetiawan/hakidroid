@@ -34,6 +34,13 @@ Route::get('/ajuan/paten', function(){
   return view('user.detailpengajuanpaten');
 });
 
+Route::get('/ajuan/edit/industri', function(){
+  return view('user.editpengajuandesainindustri');
+});
+
+Route::get('/ajuan/edit/paten', function(){
+  return view('user.editpengajuanpaten');
+});
 
 
 Route::get('/pengajuanindustri', function(){

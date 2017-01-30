@@ -66,7 +66,7 @@
                         <td>Belum Terverifikasi</td>
                         <td>
                           <a href="{{url('/usulan/detail')}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
-                          <a href="#" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                          <a href="{{ url('/ajuan/edit/industri') }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                           <a href="#" class="btn btn-danger"><i class="fa fa-remove"></i></a>
                         </td>
                       </tr>
