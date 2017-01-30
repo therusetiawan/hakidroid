@@ -98,9 +98,11 @@ class PengusulController extends Controller
     }
 
     public function getPengajuan(){
-        $dataPaten = Paten::orderby('created_at', 'desc')->get();
+        $id = auth('pengusul')->user()->id;
 
-        $dataDesainIndustri = DesainIndustri::orderby('created_at', 'desc')->get();
+        $dataPaten = Paten::where('biodata_id', $id)->orderby('created_at', 'desc')->get();
+
+        $dataDesainIndustri = DesainIndustri::where('biodata_id', $id)->orderby('created_at', 'desc')->get();
 
         $data = collect(null);
 
@@ -116,31 +118,37 @@ class PengusulController extends Controller
                 );
         }
 
-        /*foreach ($dataDesainIndustri as $key => $value) {
+        foreach ($dataDesainIndustri as $key => $value) {
             $data->push(
                     array(
                         'id'        => $value->id,
                         'judul'     => $value->judul_invensi,
-                        'jenis'     => 'Paten',
+                        'jenis'     => 'Desain Industri',
                         'tanggal'   => $value->created_at,
-                        'status'    => 'Belum Terverifikasi'
+                        'status'    => $value->status
                         )
                 );
-        }*/
+        }
 
         return view('user.daftarusulan')->withData($data);
     }
 
-    public function getPengajuanDesainIndustri(){
-    	return view('user.pengajuandesainindustri');
-    }
+    public function getDetailDesainIndustri($id){
+        $data = DesainIndustri::with('biodata')->where('id', $id)->firstOrFail();
 
-    public function getDetailDesainIndustri(){
-        return view('user.detailpengajuanindustri');
+        if($data->biodata->id != auth('pengusul')->user()->id){
+            return abort('404');
+        }
+
+        return view('user.detailpengajuanindustri')->withData($data);
     }
 
     public function getDetailPaten($id){
-        $data = Paten::where('id', $id)->first();
+        $data = Paten::with('biodata')->where('id', $id)->firstOrFail();
+
+        if($data->biodata->id != auth('pengusul')->user()->id){
+            return abort('404');
+        }
         
         return view('user.detailpengajuanpaten')->withData($data);
     }
@@ -181,86 +189,39 @@ class PengusulController extends Controller
         }
 
         if($request->hasFile('lampiran_surat_kuasa')){
-            $path = storage_path().'/app/desain_industri/surat_kuasa';
-            $file = $request->file('lampiran_surat_kuasa');
-
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'Surat_Kuasa_'.$desainIndustri->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('lampiran_surat_kuasa'), 'Surat_Kuasa_','/app/desain_industri/surat_kuasa');
             $desainIndustri->lampiran_surat_kuasa = $fileName;
         }
 
         if($request->hasFile('lampiran_surat_pernyataan_pengalihan_hak')){
-            $path = storage_path().'/app/desain_industri/surat_pernyataan_pengalihan_hak';
-            $file = $request->file('lampiran_surat_pernyataan_pengalihan_hak');
-
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'Surat_Pernyataan_Pengalihan_Hak_'.$desainIndustri->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('lampiran_surat_pernyataan_pengalihan_hak'), 'Surat_Pernyataan_Pengalihan_Hak_','/app/desain_industri/lampiran_surat_pernyataan_pengalihan_hak');
             $desainIndustri->lampiran_surat_pernyataan_pengalihan_hak = $fileName;
         }
 
         if($request->hasFile('lampiran_bukti_pemilikan_hak')){
-            $path = storage_path().'/app/desain_industri/bukti_pemilikan_hak';
-            $file = $request->file('lampiran_bukti_pemilikan_hak');
-
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'Bukti_Pemilikan_Hak'.$desainIndustri->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('lampiran_bukti_pemilikan_hak'), 'Bukti_Pemilikan_Hak_','/app/desain_industri/lampiran_bukti_pemilikan_hak');
             $desainIndustri->lampiran_bukti_pemilikan_hak = $fileName;
         }
 
         if($request->hasFile('lampiran_bukti_prioritas_dan_terjemahan')){
-            $path = storage_path().'/app/desain_industri/bukti_prioritas_dan_terjemahan';
-            $file = $request->file('lampiran_bukti_prioritas_dan_terjemahan');
-
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'Bukti_Prioritas_dan_Terjemahan'.$desainIndustri->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('bukti_prioritas_dan_terjemahan'), 'Bukti_Prioritas_dan_Terjemahan','/app/desain_industri/lampiran_bukti_prioritas_dan_terjemahan');
             $desainIndustri->lampiran_bukti_prioritas_dan_terjemahan = $fileName;
         }
 
         if($request->hasFile('lampiran_dokumen_desain_industri')){
-            $path = storage_path().'/app/desain_industri/dokumen_desain_industri';
-            $file = $request->file('lampiran_dokumen_desain_industri');
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('lampiran_dokumen_desain_industri'), 'Dokumen_Desain_Industri_','/app/desain_industri/lampiran_dokumen_desain_industri');
 
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'Dokumen_Desain_Industri'.$desainIndustri->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
             $desainIndustri->lampiran_dokumen_desain_industri = $fileName;
         }
 
         if($request->hasFile('uraian_desain_industri')){
-            $path = storage_path().'/app/desain_industri/uraian_desain_indsturi';
-            $file = $request->file('uraian_desain_industri');
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('uraian_desain_industri'), 'Uraian_Desain_Industri_','/app/desain_industri/uraian_desain_industri');
 
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'Uraian_Desain_Industri'.$desainIndustri->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
             $desainIndustri->uraian_desain_industri = $fileName;
         }
 
         if($request->hasFile('contoh_fisik')){
-            $path = storage_path().'/app/desain_industri/contoh_fisik';
-            $file = $request->file('contoh_fisik');
-
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'Contoh_Fisik'.$desainIndustri->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('contoh_fisik'), 'Contoh_Fisik_','/app/desain_industri/contoh_fisik');
             $desainIndustri->contoh_fisik = $fileName;
         }
 
@@ -280,14 +241,8 @@ class PengusulController extends Controller
         }
 
         if($request->hasFile('gambar_desain_industri')){
-            $path = storage_path().'/app/desain_industri/gambar_desain_industri';
-            $file = $request->file('gambar_desain_industri');
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('gambar_desain_industri'), 'Gambar_Desain_Industri_','/app/desain_industri/uraian_desain_industri');
 
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'Gambar_Desain_Industri'.$desainIndustri->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
             $desainIndustriGambar = new DesainIndustriGambarFoto;
             $desainIndustriGambar->nama_gambar = $fileName;
             $desainIndustriGambar->file_gambar = $fileName;
@@ -300,8 +255,14 @@ class PengusulController extends Controller
         return redirect(Route('pengusul_desain_industri_pengajuan'));
     }
 
-    public function getPengajuanPaten(){
-        return view('user.pengajuanpaten');
+    public function getEditPengajuanIndustri($id){
+        // UNDONE
+        return view('');
+    }
+
+    public function postEditPengajuanIndustri($id){
+        // UNDONE
+        return redirect('/pengajuan');
     }
 
     public function postPengajuanPaten(Request $request){
@@ -314,6 +275,7 @@ class PengusulController extends Controller
         $paten->permohonan_paten_nomor = '';
 
         $check_konsultan_hki = false;
+
         if($request->input('konsultan_check') == 'on'){
             $paten->konsultan = $request->input('konsultan');
         }else{
@@ -323,76 +285,35 @@ class PengusulController extends Controller
         $paten->paten_pecahan_nomor = $request->input('permohonan_pecahan_paten');
 
         if($request->hasFile('surat_kuasa')){
-            $path = storage_path().'/app/paten/surat_kuasa';
-            $file = $request->file('surat_kuasa');
-
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'Surat_Kuasa'.$paten->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
+            $fileName = $this->uploadFile($paten->biodata_id, $request->file('surat_kuasa'), 'Surat_Kuasa_','/app/paten/surat_kuasa');
             $paten->surat_kuasa = $fileName;
         }
 
         if($request->hasFile('surat_pengalihan_hak_atas_penemuan')){
-            $path = storage_path().'/app/paten/surat_pengalihan_hak_atas_penemuan';
-            $file = $request->file('surat_pengalihan_hak_atas_penemuan');
-
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'Surat_Pengalihan_Hak_Atas_Penemuan_'.$paten->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
+            $fileName = $this->uploadFile($paten->biodata_id, $request->file('surat_pengalihan_hak_atas_penemuan'), 'Surat_Pengalihan_Hak_Atas_Penemuan_','/app/paten/surat_pengalihan_hak_atas_penemuan');
             $paten->surat_pengalihan_hak_atas_penemuan = $fileName;
         }
 
         if($request->hasFile('bukti_pemilikan_hak_atas_penemuan_inventor')){
-            $path = storage_path().'/app/paten/bukti_pemilikan_hak_atas_penemuan_inventor';
-            $file = $request->file('bukti_pemilikan_hak_atas_penemuan_inventor');
-
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'Bukti_Pemilikan_Hak_atas_Penemuan_Inventor_'.$paten->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
+            $fileName = $this->uploadFile($paten->biodata_id, $request->file('bukti_pemilikan_hak_atas_penemuan_inventor'), 'Bukti_Pemilikan_Hak_atas_Penemuan_Inventor_','/app/paten/bukti_pemilikan_hak_atas_penemuan_inventor');
             $paten->surat_kepemilikan_invensi_oleh_inventor = $fileName;
         }
 
         if($request->hasFile('bukti_pemilikan_hak_atas_penemuan_lembaga')){
-            $path = storage_path().'/app/paten/bukti_pemilikan_hak_atas_penemuan_lembaga';
-            $file = $request->file('bukti_pemilikan_hak_atas_penemuan_lembaga');
-
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'Bukti_Pemilikan_Hak_atas_Penemuan_Lembaga_'.$paten->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
+            $fileName = $this->uploadFile($paten->biodata_id, $request->file('bukti_pemilikan_hak_atas_penemuan_lembaga'), 'Bukti_Pemilikan_Hak_atas_Penemuan_Lembaga_','/app/paten/bukti_pemilikan_hak_atas_penemuan_lembaga');
             $paten->surat_kepemilikan_invensi_oleh_inventor = $fileName;
         }
 
         if($request->hasFile('dokumen_prioritas_terjemahan')){
-            $path = storage_path().'/app/paten/dokumen_prioritas_terjemahan';
-            $file = $request->file('dokumen_prioritas_terjemahan');
+            $filName = $this->uploadFile($paten->biodata_id, $request->file('dokumen_prioritas_terjemahan'), 'Dokimen_Prioritas_Terjemahan_','/app/paten/dokumen_prioritas_terjemahan');
 
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'Dokumen_Prioritas_Terjemahan_'.$paten->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
             $paten->dokumen_prioritas_terjemahan = $fileName;
         }
 
         $paten->save();
 
         if($request->hasFile('uraian_file')){
-            $path = storage_path().'/app/paten/uraian_file';
-            $file = $request->file('uraian_file');
-
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'File_Uraian_'.$paten->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
+            $fileName = $this->uploadFile($paten->biodata_id, $request->file('urian_file'), 'File_Uraian_','/app/paten/uraian_file');
 
             $dokumen = new PatenSubtantifDeskripsi;
             $dokumen->paten_id = $paten->id;
@@ -401,14 +322,8 @@ class PengusulController extends Controller
         }
 
         if($request->hasFile('gambar_file')){
-            $path = storage_path().'/app/paten/gambar';
-            $file = $request->file('gambar_file');
-
-            $extension = $file->getClientOriginalExtension();
-
-            $fileName = 'File_Gambar_'.$paten->biodata_id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
-
-            $file->move($path, $fileName);
+            
+            $fileName = $this->uploadFile($paten->biodata_id, $request->file('gambar_file'), 'File_Gambar_','/app/paten/gambar');
 
             $dokumen = new PatenSubtantifGambar;
             $dokumen->paten_id = $paten->id;
@@ -444,5 +359,39 @@ class PengusulController extends Controller
 
         Session::flash('messageSuccess', 'Pengajuan Paten berhasil');
         return redirect(Route('pengusul_pengajuan'));
+    }
+
+    public function getEditPaten($id){
+        // UNDONE
+        $data = Paten::with('biodata')->where('id', $id)->first();
+
+        if($data->biodata->id != auth('pengusul')->user()->id){
+            return redirect('/pengajuan');
+        }
+
+        return redirect('/pengajuan');
+    }
+
+    public function postEditPaten($id){
+        // UNDONE
+        $data = Paten::with('biodata')->where('id', $id)->first();
+
+        if($data->biodata->id != auth('pengusul')->user()->id){
+            return redirect('/pengajuan');
+        }
+
+        return redirect('/pengajuan');
+    }
+
+    public function uploadFile($id, $file, $tipeDokumen, $path){
+            $path = storage_path().$path;
+
+            $extension = $file->getClientOriginalExtension();
+
+            $fileName = $tipeDokumen.$id.'_'.Carbon::now()->format('YmdHis').rand(1,99).'.'.$extension;
+
+            $file->move($path, $fileName);
+
+            return $fileName;
     }
 }

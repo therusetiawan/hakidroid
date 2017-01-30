@@ -81,4 +81,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
 	});
 });
 
-// End route list for admin by heru setiawan
+
+//route test
+Route::get('/formulir/paten', function (){
+  return view('formulir.paten');
+});
+
+Route::get('/formulir/industri', function (){
+  return view('formulir.ajuanindustri');
+});
+
