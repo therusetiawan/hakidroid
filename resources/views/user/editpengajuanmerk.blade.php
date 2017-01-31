@@ -147,7 +147,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Kirim</button>
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Simpan</button>
       </form>
     </div>
 @endsection

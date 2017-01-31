@@ -249,7 +249,7 @@
         </div>
       </div>
 
-      <button class="btn btn-primary" name="button">Submit</button>
+      <button class="btn btn-primary" name="button">Simpan</button>
 
       <div class="" style="height: 20px">
 

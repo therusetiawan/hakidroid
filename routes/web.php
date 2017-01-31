@@ -46,6 +46,10 @@ Route::get('/ajuan/edit/merk', function(){
   return view('user.editpengajuanmerk');
 });
 
+Route::get('/ajuan/edit/cipta', function(){
+  return view('user.editpengajuancipta');
+});
+
 
 
 Route::get('/pengajuanindustri', function(){
