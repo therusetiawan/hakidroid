@@ -113,9 +113,9 @@
             <div class="col-sm-10">
               <select class="form-control" name="kelas_desain_industri">
                 <option value="">--- Pilih Kelas Industri ---</option>
-                <option value="Hardware">Hardware</option>
-                <option value="Software">Software</option>
-                <option value="Kerajinan">Kerajinan</option>
+                @foreach($kelas_desain_industri as $k)
+                  <option value="{{$k->id}}">{{$k->nama_kelas_desain_industri}}</option>
+                @endforeach
               </select>
             </div>
           </div>

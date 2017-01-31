@@ -145,13 +145,27 @@
           <div class="row form-group">
             <label class="col-sm-3">File Uraian</label>
             <div class="col-sm-9">
-              <input type="file" name="uraian_file" value="">
+                <a href="#" class="btn btn-success"><i class="fa fa-download"></i></a>
+                <a href="#" data-target="uraianfile" class="btn btn-primary edit-file-btn"><i class="fa fa-pencil"></i></a>
+                <div id="uraianfile" class="row edit-file-form">
+                  <div class="col-sm-12 file-control">
+                      <label for="">Ubah file: </label>
+                      <input type="file" name="uraianfile" value="">
+                  </div>
+                </div>
             </div>
           </div>
           <div class="row form-group">
             <label class="col-sm-3">File Gambar</label>
             <div class="col-sm-9">
-              <input type="file" name="gambar_file" value="">
+                <a href="#" class="btn btn-success"><i class="fa fa-download"></i></a>
+                <a href="#" data-target="gambarfile" class="btn btn-primary edit-file-btn"><i class="fa fa-pencil"></i></a>
+                <div id="gambarfile" class="row edit-file-form">
+                  <div class="col-sm-12 file-control">
+                      <label for="">Ubah file: </label>
+                      <input type="file" name="gambarfile" value="">
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -165,35 +179,70 @@
           <div class="row form-group">
             <label class="col-sm-3">Surat kuasa</label>
             <div class="col-sm-9">
-              <input type="file" name="name" value="">
+                <a href="#" class="btn btn-success"><i class="fa fa-download"></i></a>
+                <a href="#" data-target="suratkuasa" class="btn btn-primary edit-file-btn"><i class="fa fa-pencil"></i></a>
+                <div id="suratkuasa" class="row edit-file-form">
+                  <div class="col-sm-12 file-control">
+                      <label for="">Ubah file: </label>
+                      <input type="file" name="suratkuasa" value="">
+                  </div>
+                </div>
             </div>
           </div>
 
           <div class="row form-group">
             <label class="col-sm-3">Surat Pengalihan Hak atas Penemuan</label>
             <div class="col-sm-9">
-              <input type="file" name="surat_pengalihan_hak_atas_penemuan" value="">
+                <a href="#" class="btn btn-success"><i class="fa fa-download"></i></a>
+                <a href="#" data-target="suratpengalihan" class="btn btn-primary edit-file-btn"><i class="fa fa-pencil"></i></a>
+                <div id="suratpengalihan" class="row edit-file-form">
+                  <div class="col-sm-12 file-control">
+                      <label for="">Ubah file: </label>
+                      <input type="file" name="suratpengalihan" value="">
+                  </div>
+                </div>
             </div>
           </div>
 
           <div class="row form-group">
             <label class="col-sm-3">Surat kepemilikan invensi atas Inventor</label>
             <div class="col-sm-9">
-              <input type="file" name="bukti_pemilikan_hak_atas_penemuan_inventor" value="">
+                <a href="#" class="btn btn-success"><i class="fa fa-download"></i></a>
+                <a href="#" data-target="suratkepemilikaninvensi" class="btn btn-primary edit-file-btn"><i class="fa fa-pencil"></i></a>
+                <div id="suratkepemilikaninvensi" class="row edit-file-form">
+                  <div class="col-sm-12 file-control">
+                      <label for="">Ubah file: </label>
+                      <input type="file" name="suratkepemilikaninvensi" value="">
+                  </div>
+                </div>
             </div>
           </div>
 
           <div class="row form-group">
             <label class="col-sm-3">Surat pernyataan invensi oleh lembaga</label>
             <div class="col-sm-9">
-              <input type="file" name="bukti_pemilikan_hak_atas_penemuan_lembaga" value="">
+                <a href="#" class="btn btn-success"><i class="fa fa-download"></i></a>
+                <a href="#" data-target="suratpernyataan" class="btn btn-primary edit-file-btn"><i class="fa fa-pencil"></i></a>
+                <div id="suratpernyataan" class="row edit-file-form">
+                  <div class="col-sm-12 file-control">
+                      <label for="">Ubah file: </label>
+                      <input type="file" name="suratpernyataan" value="">
+                  </div>
+                </div>
             </div>
           </div>
 
           <div class="row form-group">
             <label class="col-sm-3">Dokumen Prioritas Terjemahan</label>
             <div class="col-sm-9">
-              <input type="file" name="dokumen_prioritas_terjemahan" value="">
+                <a href="#" class="btn btn-success"><i class="fa fa-download"></i></a>
+                <a href="#" data-target="dokumenprioritas" class="btn btn-primary edit-file-btn"><i class="fa fa-pencil"></i></a>
+                <div id="dokumenprioritas" class="row edit-file-form">
+                  <div class="col-sm-12 file-control">
+                      <label for="">Ubah file: </label>
+                      <input type="file" name="dokumenprioritas" value="">
+                  </div>
+                </div>
             </div>
           </div>
 
@@ -214,6 +263,12 @@
   <script src="{{ asset('/admin/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 
   <script type="text/javascript">
+    $('.edit-file-form').toggleClass("hidden");
+    $('.edit-file-btn').click(function (e) {
+      e.preventDefault();
+      $('#'+ $(this).data('target')).toggleClass("hidden");
+    });
+
     $('.add-orang').click(function() {
       var form1 = '<td><input type="text" class="form-control" name="namadesainer[]" placeholder="Nama Investor"></td>';
       var form2 = '<td><input type="text" class="form-control" name="wndesainer[]" placeholder="Asal Negara Investor"></td>';

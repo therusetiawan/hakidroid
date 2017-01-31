@@ -164,7 +164,7 @@
           <div class="row form-group">
             <label class="col-sm-3">Surat kuasa</label>
             <div class="col-sm-9">
-              <input type="file" name="name" value="">
+              <input type="file" name="surat_kuasa" value="">
             </div>
           </div>
 

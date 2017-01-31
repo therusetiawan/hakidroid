@@ -8,6 +8,8 @@ use App\Biodata;
 use App\DesainIndustri;
 use App\DesainIndustriGambarFoto;
 use App\DesainIndustriPendesain;
+use App\DesainIndustriUraian;
+use App\KelasDesainIndustri;
 
 use App\Paten;
 use App\PatenHakPrioritas;
@@ -113,7 +115,7 @@ class PengusulController extends Controller
                         'judul'     => $value->judul_invensi,
                         'jenis'     => 'Paten',
                         'tanggal'   => $value->created_at,
-                        'status'    => $value->satus
+                        'status'    => $value->status
                         )
                 );
         }
@@ -122,7 +124,7 @@ class PengusulController extends Controller
             $data->push(
                     array(
                         'id'        => $value->id,
-                        'judul'     => $value->judul_invensi,
+                        'judul'     => $value->judul_desain_industri,
                         'jenis'     => 'Desain Industri',
                         'tanggal'   => $value->created_at,
                         'status'    => $value->status
@@ -153,6 +155,12 @@ class PengusulController extends Controller
         return view('user.detailpengajuanpaten')->withData($data);
     }
 
+    public function getPengajuanDesainIndustri(){
+        $kelasDesainIndustri = KelasDesainIndustri::all();
+
+        return view('user.pengajuandesainindustri')->withKelasDesainIndustri($kelasDesainIndustri);
+    }
+
     public function postPengajuanDesainIndustri(Request $request){
         $desainIndustri = new DesainIndustri;
         $desainIndustri->tanggal_permohonan = Carbon::now();
@@ -160,17 +168,10 @@ class PengusulController extends Controller
         $desainIndustri->nomor_permohonan = '';
         $desainIndustri->biodata_id = auth('pengusul')->user()->id;
 
-        $check_konsultan_hki = false;
         if($request->input('konsultan_hki') == 'on'){
-            $check_konsultan_hki = true;
-        }
-
-        $desainIndustri->konsultan_hki = $check_konsultan_hki;
-
-        if($check_konsultan_hki){
-            $desainIndustri->konsultan_hki_id = $request->input('konsultan_hki_id');
+            $desainIndustri->konsultan = $request->input('konsultan_hki_id');
         }else{
-            $desainIndustri->konsultan_hki_id = 1;
+            $desainIndustri->konsultan = null;
         }
 
         $desainIndustri->judul_desain_industri = $request->input('judul_desain_industri');
@@ -204,7 +205,7 @@ class PengusulController extends Controller
         }
 
         if($request->hasFile('lampiran_bukti_prioritas_dan_terjemahan')){
-            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('bukti_prioritas_dan_terjemahan'), 'Bukti_Prioritas_dan_Terjemahan','/app/desain_industri/lampiran_bukti_prioritas_dan_terjemahan');
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('lampiran_bukti_prioritas_dan_terjemahan'), 'Bukti_Prioritas_dan_Terjemahan_','/app/desain_industri/lampiran_bukti_prioritas_dan_terjemahan');
             $desainIndustri->lampiran_bukti_prioritas_dan_terjemahan = $fileName;
         }
 
@@ -214,18 +215,14 @@ class PengusulController extends Controller
             $desainIndustri->lampiran_dokumen_desain_industri = $fileName;
         }
 
-        if($request->hasFile('uraian_desain_industri')){
-            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('uraian_desain_industri'), 'Uraian_Desain_Industri_','/app/desain_industri/uraian_desain_industri');
-
-            $desainIndustri->uraian_desain_industri = $fileName;
-        }
-
-        if($request->hasFile('contoh_fisik')){
+        /*if($request->hasFile('contoh_fisik')){
             $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('contoh_fisik'), 'Contoh_Fisik_','/app/desain_industri/contoh_fisik');
             $desainIndustri->contoh_fisik = $fileName;
-        }
+        }*/
 
-        $desainIndustri->kelas_desain_industri = $request->input('kelas_desain_industri');
+        $desainIndustri->kelas_desain_industri_id = $request->input('kelas_desain_industri');
+        $desainIndustri->status = false;
+        $desainIndustri->reviewer_id = null;
 
         $desainIndustri->save();
 
@@ -244,19 +241,29 @@ class PengusulController extends Controller
             $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('gambar_desain_industri'), 'Gambar_Desain_Industri_','/app/desain_industri/uraian_desain_industri');
 
             $desainIndustriGambar = new DesainIndustriGambarFoto;
-            $desainIndustriGambar->nama_gambar = $fileName;
-            $desainIndustriGambar->file_gambar = $fileName;
+            $desainIndustriGambar->gambar_foto = $fileName;
+            // UNDONE
+            $desainIndustriGambar->jumlah = 0;
             $desainIndustriGambar->desain_industri_id = $desainIndustri->id;
             $desainIndustriGambar->save();
         }
 
+        if($request->hasFile('uraian_desain_industri')){
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('uraian_desain_industri'), 'Uraian_Desain_Industri_','/app/desain_industri/uraian_desain_industri');
+
+            $desainIndustriUraian = new DesainIndustriUraian;
+            $desainIndustriUraian->nama = $fileName;
+            $desainIndustriUraian->desain_industri_id = $desainIndustri->id;
+            $desainIndustriUraian->save();
+        }
+
         Session::flash('messageSuccess', 'Pengusulan desain industri berhasil');
 
-        return redirect(Route('pengusul_desain_industri_pengajuan'));
+        return redirect('/pengajuan');
     }
 
-    public function getEditPengajuanIndustri($id){
-        $data = PengajuanIndustri::with('biodata')->where('id', $id)->first();
+    public function getEditPengajuanDesainIndustri($id){
+        $data = DesainIndustri::with('biodata')->where('id', $id)->first();
 
         if($data->biodata->id != auth('pengusul')->user()->id){
             return abort('404');
@@ -265,9 +272,13 @@ class PengusulController extends Controller
         return view('user.editpengajuandesainindustri')->withData($data);
     }
 
-    public function postEditPengajuanIndustri($id){
+    public function postEditPengajuanDesainIndustri($id){
         // UNDONE
         return redirect('/pengajuan');
+    }
+
+    public function getPengajuanPaten(){
+        return view('user.pengajuanpaten');
     }
 
     public function postPengajuanPaten(Request $request){
