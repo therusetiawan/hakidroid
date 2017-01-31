@@ -42,6 +42,11 @@ Route::get('/ajuan/edit/paten', function(){
   return view('user.editpengajuanpaten');
 });
 
+Route::get('/ajuan/edit/merk', function(){
+  return view('user.editpengajuanmerk');
+});
+
+
 
 Route::get('/pengajuanindustri', function(){
   return view('user.pengajuandesainindustri');
