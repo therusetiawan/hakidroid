@@ -18,7 +18,8 @@
             <ul class="dropdown-menu" role="menupengajuan">
               <li><a href="{{url('pengajuanindustri')}}">Desain Industri</a></li>
               <li><a href="{{url('pengajuanpaten')}}">Paten</a></li>
-              <li class="disabled"><a style="color: rgb(185, 185, 185)" href="{{url('pengajuanpaten')}}">Hak Cipta</a></li>
+              <li><a href="{{url('pengajuanmerk')}}">Hak Merk</a></li>
+              <li><a href="{{url('pengajuancipta')}}">Hak Cipta</a></li>
               <li class="disabled"><a style="color: rgb(185, 185, 185)" href="{{url('pengajuanpaten')}}">Merk</a></li>
             </ul>
           </li>

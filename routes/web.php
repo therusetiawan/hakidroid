@@ -49,6 +49,14 @@ Route::get('/pengajuanindustri', function(){
 Route::get('/pengajuanpaten', function(){
   return view('user.pengajuanpaten');
 });
+
+Route::get('/pengajuanmerk', function(){
+  return view('user.pengajuanmerk');
+});
+
+Route::get('/pengajuancipta', function(){
+  return view('user.pengajuancipta');
+});
 // Administrator
 Route::get('/administrator', function() {
   return view('admin.index');
