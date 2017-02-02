@@ -32,7 +32,7 @@ class CreateTableDesainIndustri extends Migration
             $table->string('lampiran_bukti_prioritas_dan_terjemahan')->nullable();
             $table->string('lampiran_dokumen_desain_industri')->nullable();
             $table->boolean('status');
-            $table->integer('reviewer_id')->unsigned();
+            $table->integer('reviewer_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('biodata_id')->references('id')->on('biodata')->onUpdate('cascade')->onDelete('cascade');

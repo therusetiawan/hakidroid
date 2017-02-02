@@ -2,7 +2,7 @@
 
 
 @section('title')
-  Formulir Pengajuan Hak Cipta
+  Sunting "Judul" - Pengajuan Hak Merk
 @endsection
 
 
@@ -19,9 +19,9 @@
 
 @section('content')
     <div class="container">
-      <h2>Formulir Pengajuan Hak Cipta</h2>
+      <h2>Sunting "Judul" - Pengajuan Hak Merk</h2>
 
-      <form action="/pengajuan-hak-cipta" method="post">
+      <form action="#">
         <div class="box box-primary">
             <div class="box-header">
                 <h3 class="box-title">Data Paten</h3>
@@ -32,7 +32,7 @@
                        Nama Ciptaan :
                     </label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text"  name="nama_ciptaan" placeholder="Nama Ciptaan" required="true">
+                        <input class="form-control" type="text"  name="judul" placeholder="Nama Ciptaan" required="true">
                     </div>
                 </div>
                 <div class="row form-group">
@@ -40,11 +40,10 @@
                        Jenis Ciptaan :
                     </label>
                     <div class="col-sm-4">
-                        <select class="form-control" name="jenis_hak_cipta_id">
-                            <option disabled selected>--- Pilih Jenis Ciptaan ----</option>
-                            @foreach($jenis_hak_cipta as $j)
-                                <option value='{{$j->id}}'>{{$j->nama_jenis_hak_cipta}}</option>
-                            @endforeach
+                        <select class="form-control" name="jenisciptaan">
+                            <option disabled>--- Pilih Jenis Ciptaan ----</option>
+                            <option value="1">Test 1</option>
+                            <option value="1">Test 2</option>
                         </select>
                     </div>
                 </div>
@@ -53,7 +52,7 @@
                        Uraian Ciptaan	 :
                     </label>
                     <div class="col-sm-10">
-                        <Textarea rows=4 class="form-control" placeholder="Uraian mengenai Ciptaan" name='uraian_ciptaan'></Textarea>
+                        <Textarea rows=4 class="form-control" placeholder="Uraian mengenai Ciptaan"></Textarea>
                     </div>
                 </div>
 
@@ -62,7 +61,7 @@
                        Tempat pertama kali diumumkan	 :
                     </label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text"  name="tempat_diumumkan" placeholder="Tempat pertama kali barang ciptaaan diumumkan " required="true">
+                        <input class="form-control" type="text"  name="judul" placeholder="Tempat pertama kali barang ciptaaan diumumkan " required="true">
                     </div>
                 </div>
 
@@ -71,7 +70,7 @@
                        Tanggal Pertama kali diumumkan	 :
                     </label>
                     <div class="col-sm-10">
-                        <input class="datepicker form-control" type="text"  name="tanggal_diumumkan" placeholder="Tanggal pertama kali barang ciptaaan diumumkan " required="true">
+                        <input class="datepicker form-control" type="text"  name="judul" placeholder="Tanggal pertama kali barang ciptaaan diumumkan " required="true">
                     </div>
                 </div>
             </div>
@@ -87,7 +86,7 @@
                        Nama	 :
                     </label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text"  name="pencipta_nama" placeholder="Nama Pencipta" required="true">
+                        <input class="form-control" type="text"  name="judul" placeholder="Nama Pencipta" required="true">
                     </div>
                 </div>
                 <div class="row form-group">
@@ -95,7 +94,7 @@
                        Kewarganegaraan	 :
                     </label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text"  name="pencipta_kewarganegaraan" placeholder="Kewarganegaraan Pencipta " required="true">
+                        <input class="form-control" type="text"  name="judul" placeholder="Kewarganegaraan Pencipta " required="true">
                     </div>
                 </div>
                 <div class="row form-group">
@@ -103,7 +102,7 @@
                        Alamat	 :
                     </label>
                     <div class="col-sm-10">
-                        <Textarea rows=4 class="form-control" placeholder="Uraian mengenai Ciptaan" name='pencipta_alamat'></Textarea>
+                        <Textarea rows=4 class="form-control" placeholder="Uraian mengenai Ciptaan"></Textarea>
                     </div>
                 </div>
             </div>
@@ -119,7 +118,7 @@
                        Nama	 :
                     </label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text"  name="pemegang_hak_cipta_nama" placeholder="Nama Pemegang Hak Cipt" required="true">
+                        <input class="form-control" type="text"  name="judul" placeholder="Nama Pemegang Hak Cipt" required="true">
                     </div>
                 </div>
                 <div class="row form-group">
@@ -127,7 +126,7 @@
                        Kewarganegaraan	 :
                     </label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text"  name="pemegang_hak_cipta_kewarganegaraan" placeholder="Kewarganegaraan Pemegang Hak Cipta" required="true">
+                        <input class="form-control" type="text"  name="judul" placeholder="Kewarganegaraan Pemegang Hak Cipta" required="true">
                     </div>
                 </div>
                 <div class="row form-group">
@@ -135,7 +134,7 @@
                        Alamat	 :
                     </label>
                     <div class="col-sm-10">
-                        <Textarea rows=4 class="form-control" placeholder="Alamat Pemegang Hak Cipta" name='pemegang_hak_cipta_alamat'></Textarea>
+                        <Textarea rows=4 class="form-control" placeholder="Alamat Pemegang Hak Cipta"></Textarea>
                     </div>
                 </div>
                           
@@ -152,7 +151,7 @@
                        Nama	 :
                     </label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text"  name="kuasa_nama" placeholder="Nama Kuasa" required="true">
+                        <input class="form-control" type="text"  name="judul" placeholder="Nama Kuasa" required="true">
                     </div>
                 </div>
                 <div class="row form-group">
@@ -160,7 +159,7 @@
                        Kewarganegaraan	 :
                     </label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text"  name="kuasa_kewarganegaraan" placeholder="Kewarganegaraan Kuasa" required="true">
+                        <input class="form-control" type="text"  name="judul" placeholder="Kewarganegaraan Kuasa" required="true">
                     </div>
                 </div>
                 <div class="row form-group">
@@ -168,13 +167,13 @@
                        Alamat	 :
                     </label>
                     <div class="col-sm-10">
-                        <Textarea rows=4 class="form-control" placeholder="Alamat Kuasa" name='kuasa_alamat'></Textarea>
+                        <Textarea rows=4 class="form-control" placeholder="Alamat Kuasa"></Textarea>
                     </div>
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Kirim</button>
-        {{csrf_field()}}
+
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Simpan</button>
       </form>
     </div>
 @endsection
@@ -184,8 +183,7 @@
 
       <script>
         $('.datepicker').datepicker({
-            autoclose: true,
-            format: 'mm/dd/yyyy'
+            autoclose: true
         });
       </script>
 @endsection

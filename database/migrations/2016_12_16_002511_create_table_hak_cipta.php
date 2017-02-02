@@ -37,7 +37,7 @@ class CreateTableHakCipta extends Migration
 
             $table->text('uraian_ciptaan');
             $table->boolean('status');
-            $table->integer('reviewer_id')->unsigned();
+            $table->integer('reviewer_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('biodata_id')->references('id')->on('biodata')->onUpdate('cascade')->onDelete('cascade');

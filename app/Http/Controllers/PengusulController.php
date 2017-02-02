@@ -109,6 +109,8 @@ class PengusulController extends Controller
 
         $dataDesainIndustri = DesainIndustri::where('biodata_id', $id)->orderby('created_at', 'desc')->get();
 
+        $dataHakCipta = HakCipta::where('biodata_id', $id)->orderBy('created_at', 'desc')->get();
+
         $data = collect(null);
 
         foreach ($dataPaten as $key => $value) {
@@ -129,6 +131,18 @@ class PengusulController extends Controller
                         'id'        => $value->id,
                         'judul'     => $value->judul_desain_industri,
                         'jenis'     => 'Desain Industri',
+                        'tanggal'   => $value->created_at,
+                        'status'    => $value->status
+                        )
+                );
+        }
+
+        foreach ($dataHakCipta as $key => $value) {
+            $data->push(
+                    array(
+                        'id'        => $value->id,
+                        'judul'     => $value->nama_ciptaan,
+                        'jenis'     => 'Hak Cipta',
                         'tanggal'   => $value->created_at,
                         'status'    => $value->status
                         )
@@ -451,7 +465,7 @@ class PengusulController extends Controller
         $data->kuasa_alamat = $request->input('kuasa_alamat');
 
         $data->jenis_hak_cipta_id = $request->input('jenis_hak_cipta_id');
-        $data->uraian_ciptaan = $request->input('uraian_cipta');
+        $data->uraian_ciptaan = $request->input('uraian_ciptaan');
 
         $data->tanggal_diumumkan = $request->input('tanggal_diumumkan');
         $data->tempat_diumumkan = $request->input('tempat_diumumkan');

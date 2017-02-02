@@ -34,7 +34,7 @@ class CreateTableMerek extends Migration
             $table->integer('kelas_barang_jasa_id')->unsigned();
             $table->boolean('jenis');
             $table->boolean('status');
-            $table->integer('reviewer_id')->unsigned();
+            $table->integer('reviewer_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('biodata_id')->references('id')->on('biodata')->onUpdate('cascade')->onDelete('cascade');

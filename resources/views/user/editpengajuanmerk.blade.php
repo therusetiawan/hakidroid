@@ -1,7 +1,7 @@
 @extends('layouts.userlayout')
 
 @section('title')
-  Formulir Pengajuan Hak Merk
+  Sunting "Judul" - Pengajuan Hak Merk
 @endsection
 
 
@@ -19,7 +19,7 @@
 
 @section('content')
     <div class="container">
-      <h2>Formulir Pengajuan Hak Merk</h2>
+      <h2>Sunting "Judul" - Pengajuan Hak Merk</h2>
 
       <form action="#">
         <div class="box box-primary">
@@ -124,8 +124,15 @@
                     <label class="col-sm-2 control-label">
                        Warna-warna etiket :
                     </label>
-                    <div class="col-sm-10">
-                        <input type="file"  name="judul" placeholder="Email Kuasa" required="true">
+                    <div class="col-sm-9">
+                        <a href="#" class="btn btn-success"><i class="fa fa-download"></i></a>
+                        <a href="#" data-target="dokumenprioritas" class="btn btn-primary edit-file-btn"><i class="fa fa-pencil"></i> Ubah file</a>
+                        <div id="dokumenprioritas" class="row edit-file-form">
+                        <div class="col-sm-12 file-control">
+                            <label for="">Ubah file: </label>
+                            <input type="file" name="dokumenprioritas" value="">
+                        </div>
+                        </div>
                     </div>
                 </div>
 
@@ -140,7 +147,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Kirim</button>
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Simpan</button>
       </form>
     </div>
 @endsection
@@ -151,6 +158,12 @@
       <script>
         $('.datepicker').datepicker({
             autoclose: true
+        });
+
+        $('.edit-file-form').toggleClass("hidden");
+        $('.edit-file-btn').click(function (e) {
+            e.preventDefault();
+            $('#'+ $(this).data('target')).toggleClass("hidden");
         });
       </script>
 @endsection
