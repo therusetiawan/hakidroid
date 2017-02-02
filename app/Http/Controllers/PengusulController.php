@@ -17,6 +17,9 @@ use App\PatenInventor;
 use App\PatenSubtantifDeskripsi;
 use App\PatenSubtantifGambar;
 
+use App\HakCipta;
+use App\JenisHakCipta;
+
 use Auth;
 use Hash;
 use Session;
@@ -153,6 +156,14 @@ class PengusulController extends Controller
         }
         
         return view('user.detailpengajuanpaten')->withData($data);
+    }
+
+    public function getDetailMerk($id){
+        // UNDONE
+    }
+
+    public function getDetailHakCipta($id){
+        // UNDONE
     }
 
     public function getPengajuanDesainIndustri(){
@@ -397,6 +408,70 @@ class PengusulController extends Controller
         }
 
         return redirect('/pengajuan');
+    }
+
+    public function getPengajuanMerk(){
+        // UNDONE
+    }
+
+    public function postPengajuanMerk(Request $request){
+
+    }
+
+    public function getEditMerk(){
+
+    }
+
+    public function postEditMerk(Request $request){
+
+    }
+
+    public function getPengajuanHakCipta(){
+        $jenis_hak_cipta = JenisHakCipta::all();
+
+        return view('user.pengajuancipta')->withJenisHakCipta($jenis_hak_cipta);
+    }
+
+    public function postPengajuanHakCipta(Request $request){
+        $data = new HakCipta;
+        $data->biodata_id = auth('pengusul')->user()->id;
+
+        $data->nama_ciptaan = $request->input('nama_ciptaan');
+
+        $data->pencipta_nama = $request->input('pencipta_nama');
+        $data->pencipta_kewarganegaraan = $request->input('pencipta_kewarganegaraan');
+        $data->pencipta_alamat = $request->input('pencipta_alamat');
+
+        $data->pemegang_hak_cipta_nama = $request->input('pemegang_hak_cipta_nama');
+        $data->pemegang_hak_cipta_kewarganegaraan = $request->input('pemegang_hak_cipta_kewarganegaraan');
+        $data->pemegang_hak_cipta_alamat = $request->input('pemegang_hak_cipta_alamat');
+
+        $data->kuasa_nama = $request->input('kuasa_nama');
+        $data->kuasa_kewarganegaraan = $request->input('kuasa_kewarganegaraan');
+        $data->kuasa_alamat = $request->input('kuasa_alamat');
+
+        $data->jenis_hak_cipta_id = $request->input('jenis_hak_cipta_id');
+        $data->uraian_ciptaan = $request->input('uraian_cipta');
+
+        $data->tanggal_diumumkan = $request->input('tanggal_diumumkan');
+        $data->tempat_diumumkan = $request->input('tempat_diumumkan');
+
+        $data->status = 0;
+        $data->reviewer_id = null;
+        $data->save();
+
+        Session::flash('messageSuccess', 'Pengusulan hak cipta berhasil');
+
+        return redirect('/pengajuan');
+
+    }
+
+    public function getEditHakCipta(){
+
+    }
+
+    public function postHakCipta(){
+
     }
 
     public function uploadFile($id, $file, $tipeDokumen, $path){

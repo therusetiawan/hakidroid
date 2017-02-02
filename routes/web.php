@@ -34,9 +34,16 @@ Route::group(array('prefix'=>'/'), function(){
 	Route::post('edit-pengajuan-industri', 'PengusulController@postEditPengajuanDesainIndustri');
 
 	// Paten
-	Route::get('pengajuan-paten/{id}', 'PengusulController@getDetailPaten')->name('pengusul_desain_industri_detail');
 	Route::get('pengajuan-paten', 'PengusulController@getPengajuanPaten')->name('pengusul_paten_pengajuan');
+	Route::get('pengajuan-paten/{id}', 'PengusulController@getDetailPaten')->name('pengusul_desain_industri_detail');
 	Route::post('pengajuan-paten', 'PengusulController@postPengajuanPaten')->name('pengusul_paten_pengajuan_post');
+
+	// Hak Cipta
+	Route::get('pengajuan-hak-cipta', 'PengusulController@getPengajuanHakCipta')->name('pengusul_hak_cipta_pengajuan');
+	Route::post('pengajuan-hak-cipta', 'PengusulController@postPengajuanHakCipta')->name('pengusul_pengajuan_hak_cipta_pengajuan_post');
+	Route::get('pengajuan-hak-cipta/{id}', 'PengusulController@getDetailHakCipta');
+	Route::get('edit-pengajuan-hak-cipta/{id}', 'PengusulController@getEditHakCipta');
+	Route::post('edit-pengajuan-hak-cipta', 'PengusulController@postHakCipta');
 	
 });
 
