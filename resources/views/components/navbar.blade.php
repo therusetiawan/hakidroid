@@ -19,7 +19,7 @@
               <li><a href="{{Route('pengusul_paten_pengajuan')}}">Paten</a></li>
               <li><a href="{{Route('pengusul_desain_industri_pengajuan')}}">Desain Industri</a></li>
               <li><a href="{{Route('pengusul_hak_cipta_pengajuan')}}">Hak Cipta</a></li>
-              <li class="disabled"><a style="color: rgb(185, 185, 185)" href="{{url('pengajuanpaten')}}">Merk</a></li>
+              <li><a href="{{Route('pengusul_merek_pengajuan')}}">Merek</a></li>
             </ul>
           </li>
         </ul>

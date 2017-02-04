@@ -44,6 +44,10 @@ Route::group(array('prefix'=>'/'), function(){
 	Route::get('pengajuan-hak-cipta/{id}', 'PengusulController@getDetailHakCipta');
 	Route::get('edit-pengajuan-hak-cipta/{id}', 'PengusulController@getEditHakCipta');
 	Route::post('edit-pengajuan-hak-cipta', 'PengusulController@postHakCipta');
+
+	// Merek
+	Route::get('pengajuan-merek', 'PengusulController@getPengajuanMerek')->name('pengusul_merek_pengajuan');
+	Route::post('pengajuan-merek', 'PengusulController@postPengajuanMerek')->name('pengusul_merek_pengajuan_post');
 	
 });
 
@@ -57,13 +61,6 @@ Route::group(array('prefix'=>'download'), function(){
 	Route::get('paten/dokumen-subtantif-gambar/{filename}', 'DownloadController@getPatenDokumenSubtantifGambar');
 });
 
-Route::get('/pengajuanmerk', function(){
-  return view('user.pengajuanmerk');
-});
-
-Route::get('/pengajuancipta', function(){
-  return view('user.pengajuancipta');
-});
 // Administrator
 Route::get('/administrator', function() {
   	return view('admin.index');

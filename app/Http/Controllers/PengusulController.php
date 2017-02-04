@@ -20,6 +20,9 @@ use App\PatenSubtantifGambar;
 use App\HakCipta;
 use App\JenisHakCipta;
 
+use App\Merek;
+use App\KelasBarangJasa;
+
 use Auth;
 use Hash;
 use Session;
@@ -111,6 +114,8 @@ class PengusulController extends Controller
 
         $dataHakCipta = HakCipta::where('biodata_id', $id)->orderBy('created_at', 'desc')->get();
 
+        $dataMerek = Merek::where('biodata_id', $id)->orderBy('created_at', 'desc')->get();
+
         $data = collect(null);
 
         foreach ($dataPaten as $key => $value) {
@@ -149,6 +154,18 @@ class PengusulController extends Controller
                 );
         }
 
+        foreach ($dataMerek as $key => $value) {
+            $data->push(
+                    array(
+                        'id'        => $value->id,
+                        'judul'     => $value->untuk_permohonan_merek,
+                        'jenis'     => 'Merek',
+                        'tanggal'   => $value->created_at,
+                        'status'    => $value->status
+                        )
+                );
+        }
+
         return view('user.daftarusulan')->withData($data);
     }
 
@@ -172,7 +189,7 @@ class PengusulController extends Controller
         return view('user.detailpengajuanpaten')->withData($data);
     }
 
-    public function getDetailMerk($id){
+    public function getDetailMerek($id){
         // UNDONE
     }
 
@@ -424,19 +441,60 @@ class PengusulController extends Controller
         return redirect('/pengajuan');
     }
 
-    public function getPengajuanMerk(){
+    public function getPengajuanMerek(){
+        $kelas_barang_jasa = KelasBarangJasa::all();
+
+        return view('user.pengajuanmerek')->withKelasBarangJasa($kelas_barang_jasa
+            );
+    }
+
+    public function postPengajuanMerek(Request $request){
+        $data = new Merek;
+
+        $data->tgl_masuk = Carbon::now();
+        $data->no_agenda = '';
+        $data->untuk_permohonan_merek = $request->input('nama_merek');
+        $data->tgl_penerimaan_permohonan = Carbon::now();
+
+        $data->biodata_id = auth('pengusul')->user()->id;
+
+        $data->kuasa_nama = $request->input('kuasa_nama');
+        $data->kuasa_alamat = $request->input('kuasa_alamat');
+        $data->kuasa_telpon = $request->input('kuasa_telepon');
+        $data->kuasa_email = $request->input('kuasa_email');
+
         // UNDONE
+        $data->kuasa_alamat_indonesia = $request->input('kuasa_alamat');
+        $data->kuasa_nama_negara = 'Indonesia';
+
+        $data->tgl_permohonan = Carbon::now();
+
+        $data->warna_warna_etiket = $request->input('warna_etiket');
+
+        $data->arti_etiket_merek = $request->input('arti_etiket');
+
+        if($request->hasFile('etiket_merek')){
+            $fileName = $this->uploadFile($data->biodata_id, $request->file('etiket_merek'), 'Etiket_Merek_','/app/merek/etiket_merek');
+
+            $data->etiket_merek = $fileName;
+        }
+
+        $data->kelas_barang_jasa_id = $request->input('kelas_barang_jasa');
+        $data->jenis = $request->input('jenis_barang_jasa');
+
+        $data->status = false;
+
+        $data->save();
+
+        Session::flash('messageSuccess', 'Pengajuan Merek berhasil');
+        return redirect(Route('pengusul_pengajuan'));
     }
 
-    public function postPengajuanMerk(Request $request){
+    public function getEditMerek(){
 
     }
 
-    public function getEditMerk(){
-
-    }
-
-    public function postEditMerk(Request $request){
+    public function postEditMerek(Request $request){
 
     }
 

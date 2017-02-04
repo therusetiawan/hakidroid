@@ -75,6 +75,9 @@
                           @elseif($d['jenis'] == 'Hak Cipta')
                             <a href="/pengajuan-hak-cipta/{{$d['id']}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
                             <a href="/edit-pengajuan-hak-cipta/{{$d['id']}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                          @elseif($d['jenis'] == 'Merek')
+                            <a href="/pengajuan-merek/{{$d['id']}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                            <a href="/edit-pengajuan-merek/{{$d['id']}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                           @endif
                           
                           <a href="#" class="btn btn-danger"><i class="fa fa-remove"></i></a>
