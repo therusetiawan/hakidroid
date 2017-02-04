@@ -101,14 +101,3 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
         Route::resource('paten', 'PatenController', ['except' => ['create', 'show', 'store']]);
 	});
 });
-
-
-//route test
-Route::get('/formulir/paten', function (){
-  return view('formulir.paten');
-});
-
-Route::get('/formulir/industri', function (){
-  return view('formulir.ajuanindustri');
-});
-

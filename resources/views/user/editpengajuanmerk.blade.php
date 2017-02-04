@@ -156,14 +156,14 @@
       <script src="{{ asset('/admin/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 
       <script>
-        $('.datepicker').datepicker({
-            autoclose: true
-        });
+            $('.datepicker').datepicker({
+                autoclose: true
+            });
 
-        $('.edit-file-form').toggleClass("hidden");
-        $('.edit-file-btn').click(function (e) {
-            e.preventDefault();
-            $('#'+ $(this).data('target')).toggleClass("hidden");
-        });
+            $('.edit-file-form').toggleClass("hidden");
+            $('.edit-file-btn').click(function (e) {
+                e.preventDefault();
+                $('#'+ $(this).data('target')).toggleClass("hidden");
+            });
       </script>
 @endsection

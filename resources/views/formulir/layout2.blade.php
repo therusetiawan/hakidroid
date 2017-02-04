@@ -17,8 +17,9 @@
           border-width: 0 0 1px 1px;
     
         }
-        td.solid {
-
+        
+        table.margin td {
+          padding: 5pt;
         }
         
     </style>
