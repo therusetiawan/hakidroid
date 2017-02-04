@@ -95,3 +95,11 @@ Route::get('/formulir/paten', function (){
 Route::get('/formulir/industri', function (){
   return view('formulir.ajuanindustri');
 });
+
+Route::get('/formulir/merk', function (){
+  return view('formulir.merk');
+});
+
+Route::get('/formulir/cipta', function (){
+  return view('formulir.cipta');
+});
