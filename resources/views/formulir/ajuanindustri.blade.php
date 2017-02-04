@@ -1,4 +1,6 @@
-@extends('formulir.layout2') @section('table')
+@extends('formulir.layout2') 
+
+@section('table')
 <h4>KEMENTERIAN HUKUM DAN HAK ASASI MANUSIA <br> DIREKTORAT JENDERAL HAK KEKAYAAN INTELEKTUAL</h4>
 <h3 align="center">FORMULIR PERMOHONAN PENDAFTARAN DESAIN INDUSTRI</h3>
 <hr> {{-- Table Pengajuan --}}
