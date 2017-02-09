@@ -329,6 +329,7 @@
 
         </div>
       </div>
+      <input type="hidden" name="id" value="{{$data->id}}">
       {{csrf_field()}}
       <button class="btn btn-primary" name="button">Simpan</button>
       <div class="" style="height: 20px">
@@ -365,8 +366,8 @@
     });
 
     $('.add-orang').click(function() {
-      var form1 = '<td><input type="text" class="form-control" name="namadesainer[]" placeholder="Nama Investor"></td>';
-      var form2 = '<td><input type="text" class="form-control" name="wndesainer[]" placeholder="Asal Negara Investor"></td>';
+      var form1 = '<td><input type="text" class="form-control" name="nama_inventor[]" placeholder="Nama Inventor"></td>';
+      var form2 = '<td><input type="text" class="form-control" name="kewarganegaraan[]" placeholder="Asal Negara Inventor"></td>';
       var btndel = '<td><button type="button" class="btn-delete btn btn-danger" name="button"><i class="fa fa-close"></i></button></td>'
       $(this).parent().parent().before('<tr>' + form1 + form2 + btndel +'</tr>')
       .fadeIn('slow');

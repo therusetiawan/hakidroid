@@ -113,7 +113,7 @@
                        Warna-warna etiket :
                     </label>
                     <div class="col-sm-10">
-                        <Textarea rows=4 class="form-control" placeholder="Warna-warna etiket merek">{{$data->warna_warna_etiket}}</Textarea>
+                        <Textarea rows=4 class="form-control" placeholder="Warna-warna etiket merek" name='warna_etiket'>{{$data->warna_warna_etiket}}</Textarea>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -121,7 +121,7 @@
                        Arti bahasa/huruf :
                     </label>
                     <div class="col-sm-10">
-                        <Textarea rows=4 class="form-control" placeholder="Arti bahasa/huruf">{{$data->arti_etiket_merek}}</Textarea>
+                        <Textarea rows=4 class="form-control" placeholder="Arti bahasa/huruf" name='arti_etiket'>{{$data->arti_etiket_merek}}</Textarea>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -141,6 +141,7 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" name="id" value="{{$data->id}}">
         {{csrf_field()}}
         <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Simpan</button>
       </form>

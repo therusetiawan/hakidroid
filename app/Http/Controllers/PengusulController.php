@@ -30,16 +30,16 @@ use Carbon\Carbon;
 
 class PengusulController extends Controller
 {
-	public function __construct(){
-		$sites = array('getIndex', 'getLogin', 'postLogin', 'getRegister', 'postRegister');
-		$this->middleware('auth:pengusul', ['except' => $sites]);
-	}
+    public function __construct(){
+        $sites = array('getIndex', 'getLogin', 'postLogin', 'getRegister', 'postRegister');
+        $this->middleware('auth:pengusul', ['except' => $sites]);
+    }
 
     public function getIndex(){
         if(auth('pengusul')->check()){
             return redirect(Route('pengusul_beranda'));
         }
-    	return view('user.index');
+        return view('user.index');
     }
 
     public function getRegister(){
@@ -73,11 +73,11 @@ class PengusulController extends Controller
         if(auth('pengusul')->check()){
             return redirect(Route('pengusul_beranda'));
         }
-    	return view('layouts.loginlayout');
+        return view('layouts.loginlayout');
     }
 
     public function postLogin(Request $request){
-    	$auth = auth('pengusul');
+        $auth = auth('pengusul');
 
         $credential = array(
             'email' => $request->input('email'),
@@ -91,7 +91,7 @@ class PengusulController extends Controller
             Session::flash('loginFailed', 'Login Gagal');
             return redirect(Route('pengusul_login'));
         }
-    	return redirect(Route('pengusul_login'));
+        return redirect(Route('pengusul_login'));
     }
 
     public function getLogout(){
@@ -102,7 +102,7 @@ class PengusulController extends Controller
     }
 
     public function getBeranda(){
-    	return view('user.beranda');
+        return view('user.beranda');
     }
 
     public function getPengajuan(){
@@ -361,16 +361,18 @@ class PengusulController extends Controller
         $paten->jenis_paten = $request->input('jenis_paten');
         $paten->permohonan_paten_nomor = '';
 
-        $check_konsultan_hki = false;
-
         if($request->input('konsultan_check') == 'on'){
             $paten->konsultan = $request->input('konsultan');
         }else{
-            $paten->konsultan_hki = $request->input('konsultan');
+            $paten->konsultan = null;
         }
 
-        $paten->paten_pecahan_nomor = $request->input('permohonan_pecahan_paten');
-
+        if($request->input('nomor_pecahan_check') == 'on'){
+            $paten->paten_pecahan_nomor = $request->input('nomor_pecahan');
+        }else{
+            $paten->paten_pecahan_nomor = null;    
+        }
+        
         if($request->hasFile('surat_kuasa')){
             $fileName = $this->uploadFile($paten->biodata_id, $request->file('surat_kuasa'), 'Surat_Kuasa_','/app/paten/surat_kuasa');
             $paten->surat_kuasa = $fileName;
@@ -465,8 +467,152 @@ class PengusulController extends Controller
         return view('user.editpengajuanpaten')->withData($data);
     }
 
-    public function postEditPaten($id){
-        // UNDONE
+    public function postEditPaten(Request $request){
+        $id = $request->input('id');
+
+        $paten = Paten::where('id', $id)->firstOrFail();
+
+        if($paten == null){
+            Session::flash('messageError', 'Data tidak valid');
+
+            return redirect('/pengajuan');
+        }
+
+        if($paten->status == 1){
+            Session::flash('messageError', 'Data sudah tidak dapat diubah');
+
+            return redirect('/pengajuan');
+        }
+
+        if($paten->biodata_id != auth('pengusul')->user()->id){
+            Session::flash('messageError', 'Akses dilarang');
+
+            return redirect('/pengajuan');
+        }
+
+        $paten->biodata_id = auth('pengusul')->user()->id;
+        $paten->judul_invensi = $request->input('judul_invensi');
+
+        $paten->jenis_paten = $request->input('jenis_paten');
+
+        if($request->input('konsultan_check') == 'on'){
+            $paten->konsultan = $request->input('konsultan');
+        }else{
+            $paten->konsultan = null;
+        }
+
+        if($request->input('nomor_pecahan_check') == 'on'){
+            $paten->paten_pecahan_nomor = $request->input('nomor_pecahan');
+        }else{
+            $paten->paten_pecahan_nomor = null;    
+        }
+
+        $file_surat_kuasa = $paten->surat_kuasa;
+        if($request->hasFile('surat_kuasa')){
+            if($file_surat_kuasa == null){
+                $file_surat_kuasa = $this->uploadFile($paten->biodata_id, $request->file('surat_kuasa'), 'Surat_Kuasa_','/app/paten/surat_kuasa');
+            }
+            else{
+                $file_surat_kuasa = $this->updateUploadFile($file_surat_kuasa, $request->file('surat_kuasa'), '/app/paten/surat_kuasa');
+            }
+            $paten->surat_kuasa = $file_surat_kuasa;
+        }
+
+        $file_surat_pengalihan_hak_atas_penemuan = $paten->surat_pengalihan_hak_atas_penemuan;
+        if($request->hasFile('surat_pengalihan_hak_atas_penemuan')){
+            if($file_surat_pengalihan_hak_atas_penemuan == null){
+                $file_surat_pengalihan_hak_atas_penemuan = $this->uploadFile($paten->biodata_id, $request->file('surat_pengalihan_hak_atas_penemuan'), 'Surat_Pengalihan_Hak_Atas_Penemuan_','/app/paten/surat_pengalihan_hak_atas_penemuan');
+            }
+            else{
+                $file_surat_pengalihan_hak_atas_penemuan = $this->updateUploadFile($file_surat_pengalihan_hak_atas_penemuan, $request->file('surat_pengalihan_hak_atas_penemuan'), '/app/paten/surat_pengalihan_hak_atas_penemuan');
+            }
+
+            $paten->surat_pengalihan_hak_atas_penemuan = $file_surat_pengalihan_hak_atas_penemuan;
+        }
+
+        $file_bukti_pemilikan_hak_atas_penemuan_inventor = $paten->surat_kepemilikan_invensi_oleh_inventor;
+        if($request->hasFile('bukti_pemilikan_hak_atas_penemuan_inventor')){
+            if($file_bukti_pemilikan_hak_atas_penemuan_inventor == null){
+                $file_bukti_pemilikan_hak_atas_penemuan_inventor = $this->uploadFile($paten->biodata_id, $request->file('bukti_pemilikan_hak_atas_penemuan_inventor'), 'Bukti_Pemilikan_Hak_atas_Penemuan_Inventor_','/app/paten/bukti_pemilikan_hak_atas_penemuan_inventor');    
+            }else{
+                $file_bukti_pemilikan_hak_atas_penemuan_inventor = $this->updateUploadFile($file_bukti_pemilikan_hak_atas_penemuan_inventor, $request->file('bukti_pemilikan_hak_atas_penemuan_inventor'), '/app/paten/bukti_pemilikan_hak_atas_penemuan_inventor');
+            }
+
+            $paten->surat_kepemilikan_invensi_oleh_inventor = $file_bukti_pemilikan_hak_atas_penemuan_inventor;
+        }
+
+        $file_surat_pernyataan_invensi_oleh_lembaga = $paten->surat_pernyataan_invensi_oleh_lembaga;
+        if($request->hasFile('bukti_pemilikan_hak_atas_penemuan_lembaga')){
+            if($file_surat_pernyataan_invensi_oleh_lembaga == null){
+                $file_surat_pernyataan_invensi_oleh_lembaga = $this->uploadFile($paten->biodata_id, $request->file('bukti_pemilikan_hak_atas_penemuan_lembaga'), 'Bukti_Pemilikan_Hak_atas_Penemuan_Lembaga_','/app/paten/bukti_pemilikan_hak_atas_penemuan_lembaga');
+            }else{
+                $file_surat_pernyataan_invensi_oleh_lembaga = $this->updateUploadFile($file_surat_pernyataan_invensi_oleh_lembaga, $request->file('bukti_pemilikan_hak_atas_penemuan_lembaga'), '/app/paten/bukti_pemilikan_hak_atas_penemuan_lembaga');
+            }
+
+            $paten->surat_pernyataan_invensi_oleh_lembaga = $file_surat_pernyataan_invensi_oleh_lembaga;
+        }
+
+        $file_dokumen_prioritas_terjemahan = $paten->dokumen_prioritas_terjemahan;
+        if($request->hasFile('dokumen_prioritas_terjemahan')){
+            if($file_dokumen_prioritas_terjemahan == null){
+                $file_dokumen_prioritas_terjemahan = $this->uploadFile($paten->biodata_id, $request->file('dokumen_prioritas_terjemahan'), 'Dokimen_Prioritas_Terjemahan_','/app/paten/dokumen_prioritas_terjemahan');
+            }else{
+                $file_dokumen_prioritas_terjemahan = $this->updateUploadFile($file_dokumen_prioritas_terjemahan, $request->file('dokumen_prioritas_terjemahan'), '/app/paten/dokumen_prioritas_terjemahan');
+            }
+
+            $paten->dokumen_prioritas_terjemahan = $file_dokumen_prioritas_terjemahan;
+        }
+
+        $paten->save();
+
+        if($request->hasFile('uraian_file')){
+            $fileName = $this->uploadFile($paten->biodata_id, $request->file('uraian_file'), 'File_Uraian_','/app/paten/uraian_file');
+
+            $dokumen = new PatenSubtantifDeskripsi;
+            $dokumen->paten_id = $paten->id;
+            $dokumen->nama_file = $fileName;
+            $dokumen->save();
+        }
+
+        if($request->hasFile('gambar_file')){
+            $fileName = $this->uploadFile($paten->biodata_id, $request->file('gambar_file'), 'File_Gambar_','/app/paten/gambar');
+
+            $dokumen = new PatenSubtantifGambar;
+            $dokumen->paten_id = $paten->id;
+            $dokumen->nama_file = $fileName;
+            $dokumen->save();
+        }
+
+        $paten->save();
+
+        $inventor = $request->input('nama_inventor');
+        $kewarganegaraan = $request->input('kewarganegaraan');
+
+        $last_inventor = PatenInventor::where('paten_id', $paten->id)->delete();
+
+        foreach ($inventor as $i => $d) {
+            $dataInventor = new PatenInventor;
+            $dataInventor->nama = $d;
+            $dataInventor->kewarganegaraan = $kewarganegaraan[$i];
+            $dataInventor->paten_id = $paten->id;
+            $dataInventor->save();
+        }
+
+        if($request->input('hak_prioritas') == 'on'){
+
+            $paten_hak_prioritas = new PatenHakPrioritas;
+            $paten_hak_prioritas->nama = $request->input('hak_prioritas_nama');
+            $paten_hak_prioritas->tanggal_penerimaan_permohonan = Carbon::parse($request->input('hak_prioritas_tanggal'))->format('Y-m-d');
+            $paten_hak_prioritas->nomor_prioritas = $request->input('hak_prioritas_nomor');
+            $paten_hak_prioritas->save();
+
+            $paten->hak_prioritas_id = $paten_hak_prioritas->id;
+            $paten->save();
+        }
+
+
+        Session::flash('messageSuccess', 'Update Pengajuan Paten berhasil');
+        return redirect(Route('pengusul_pengajuan'));
         
     }
 
@@ -507,7 +653,10 @@ class PengusulController extends Controller
         }
 
         $data->kelas_barang_jasa_id = $request->input('kelas_barang_jasa');
-        $data->jenis = $request->input('jenis_barang_jasa');
+
+        $kelasBarangJasa = KelasBarangJasa::where('id', $data->kelas_barang_jasa)->first();
+
+        $data->jenis = $kelasBarangJasa->deskripsi;
 
         $data->status = false;
 
@@ -532,7 +681,62 @@ class PengusulController extends Controller
     }
 
     public function postEditMerek(Request $request){
+        $id = $request->input('id');
 
+        $data = Merek::where('id', $id)->first();
+
+        if($data == null){
+            Session::flash('messageError', 'Data tidak valid');
+
+            return redirect('/pengajuan');
+        }
+
+        if($data->status == 1){
+            Session::flash('messageError', 'Data sudah tidak dapat diubah');
+
+            return redirect('/pengajuan');
+        }
+
+        if($data->biodata_id != auth('pengusul')->user()->id){
+            Session::flash('messageError', 'Akses dilarang');
+
+            return redirect('/pengajuan');
+        }
+
+        $data->untuk_permohonan_merek = $request->input('nama_merek');
+
+        $data->kuasa_nama = $request->input('kuasa_nama');
+        $data->kuasa_alamat = $request->input('kuasa_alamat');
+        $data->kuasa_telpon = $request->input('kuasa_telepon');
+        $data->kuasa_email = $request->input('kuasa_email');
+        $data->kuasa_alamat_indonesia = $request->input('kuasa_alamat');
+        $data->kuasa_nama_negara = 'Indonesia';
+
+        $data->warna_warna_etiket = $request->input('warna_etiket');
+
+        $data->arti_etiket_merek = $request->input('arti_etiket');
+
+        $fileName = $data->etiket_merek;
+        if($request->hasFile('etiket_merek')){
+            if($fileName == null){
+                $fileName = $this->uploadFile($data->biodata_id, $request->file('etiket_merek'), 'Etiket_Merek_','/app/merek/etiket_merek');
+            }else{
+                $fileName = $this->updateUploadFile($fileName, $request->file('etiket_merek'), '/app/merek/etiket_merek');
+            }
+
+            $data->etiket_merek = $fileName;
+        }
+
+        $data->kelas_barang_jasa_id = $request->input('kelas_barang_jasa');
+
+        $kelasBarangJasa = KelasBarangJasa::where('id', $data->kelas_barang_jasa_id)->first();
+
+        $data->jenis = $kelasBarangJasa->deskripsi;
+
+        $data->save();
+
+        Session::flash('messageSuccess', 'Update Pengajuan Merek berhasil');
+        return redirect(Route('pengusul_pengajuan'));
     }
 
     public function getPengajuanHakCipta(){
@@ -679,5 +883,15 @@ class PengusulController extends Controller
             $file->move($path, $fileName);
 
             return $fileName;
+    }
+
+    public function updateUploadFile($filename, $file, $path){
+            $path = storage_path().$path;
+
+            $extension = $file->getClientOriginalExtension();
+
+            $file->move($path, $filename);
+
+            return $filename;
     }
 }
