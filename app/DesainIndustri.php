@@ -14,8 +14,8 @@ class DesainIndustri extends Model
     	return $this->belongsTo('App\Biodata');
     }
 
-    public function dokumen_lain(){
-    	return $this->hasMany('App\DesainIndustriDokumenLain');
+    public function uraian(){
+    	return $this->hasMany('App\DesainIndustriUraian');
     }
 
     public function gambar_foto(){
@@ -24,6 +24,10 @@ class DesainIndustri extends Model
 
     public function pendesain(){
     	return $this->hasMany('App\DesainIndustriPendesain');
+    }
+
+    public function kelas_desain_industri(){
+        return $this->belongsTo('App\KelasDesainIndustri');
     }
 
 }

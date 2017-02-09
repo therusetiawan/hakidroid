@@ -127,7 +127,7 @@
                     Nomor prioritas:
                   </label>
                   <div class="col-sm-12">
-                    <input class="form-control" type="text"  name="hak_prioritas_nomor" placeholder="Nomor Prioritas ">
+                    <input class="form-control" type="text"  name="hak_prioritas_nomor" placeholder="Nomor Prioritas">
                   </div>
                 </div>
               </div>

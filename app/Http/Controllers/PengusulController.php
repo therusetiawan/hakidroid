@@ -170,7 +170,12 @@ class PengusulController extends Controller
     }
 
     public function getDetailDesainIndustri($id){
-        $data = DesainIndustri::with('biodata')->where('id', $id)->firstOrFail();
+        $data = DesainIndustri::with('biodata')
+                                ->with('uraian')
+                                ->with('gambar_foto')
+                                ->with('kelas_desain_industri')
+                                ->with('pendesain')
+                                ->where('id', $id)->firstOrFail();
 
         if($data->biodata->id != auth('pengusul')->user()->id){
             return abort('404');
@@ -180,7 +185,10 @@ class PengusulController extends Controller
     }
 
     public function getDetailPaten($id){
-        $data = Paten::with('biodata')->where('id', $id)->firstOrFail();
+        $data = Paten::with('biodata')
+                        ->with('dokumen_subtantif_gambar')
+                        ->with('dokumen_subtantif_deskripsi')
+                        ->where('id', $id)->firstOrFail();
 
         if($data->biodata->id != auth('pengusul')->user()->id){
             return abort('404');
@@ -190,11 +198,25 @@ class PengusulController extends Controller
     }
 
     public function getDetailMerek($id){
-        // UNDONE
+        $data = Merek::with('biodata')
+                        ->with('kelas_barang_jasa')
+                        ->where('id', $id)->firstOrFail();
+
+        if($data->biodata->id != auth('pengusul')->user()->id){
+            return abort('404');
+        }
+
+        return view('user.detailpengajuanmerek')->withData($data);
     }
 
     public function getDetailHakCipta($id){
-        // UNDONE
+        $data = HakCipta::with('biodata')->with('jenis_hak_cipta')->where('id', $id)->firstOrFail();
+
+        if($data->biodata->id != auth('pengusul')->user()->id){
+            return abort('404');
+        }
+        
+        return view('user.detailpengajuanhakcipta')->withData($data);
     }
 
     public function getPengajuanDesainIndustri(){
@@ -280,7 +302,7 @@ class PengusulController extends Controller
         }
 
         if($request->hasFile('gambar_desain_industri')){
-            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('gambar_desain_industri'), 'Gambar_Desain_Industri_','/app/desain_industri/uraian_desain_industri');
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('gambar_desain_industri'), 'Gambar_Desain_Industri_','/app/desain_industri/gambar_desain_industri');
 
             $desainIndustriGambar = new DesainIndustriGambarFoto;
             $desainIndustriGambar->gambar_foto = $fileName;
@@ -304,17 +326,24 @@ class PengusulController extends Controller
         return redirect('/pengajuan');
     }
 
-    public function getEditPengajuanDesainIndustri($id){
-        $data = DesainIndustri::with('biodata')->where('id', $id)->first();
+    public function getEditDesainIndustri($id){
+        $kelasDesainIndustri = KelasDesainIndustri::all();
+
+        $data = DesainIndustri::with('biodata')
+                                ->with('uraian')
+                                ->with('gambar_foto')
+                                ->with('pendesain')
+                                ->with('kelas_desain_industri')
+                                ->where('id', $id)->first();
 
         if($data->biodata->id != auth('pengusul')->user()->id){
             return abort('404');
         }
 
-        return view('user.editpengajuandesainindustri')->withData($data);
+        return view('user.editpengajuandesainindustri')->withData($data)->withKelasDesainIndustri($kelasDesainIndustri);
     }
 
-    public function postEditPengajuanDesainIndustri($id){
+    public function postEditDesainIndustri($id){
         // UNDONE
         return redirect('/pengajuan');
     }
@@ -371,7 +400,7 @@ class PengusulController extends Controller
         $paten->save();
 
         if($request->hasFile('uraian_file')){
-            $fileName = $this->uploadFile($paten->biodata_id, $request->file('urian_file'), 'File_Uraian_','/app/paten/uraian_file');
+            $fileName = $this->uploadFile($paten->biodata_id, $request->file('uraian_file'), 'File_Uraian_','/app/paten/uraian_file');
 
             $dokumen = new PatenSubtantifDeskripsi;
             $dokumen->paten_id = $paten->id;
@@ -420,32 +449,31 @@ class PengusulController extends Controller
     }
 
     public function getEditPaten($id){
-        // UNDONE
-        $data = Paten::with('biodata')->where('id', $id)->first();
+        $data = Paten::with('biodata')
+                        ->with('inventor')
+                        ->with('hak_prioritas')
+                        ->with('reviewer')
+                        ->with('dokumen_subtantif_deskripsi')
+                        ->with('dokumen_subtantif_gambar')
+                        ->where('id', $id)->firstOrFail();
+        
 
         if($data->biodata->id != auth('pengusul')->user()->id){
-            return redirect('/pengajuan');
+            return abort('404');
         }
 
-        return redirect('/pengajuan');
+        return view('user.editpengajuanpaten')->withData($data);
     }
 
     public function postEditPaten($id){
         // UNDONE
-        $data = Paten::with('biodata')->where('id', $id)->first();
-
-        if($data->biodata->id != auth('pengusul')->user()->id){
-            return redirect('/pengajuan');
-        }
-
-        return redirect('/pengajuan');
+        
     }
 
     public function getPengajuanMerek(){
         $kelas_barang_jasa = KelasBarangJasa::all();
 
-        return view('user.pengajuanmerek')->withKelasBarangJasa($kelas_barang_jasa
-            );
+        return view('user.pengajuanmerek')->withKelasBarangJasa($kelas_barang_jasa);
     }
 
     public function postPengajuanMerek(Request $request){
@@ -463,7 +491,6 @@ class PengusulController extends Controller
         $data->kuasa_telpon = $request->input('kuasa_telepon');
         $data->kuasa_email = $request->input('kuasa_email');
 
-        // UNDONE
         $data->kuasa_alamat_indonesia = $request->input('kuasa_alamat');
         $data->kuasa_nama_negara = 'Indonesia';
 
@@ -490,8 +517,18 @@ class PengusulController extends Controller
         return redirect(Route('pengusul_pengajuan'));
     }
 
-    public function getEditMerek(){
+    public function getEditMerek($id){
+        $kelas_barang_jasa = KelasBarangJasa::all();
 
+        $data = Merek::with('biodata')
+                        ->with('kelas_barang_jasa')
+                        ->where('id', $id)->firstOrFail();   
+
+        if($data->biodata->id != auth('pengusul')->user()->id){
+            return abort('404');
+        }
+
+        return view('user.editpengajuanmerek')->withData($data)->withKelasBarangJasa($kelas_barang_jasa);
     }
 
     public function postEditMerek(Request $request){
@@ -538,12 +575,53 @@ class PengusulController extends Controller
 
     }
 
-    public function getEditHakCipta(){
+    public function getEditHakCipta($id){
+        $jenis_hak_cipta = JenisHakCipta::all();
+
+        $data = HakCipta::where('id', $id)->firstOrFail();
+
+        if($data->biodata->id != auth('pengusul')->user()->id){
+            return abort('404');
+        }
+
+        return view('user.editpengajuancipta')->withData($data)->withJenisHakCipta($jenis_hak_cipta);
+    }
+
+    public function postEditHakCipta(Request $request){
 
     }
 
-    public function postHakCipta(){
 
+    // Delete Pengajuan
+    public function postDeletePengajuan(Request $request){
+        $data = null;
+        $id = $request->input('id');
+        $jenis_pengajuan = $request->input('jenis_pengajuan');
+
+        switch($jenis_pengajuan){
+            case 'Paten':
+                $data = Paten::where('id', $id)->first();
+            break;
+
+            case 'Desain Industri':
+                $data = DesainIndustri::where('id', $id)->first();
+            break;
+
+            case 'Hak Cipta':
+                $data = HakCipta::where('id', $id)->first();
+            break;
+
+            case 'Merek':
+                $data = Merek::where('id', $id)->first();
+            break;
+        }
+
+        if($data != null){
+            $data->delete();
+        }
+
+        Session::flash('messageSuccess','Hapus pengajuan berhasil');
+        return redirect('/pengajuan');
     }
 
     public function uploadFile($id, $file, $tipeDokumen, $path){

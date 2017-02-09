@@ -24,7 +24,7 @@
       <form action="/pengajuan-hak-cipta" method="post">
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Data Paten</h3>
+                <h3 class="box-title">Data Hak Cipta</h3>
             </div>
             <div class="box-body">
                 <div class="row form-group">
@@ -185,7 +185,7 @@
       <script>
         $('.datepicker').datepicker({
             autoclose: true,
-            format: 'mm/dd/yyyy'
+            format: 'yyyy-mm-dd'
         });
       </script>
 @endsection

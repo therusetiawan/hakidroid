@@ -80,7 +80,7 @@
                             <a href="/edit-pengajuan-merek/{{$d['id']}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                           @endif
                           
-                          <a href="#" class="btn btn-danger"><i class="fa fa-remove"></i></a>
+                          <a href="#" class="btn btn-danger delete-pengajuan" data-id="{{$d['id']}}" data-jenis-pengajuan="{{$d['jenis']}}" data-judul="{{ $d['judul']}}"><i class="fa fa-remove"></i></a>
                         </td>
                       </tr>
                       @endforeach
@@ -108,6 +108,30 @@
         "lengthChange": false,
         "searching": false
       });
+    });
+    $('.delete-pengajuan').click(function() {
+      var id = $(this).data('id');
+      var jenis_pengajuan = $(this).data('jenis-pengajuan');
+      var judul = $(this).data('judul');
+      var _token = '{{csrf_token()}}';
+
+      bootbox.confirm("Hapus Pengajuan <strong>"+judul+" </strong>?", function(result) {
+        if (result) {
+          toastr.options.timeOut = 0;
+          toastr.options.extendedTimeOut = 0;
+          toastr.info('<i class="fa fa-spinner fa-spin"></i><br>Sedang menghapus...');
+          toastr.options.timeOut = 5000;
+          toastr.options.extendedTimeOut = 1000;
+          $.post("/delete-pengajuan", {id: id, jenis_pengajuan:jenis_pengajuan, _token:_token})
+          .done(function(result) {
+            window.location.replace("/pengajuan");
+          })
+          .fail(function(result) {
+            toastr.clear();
+            toastr.error('Kesalahan server!');
+          });
+        };
+      }); 
     });
   </script>
 @endsection

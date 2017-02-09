@@ -1,7 +1,7 @@
 @extends('layouts.userlayout')
 
 @section('title')
-  Formulir Pengajuan Hak Merek
+  Formulir Pengajuan Merek
 @endsection
 
 
@@ -19,7 +19,7 @@
 
 @section('content')
     <div class="container">
-      <h2>Formulir Pengajuan Hak Merek</h2>
+      <h2>Formulir Pengajuan Merek</h2>
 
       <form action="/pengajuan-merek" method="post" enctype="multipart/form-data">
         <div class="box box-primary">
@@ -35,23 +35,7 @@
                         <input class="form-control" type="text"  name="nama_merek" placeholder="Nama Merek" required="true">
                     </div>
                 </div>
-                <div class="row form-group">
-                    <label class="col-sm-2 control-label">
-                       Kewarganegaraan
-                    </label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text"  name="judul" placeholder="Kewarganegaraan" required="true">
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <label class="col-sm-2 control-label">
-                       Alamat	 :
-                    </label>
-                    <div class="col-sm-10">
-                        <Textarea rows=4 class="form-control" placeholder="Alamat..."></Textarea>
-                    </div>
-                </div>
-
+                
                 <div class="row form-group">
                     <label class="col-sm-2 control-label">
                        Kelas barang/jasa	 :
@@ -71,7 +55,7 @@
                       Jenis barang/jasa 	 :
                     </label>
                     <div class="col-sm-10">
-                       <input class="form-control" type="text"  name="jenis_barang_jasa" placeholder="Kewarganegaraan Pemegang Hak Cipta" required="true">                    
+                       <input class="form-control" type="text"  name="jenis_barang_jasa" placeholder="Deskripsi Jenis barang/jasa" required="true">               
                     </div>
                 </div>
             </div>
@@ -95,7 +79,7 @@
                        Alamat Kuasa	 :
                     </label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text"  name="kuasa_alamat" placeholder="Kewarganegaraan Kuasa" required="true">
+                        <input class="form-control" type="text"  name="kuasa_alamat" placeholder="Alamat Kuasa" required="true">
                     </div>
                 </div>
                 <div class="row form-group">

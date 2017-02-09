@@ -30,35 +30,56 @@ Route::group(array('prefix'=>'/'), function(){
 	Route::get('pengajuan-industri', 'PengusulController@getPengajuanDesainIndustri')->name('pengusul_desain_industri_pengajuan');
 	Route::post('pengajuan-industri', 'PengusulController@postPengajuanDesainIndustri')->name('pengusul_desain_industri_pengajuan_post');
 	Route::get('pengajuan-industri/{id}', 'PengusulController@getDetailDesainIndustri')->name('pengusul_desain_industri_detail');
-	Route::get('edit-pengajuan-industri/{id}', 'PengusulController@getEditPengajuanDesainIndustri');
-	Route::post('edit-pengajuan-industri', 'PengusulController@postEditPengajuanDesainIndustri');
+	Route::get('edit-pengajuan-industri/{id}', 'PengusulController@getEditDesainIndustri');
+	Route::post('edit-pengajuan-industri', 'PengusulController@postEditDesainIndustri');
 
 	// Paten
 	Route::get('pengajuan-paten', 'PengusulController@getPengajuanPaten')->name('pengusul_paten_pengajuan');
 	Route::get('pengajuan-paten/{id}', 'PengusulController@getDetailPaten')->name('pengusul_desain_industri_detail');
 	Route::post('pengajuan-paten', 'PengusulController@postPengajuanPaten')->name('pengusul_paten_pengajuan_post');
+	Route::get('edit-pengajuan-paten/{id}', 'PengusulController@getEditPaten');
+	Route::post('edit-pengajuan-paten', 'PengusulController@postEditPaten');
 
 	// Hak Cipta
 	Route::get('pengajuan-hak-cipta', 'PengusulController@getPengajuanHakCipta')->name('pengusul_hak_cipta_pengajuan');
 	Route::post('pengajuan-hak-cipta', 'PengusulController@postPengajuanHakCipta')->name('pengusul_pengajuan_hak_cipta_pengajuan_post');
 	Route::get('pengajuan-hak-cipta/{id}', 'PengusulController@getDetailHakCipta');
 	Route::get('edit-pengajuan-hak-cipta/{id}', 'PengusulController@getEditHakCipta');
-	Route::post('edit-pengajuan-hak-cipta', 'PengusulController@postHakCipta');
+	Route::post('edit-pengajuan-hak-cipta', 'PengusulController@postEditHakCipta');
 
 	// Merek
 	Route::get('pengajuan-merek', 'PengusulController@getPengajuanMerek')->name('pengusul_merek_pengajuan');
 	Route::post('pengajuan-merek', 'PengusulController@postPengajuanMerek')->name('pengusul_merek_pengajuan_post');
+	Route::get('pengajuan-merek/{id}', 'PengusulController@getDetailMerek');
+	Route::get('edit-pengajuan-merek/{id}', 'PengusulController@getEditMerek');
+	Route::post('edit-pengajuan-merek', 'PengusulController@postEditMerek');
+
+	Route::post('delete-pengajuan', 'PengusulController@postDeletePengajuan');
 	
 });
 
 Route::group(array('prefix'=>'download'), function(){
-	Route::get('paten/surat-kuasa/{{filename}}', 'DownloadController@getPatenSuratKuasa');
-	Route::get('paten/surat-pengalihan-hak-penemuan/{filename}', 'DownloadController@getPatenSuratPengalihanHakPenemaun');
+	// Download File Paten
+	Route::get('paten/surat-kuasa/{filename}', 'DownloadController@getPatenSuratKuasa');
+	Route::get('paten/surat-pengalihan-hak-penemuan/{filename}', 'DownloadController@getPatenSuratPengalihanHakPenemuan');
 	Route::get('paten/surat-kepemilikan-inventor/{filename}', 'DownloadController@getPatenSuratKepemilikanInventor');
 	Route::get('paten/surat-kepemilikan-lembaga/{filename}', 'DownloadController@getPatenSuratkepemilikanLembaga');
+	Route::get('paten/dokumen-terjemahan/{filename}', 'DownloadController@getPatenDokumenTerjemahan');
 
 	Route::get('paten/dokumen-subtantif-deskripsi/{filename}', 'DownloadController@getPatenDokumenSubtantifDeskripsi');
 	Route::get('paten/dokumen-subtantif-gambar/{filename}', 'DownloadController@getPatenDokumenSubtantifGambar');
+
+	// Download File Desain Industri
+	Route::get('desain-industri/surat-kuasa/{filename}', 'DownloadController@getDesainIndustriSuratKuasa');
+	Route::get('desain-industri/surat-pengalihan-hak/{filename}', 'DownloadController@getDesainIndustriSuratPernyataanPengalihanHak');
+	Route::get('desain-industri/bukti-pemilikan-hak/{filename}', 'DownloadController@getDesainIndustriBuktiPemilikanHak');
+	Route::get('desain-industri/bukti-prioritas-terjemahan/{filename}', 'DownloadController@getDesainIndustriBuktiPrioritasTerjemahan');
+	Route::get('desain-industri/dokumen/{filename}', 'DownloadController@getDesainIndustriDokumenDesainIndustri');
+	Route::get('desain-industri/uraian/{filename}', 'DownloadController@getDesainIndustriUraian');
+	Route::get('desain-industri/gambar/{filename}', 'DownloadController@getDesainIndustriGambarDesainIndustri');
+
+	// Download File Merek
+	Route::get('merek/etiket-merek/{filename}', 'DownloadController@getMerekEtiketMerek');
 });
 
 // Administrator

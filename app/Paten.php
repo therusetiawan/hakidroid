@@ -16,12 +16,12 @@ class Paten extends Model
     	return $this->hasMany('App\PatenInventor');
     }
 
-    public function detail_hak_prioritas(){
+    public function hak_prioritas(){
         return $this->hasOne('App\PatenHakPrioritas');
     }
 
     public function reviewer(){
-        return $this->hasOne('App\Reviwer');
+        return $this->belongsTo('App\Reviewer');
     }
 
     public function dokumen_subtantif_deskripsi(){

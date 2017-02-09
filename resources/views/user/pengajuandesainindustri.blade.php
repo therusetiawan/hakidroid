@@ -123,13 +123,10 @@
       </div>
 
       {{--  lampiran formatif --}}
-      <div class="">
-
-      </div>
 
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Lampiran Karya</h3>
+          <h3 class="box-title">Lampiran</h3>
         </div>
         <div class="box-body">
           <div class="row form-group">
@@ -180,14 +177,6 @@
               <input type="file" name="gambar_desain_industri" value="">
             </div>
           </div>
-
-          <div class="row form-group">
-            <label class="col-sm-3">Contoh fisik</label>
-            <div class="col-sm-9">
-              <input type="file" name="contoh_fisik" value="">
-            </div>
-          </div>
-
         </div>
       </div>
       {{csrf_field()}}
