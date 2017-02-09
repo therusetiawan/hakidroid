@@ -178,6 +178,7 @@
             </div>
         </div>
         {{csrf_field()}}
+        <input type="hidden" name="id" value="{{$data->id}}">
         <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Simpan</button>
       </form>
     </div>
@@ -188,7 +189,8 @@
 
       <script>
         $('.datepicker').datepicker({
-            autoclose: true
+            autoclose: true,
+            format: 'yyyy-mm-dd'
         });
       </script>
 @endsection

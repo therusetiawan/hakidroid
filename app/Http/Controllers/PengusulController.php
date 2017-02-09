@@ -572,7 +572,6 @@ class PengusulController extends Controller
         Session::flash('messageSuccess', 'Pengusulan hak cipta berhasil');
 
         return redirect('/pengajuan');
-
     }
 
     public function getEditHakCipta($id){
@@ -588,7 +587,53 @@ class PengusulController extends Controller
     }
 
     public function postEditHakCipta(Request $request){
+        $id = $request->input('id');
 
+        $data = HakCipta::where('id', $id)->first();
+
+        if($data == null){
+            Session::flash('messageError', 'Data tidak valid');
+
+            return redirect('/pengajuan');
+        }
+
+        if($data->status == 1){
+            Session::flash('messageError', 'Data sudah tidak dapat diubah');
+
+            return redirect('/pengajuan');
+        }
+
+        if($data->biodata_id != auth('pengusul')->user()->id){
+            Session::flash('messageError', 'Akses dilarang');
+
+            return redirect('/pengajuan');
+        }
+
+        $data->nama_ciptaan = $request->input('nama_ciptaan');
+
+        $data->pencipta_nama = $request->input('pencipta_nama');
+        $data->pencipta_kewarganegaraan = $request->input('pencipta_kewarganegaraan');
+        $data->pencipta_alamat = $request->input('pencipta_alamat');
+
+        $data->pemegang_hak_cipta_nama = $request->input('pemegang_hak_cipta_nama');
+        $data->pemegang_hak_cipta_kewarganegaraan = $request->input('pemegang_hak_cipta_kewarganegaraan');
+        $data->pemegang_hak_cipta_alamat = $request->input('pemegang_hak_cipta_alamat');
+
+        $data->kuasa_nama = $request->input('kuasa_nama');
+        $data->kuasa_kewarganegaraan = $request->input('kuasa_kewarganegaraan');
+        $data->kuasa_alamat = $request->input('kuasa_alamat');
+
+        $data->jenis_hak_cipta_id = $request->input('jenis_hak_cipta_id');
+        $data->uraian_ciptaan = $request->input('uraian_ciptaan');
+
+        $data->tanggal_diumumkan = $request->input('tanggal_diumumkan');
+        $data->tempat_diumumkan = $request->input('tempat_diumumkan');
+
+        $data->save();
+
+        Session::flash('messageSuccess', 'Pengusulan hak cipta berhasil');
+
+        return redirect('/pengajuan');
     }
 
 
