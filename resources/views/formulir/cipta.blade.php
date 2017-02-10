@@ -3,7 +3,7 @@
 @section('table')
 
     {{-- Header --}}
-    <table style="width: 40%; margin-left: 60%">
+    <table style="padding-left: 11cm">
         <tr>
             <td style="font-weight: bold">
                 Lampiran I. <br>

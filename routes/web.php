@@ -122,3 +122,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
         Route::resource('paten', 'PatenController', ['except' => ['create', 'show', 'store']]);
 	});
 });
+
+Route::get('testhakcipta', "GenerateFileController@getFileHakCipta");
+Route::get('testmerek', "GenerateFileController@getFileMerek");
+Route::get('testpaten', "GenerateFileController@getFilePaten");
+Route::get('testdesainindustri', "GenerateFileController@getFileDesainIndustri");
