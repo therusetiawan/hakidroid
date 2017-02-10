@@ -4,7 +4,7 @@
 <h4>KEMENTERIAN HUKUM DAN HAK ASASI MANUSIA <br> DIREKTORAT JENDERAL HAK KEKAYAAN INTELEKTUAL</h4>
 <h3 align="center">FORMULIR PERMOHONAN PENDAFTARAN DESAIN INDUSTRI</h3>
 <hr> {{-- Table Pengajuan --}}
-<table style="margin-left: 25%; margin-bottom: 20px;  width: 75%">
+<table style="margin-left: 3.75in; margin-bottom: 20px;  width: 3.5in">
     <tr>
         <td class="solid">
             <table class="unsolid" cellpadding="2">
@@ -218,7 +218,7 @@
     </tr>
 </table>
 
-<table style="margin-left: 60%">
+<table style="margin-left: 3.9in; margin-bottom: 20px;  width: 3.15in">
     <tr>
         <td style="text-align: center"> 
             Yang mengajukan permohonan desain industri <sup>6)</sup>
