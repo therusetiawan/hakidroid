@@ -85,8 +85,8 @@
       "showMethod": "fadeIn",
       "hideMethod": "fadeOut"
     }
-    @if(Session::has('message'))
-      toastr.success("{{ Session::get('message') }}");
+    @if(Session::has('messageSuccess'))
+      toastr.success("{{ Session::get('messageSuccess') }}");
     @elseif(Session::has('messageError'))
       toastr.error("{{ Session::get('messageError') }}");
     @endif

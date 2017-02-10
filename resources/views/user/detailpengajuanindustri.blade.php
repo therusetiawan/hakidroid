@@ -40,15 +40,16 @@
             </div>
           </div>
 
-          <div class="row form-group">
-            <label class="col-sm-2 control-label">
-              Konsultan Haki :
-            </label>
-            <div class="col-sm-10">
-              <p>Kokas</p>
+          @if($data->konsultan != null)
+            <div class="row form-group">
+              <label class="col-sm-2 control-label">
+                Konsultan Haki :
+              </label>
+              <div class="col-sm-10">
+                <p>{{$data->konsultan}}</p>
+              </div>
             </div>
-          </div>
-
+          @endif
           <div class="row form-group">
             <label class="col-sm-2 control-label">
               Desainer :
@@ -65,9 +66,15 @@
           <div class="row">
             <label class="col-xs-2 control-label">Pengajuan dengan hak prioritas :</label>
             <div class="col-xs-10">
+              @if($data->hak_prioritas == 1)
               <p>Ya</p>
+              @else
+              <p>Tidak</p>
+              @endif
             </div>
           </div>
+
+          @if($data->hak_prioritas == 1)
           <div class="row form-group">
               <div class="row" id="form-prioritas">
                 <div class="col-sm-12">
@@ -75,7 +82,7 @@
                     Negara:
                   </label>
                   <div class="col-sm-10">
-                    <p>kasjds</p>
+                    <p>{{$data->negara}}</p>
                   </div>
                 </div>
                 <div class="col-sm-12">
@@ -83,7 +90,7 @@
                     Tanggal penerimaan permohonan pertama kali:
                   </label>
                   <div class="col-sm-10">
-                    <p>tanggal</p>
+                    <p>{{$data->tanggal_penerimaan_permohonan_pertama_kali}}</p>
                   </div>
                 </div>
                 <div class="col-sm-12">
@@ -91,11 +98,12 @@
                     Nomor prioritas:
                   </label>
                   <div class="col-sm-10">
-                    <p>ksdask</p>
+                    <p>{{$data->nomor_prioritas}}</p>
                   </div>
                 </div>
               </div>
           </div>
+          @endif
 
           <div class="row form-group">
             <label class="col-sm-2 label-control">Kelas Industri</label>

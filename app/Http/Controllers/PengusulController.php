@@ -27,6 +27,7 @@ use Auth;
 use Hash;
 use Session;
 use Carbon\Carbon;
+use File;
 
 class PengusulController extends Controller
 {
@@ -165,7 +166,7 @@ class PengusulController extends Controller
                         )
                 );
         }
-
+        
         return view('user.daftarusulan')->withData($data);
     }
 
@@ -343,8 +344,129 @@ class PengusulController extends Controller
         return view('user.editpengajuandesainindustri')->withData($data)->withKelasDesainIndustri($kelasDesainIndustri);
     }
 
-    public function postEditDesainIndustri($id){
-        // UNDONE
+    public function postEditDesainIndustri(Request $request){
+        $id = $request->input('id');
+
+        $desainIndustri = DesainIndustri::where('id', $id)->firstOrFail();
+
+        if($desainIndustri == null){
+            Session::flash('messageError', 'Data tidak valid');
+
+            return redirect('/pengajuan');
+        }
+
+        if($desainIndustri->status == 1){
+            Session::flash('messageError', 'Data sudah tidak dapat diubah');
+
+            return redirect('/pengajuan');
+        }
+
+        if($desainIndustri->biodata_id != auth('pengusul')->user()->id){
+            Session::flash('messageError', 'Akses dilarang');
+
+            return redirect('/pengajuan');
+        }
+
+        if($request->input('konsultan_hki') == 'on'){
+            $desainIndustri->konsultan = $request->input('konsultan_hki_id');
+        }else{
+            $desainIndustri->konsultan = null;
+        }
+
+        $desainIndustri->judul_desain_industri = $request->input('judul_desain_industri');
+
+        $check_hak_prioritas = false;
+        if($request->input('hak_prioritas') == 'on'){
+            $check_hak_prioritas = true;
+        }
+
+        $desainIndustri->hak_prioritas = $check_hak_prioritas;
+
+        if($check_hak_prioritas){
+            $desainIndustri->negara = $request->input('negara');
+            $desainIndustri->tanggal_penerimaan_permohonan_pertama_kali = Carbon::parse($request->input('tanggal_permohonan_pertama_kali'))->format('Y-m-d');
+            $desainIndustri->nomor_prioritas = $request->input('nomor_prioritas');
+        }
+
+        if($request->hasFile('lampiran_surat_kuasa')){
+            if(File::exists(storage_path() . '/app/desain_industri/surat_kuasa/' . $desainIndustri->lampiran_surat_kuasa)){
+                File::delete(storage_path() . '/app/desain_industri/surat_kuasa/' . $desainIndustri->lampiran_surat_kuasa);
+            }
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('lampiran_surat_kuasa'), 'Surat_Kuasa_','/app/desain_industri/surat_kuasa');
+
+            $desainIndustri->lampiran_surat_kuasa = $fileName;
+        }
+
+        if($request->hasFile('lampiran_surat_pernyataan_pengalihan_hak')){
+            if(File::exists(storage_path() . '/app/desain_industri/lampiran_surat_pernyataan_pengalihan_hak/' . $desainIndustri->lampiran_surat_pernyataan_pengalihan_hak)){
+                File::delete(storage_path() . '/app/desain_industri/lampiran_surat_pernyataan_pengalihan_hak/' . $desainIndustri->lampiran_surat_pernyataan_pengalihan_hak);
+            }
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('lampiran_surat_pernyataan_pengalihan_hak'), 'Surat_Pernyataan_Pengalihan_Hak_','/app/desain_industri/lampiran_surat_pernyataan_pengalihan_hak');
+            $desainIndustri->lampiran_surat_pernyataan_pengalihan_hak = $fileName;
+        }
+
+        if($request->hasFile('lampiran_bukti_pemilikan_hak')){
+            if(File::exists(storage_path() . '/app/desain_industri/lampiran_bukti_pemilikan_hak/' . $desainIndustri->lampiran_bukti_pemilikan_hak)){
+                File::delete(storage_path() . '/app/desain_industri/lampiran_bukti_pemilikan_hak/' . $desainIndustri->lampiran_bukti_pemilikan_hak);
+            }
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('lampiran_bukti_pemilikan_hak'), 'Bukti_Pemilikan_Hak_','/app/desain_industri/lampiran_bukti_pemilikan_hak');
+            $desainIndustri->lampiran_bukti_pemilikan_hak = $fileName;
+        }
+
+        if($request->hasFile('lampiran_bukti_prioritas_dan_terjemahan')){
+            if(File::exists(storage_path() . '/app/desain_industri/lampiran_bukti_prioritas_dan_terjemahan/' . $desainIndustri->lampiran_bukti_prioritas_dan_terjemahan)){
+                File::delete(storage_path() . '/app/desain_industri/lampiran_bukti_prioritas_dan_terjemahan/' . $desainIndustri->lampiran_bukti_prioritas_dan_terjemahan);
+            }
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('lampiran_bukti_prioritas_dan_terjemahan'), 'Bukti_Prioritas_dan_Terjemahan_','/app/desain_industri/lampiran_bukti_prioritas_dan_terjemahan');
+            $desainIndustri->lampiran_bukti_prioritas_dan_terjemahan = $fileName;
+        }
+
+        if($request->hasFile('lampiran_dokumen_desain_industri')){
+            if(File::exists(storage_path() . '/app/desain_industri/lampiran_dokumen_desain_industri/' . $desainIndustri->lampiran_dokumen_desain_industri)){
+                File::delete(storage_path() . '/app/desain_industri/lampiran_dokumen_desain_industri/' . $desainIndustri->lampiran_dokumen_desain_industri);
+            }
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('lampiran_dokumen_desain_industri'), 'Dokumen_Desain_Industri_','/app/desain_industri/lampiran_dokumen_desain_industri');
+
+            $desainIndustri->lampiran_dokumen_desain_industri = $fileName;
+        }
+
+        $desainIndustri->kelas_desain_industri_id = $request->input('kelas_desain_industri');
+
+        $desainIndustri->save();
+
+        $desainer = $request->input('nama_desainer');
+        $kewarganegaraan = $request->input('kewarganegaraan');
+
+        $temp_desainer = DesainIndustriPendesain::where('desain_industri_id', $id)->delete();
+
+        foreach ($desainer as $i => $d) {
+            $dataDesainer = new DesainIndustriPendesain;
+            $dataDesainer->nama = $d;
+            $dataDesainer->kewarganegaraan = $kewarganegaraan[$i];
+            $dataDesainer->desain_industri_id = $desainIndustri->id;
+            $dataDesainer->save();
+        }
+
+        if($request->hasFile('gambar_desain_industri')){
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('gambar_desain_industri'), 'Gambar_Desain_Industri_','/app/desain_industri/gambar_desain_industri');
+
+            $desainIndustriGambar = new DesainIndustriGambarFoto;
+            $desainIndustriGambar->gambar_foto = $fileName;
+            $desainIndustriGambar->jumlah = 0;
+            $desainIndustriGambar->desain_industri_id = $desainIndustri->id;
+            $desainIndustriGambar->save();
+        }
+
+        if($request->hasFile('uraian_desain_industri')){
+            $fileName = $this->uploadFile($desainIndustri->biodata_id, $request->file('uraian_desain_industri'), 'Uraian_Desain_Industri_','/app/desain_industri/uraian_desain_industri');
+
+            $desainIndustriUraian = new DesainIndustriUraian;
+            $desainIndustriUraian->nama = $fileName;
+            $desainIndustriUraian->desain_industri_id = $desainIndustri->id;
+            $desainIndustriUraian->save();
+        }
+
+        Session::flash('messageSuccess', 'Update Pengajuan Desain Industri berhasil');
         return redirect('/pengajuan');
     }
 
@@ -390,11 +512,11 @@ class PengusulController extends Controller
 
         if($request->hasFile('bukti_pemilikan_hak_atas_penemuan_lembaga')){
             $fileName = $this->uploadFile($paten->biodata_id, $request->file('bukti_pemilikan_hak_atas_penemuan_lembaga'), 'Bukti_Pemilikan_Hak_atas_Penemuan_Lembaga_','/app/paten/bukti_pemilikan_hak_atas_penemuan_lembaga');
-            $paten->surat_kepemilikan_invensi_oleh_inventor = $fileName;
+            $paten->surat_pernyataan_invensi_oleh_lembaga = $fileName;
         }
 
         if($request->hasFile('dokumen_prioritas_terjemahan')){
-            $filName = $this->uploadFile($paten->biodata_id, $request->file('dokumen_prioritas_terjemahan'), 'Dokimen_Prioritas_Terjemahan_','/app/paten/dokumen_prioritas_terjemahan');
+            $filName = $this->uploadFile($paten->biodata_id, $request->file('dokumen_prioritas_terjemahan'), 'Dokumen_Prioritas_Terjemahan_','/app/paten/dokumen_prioritas_terjemahan');
 
             $paten->dokumen_prioritas_terjemahan = $fileName;
         }
@@ -420,6 +542,7 @@ class PengusulController extends Controller
             $dokumen->save();
         }
 
+        $paten->status = 0;
         $paten->save();
 
         $inventor = $request->input('nama_inventor');
@@ -439,6 +562,7 @@ class PengusulController extends Controller
             $paten_hak_prioritas->nama = $request->input('hak_prioritas_nama');
             $paten_hak_prioritas->tanggal_penerimaan_permohonan = Carbon::parse($request->input('hak_prioritas_tanggal'))->format('Y-m-d');
             $paten_hak_prioritas->nomor_prioritas = $request->input('hak_prioritas_nomor');
+            $paten_hak_prioritas->paten_id = $paten->id;
             $paten_hak_prioritas->save();
 
             $paten->hak_prioritas_id = $paten_hak_prioritas->id;
@@ -509,56 +633,46 @@ class PengusulController extends Controller
 
         $file_surat_kuasa = $paten->surat_kuasa;
         if($request->hasFile('surat_kuasa')){
-            if($file_surat_kuasa == null){
-                $file_surat_kuasa = $this->uploadFile($paten->biodata_id, $request->file('surat_kuasa'), 'Surat_Kuasa_','/app/paten/surat_kuasa');
+            if(File::exists(storage_path() . '/app/paten/surat_kuasa/' . $paten->surat_kuasa)){
+                File::delete(storage_path() . '/app/paten/surat_kuasa/' . $paten->surat_kuasa);
             }
-            else{
-                $file_surat_kuasa = $this->updateUploadFile($file_surat_kuasa, $request->file('surat_kuasa'), '/app/paten/surat_kuasa');
-            }
+            $file_surat_kuasa = $this->uploadFile($paten->biodata_id, $request->file('surat_kuasa'), 'Surat_Kuasa_','/app/paten/surat_kuasa');
             $paten->surat_kuasa = $file_surat_kuasa;
         }
 
         $file_surat_pengalihan_hak_atas_penemuan = $paten->surat_pengalihan_hak_atas_penemuan;
         if($request->hasFile('surat_pengalihan_hak_atas_penemuan')){
-            if($file_surat_pengalihan_hak_atas_penemuan == null){
-                $file_surat_pengalihan_hak_atas_penemuan = $this->uploadFile($paten->biodata_id, $request->file('surat_pengalihan_hak_atas_penemuan'), 'Surat_Pengalihan_Hak_Atas_Penemuan_','/app/paten/surat_pengalihan_hak_atas_penemuan');
+            if(File::exists(storage_path() . '/app/paten/surat_pengalihan_hak_atas_penemuan/' . $paten->surat_pengalihan_hak_atas_penemuan)){
+                File::delete(storage_path() . '/app/paten/surat_pengalihan_hak_atas_penemuan/' . $paten->surat_pengalihan_hak_atas_penemuan);
             }
-            else{
-                $file_surat_pengalihan_hak_atas_penemuan = $this->updateUploadFile($file_surat_pengalihan_hak_atas_penemuan, $request->file('surat_pengalihan_hak_atas_penemuan'), '/app/paten/surat_pengalihan_hak_atas_penemuan');
-            }
-
+            $file_surat_pengalihan_hak_atas_penemuan = $this->uploadFile($paten->biodata_id, $request->file('surat_pengalihan_hak_atas_penemuan'), 'Surat_Pengalihan_Hak_Atas_Penemuan_','/app/paten/surat_pengalihan_hak_atas_penemuan');
             $paten->surat_pengalihan_hak_atas_penemuan = $file_surat_pengalihan_hak_atas_penemuan;
         }
 
         $file_bukti_pemilikan_hak_atas_penemuan_inventor = $paten->surat_kepemilikan_invensi_oleh_inventor;
         if($request->hasFile('bukti_pemilikan_hak_atas_penemuan_inventor')){
-            if($file_bukti_pemilikan_hak_atas_penemuan_inventor == null){
-                $file_bukti_pemilikan_hak_atas_penemuan_inventor = $this->uploadFile($paten->biodata_id, $request->file('bukti_pemilikan_hak_atas_penemuan_inventor'), 'Bukti_Pemilikan_Hak_atas_Penemuan_Inventor_','/app/paten/bukti_pemilikan_hak_atas_penemuan_inventor');    
-            }else{
-                $file_bukti_pemilikan_hak_atas_penemuan_inventor = $this->updateUploadFile($file_bukti_pemilikan_hak_atas_penemuan_inventor, $request->file('bukti_pemilikan_hak_atas_penemuan_inventor'), '/app/paten/bukti_pemilikan_hak_atas_penemuan_inventor');
+            if(File::exists(storage_path() . '/app/paten/bukti_pemilikan_hak_atas_penemuan_inventor/' . $paten->surat_kepemilikan_invensi_oleh_inventor)){
+                File::delete(storage_path() . '/app/paten/bukti_pemilikan_hak_atas_penemuan_inventor/' . $paten->surat_kepemilikan_invensi_oleh_inventor);
             }
-
+            $file_bukti_pemilikan_hak_atas_penemuan_inventor = $this->uploadFile($paten->biodata_id, $request->file('bukti_pemilikan_hak_atas_penemuan_inventor'), 'Bukti_Pemilikan_Hak_atas_Penemuan_Inventor_','/app/paten/bukti_pemilikan_hak_atas_penemuan_inventor');
             $paten->surat_kepemilikan_invensi_oleh_inventor = $file_bukti_pemilikan_hak_atas_penemuan_inventor;
         }
 
         $file_surat_pernyataan_invensi_oleh_lembaga = $paten->surat_pernyataan_invensi_oleh_lembaga;
         if($request->hasFile('bukti_pemilikan_hak_atas_penemuan_lembaga')){
-            if($file_surat_pernyataan_invensi_oleh_lembaga == null){
-                $file_surat_pernyataan_invensi_oleh_lembaga = $this->uploadFile($paten->biodata_id, $request->file('bukti_pemilikan_hak_atas_penemuan_lembaga'), 'Bukti_Pemilikan_Hak_atas_Penemuan_Lembaga_','/app/paten/bukti_pemilikan_hak_atas_penemuan_lembaga');
-            }else{
-                $file_surat_pernyataan_invensi_oleh_lembaga = $this->updateUploadFile($file_surat_pernyataan_invensi_oleh_lembaga, $request->file('bukti_pemilikan_hak_atas_penemuan_lembaga'), '/app/paten/bukti_pemilikan_hak_atas_penemuan_lembaga');
+            if(File::exists(storage_path() . '/app/paten/bukti_pemilikan_hak_atas_penemuan_lembaga/' . $paten->surat_pernyataan_invensi_oleh_lembaga)){
+                File::delete(storage_path() . '/app/paten/bukti_pemilikan_hak_atas_penemuan_lembaga/' . $paten->surat_pernyataan_invensi_oleh_lembaga);
             }
-
+            $file_surat_pernyataan_invensi_oleh_lembaga = $this->uploadFile($paten->biodata_id, $request->file('bukti_pemilikan_hak_atas_penemuan_lembaga'), 'Bukti_Pemilikan_Hak_atas_Penemuan_Lembaga_','/app/paten/bukti_pemilikan_hak_atas_penemuan_lembaga');
             $paten->surat_pernyataan_invensi_oleh_lembaga = $file_surat_pernyataan_invensi_oleh_lembaga;
         }
 
         $file_dokumen_prioritas_terjemahan = $paten->dokumen_prioritas_terjemahan;
         if($request->hasFile('dokumen_prioritas_terjemahan')){
-            if($file_dokumen_prioritas_terjemahan == null){
-                $file_dokumen_prioritas_terjemahan = $this->uploadFile($paten->biodata_id, $request->file('dokumen_prioritas_terjemahan'), 'Dokimen_Prioritas_Terjemahan_','/app/paten/dokumen_prioritas_terjemahan');
-            }else{
-                $file_dokumen_prioritas_terjemahan = $this->updateUploadFile($file_dokumen_prioritas_terjemahan, $request->file('dokumen_prioritas_terjemahan'), '/app/paten/dokumen_prioritas_terjemahan');
+            if(File::exists(storage_path() . '/app/paten/dokumen_prioritas_terjemahan/' . $paten->dokumen_prioritas_terjemahan)){
+                File::delete(storage_path() . '/app/paten/dokumen_prioritas_terjemahan/' . $paten->dokumen_prioritas_terjemahan);
             }
+            $file_dokumen_prioritas_terjemahan = $this->uploadFile($paten->biodata_id, $request->file('dokumen_prioritas_terjemahan'), 'Dokimen_Prioritas_Terjemahan_','/app/paten/dokumen_prioritas_terjemahan');
 
             $paten->dokumen_prioritas_terjemahan = $file_dokumen_prioritas_terjemahan;
         }
@@ -718,11 +832,10 @@ class PengusulController extends Controller
 
         $fileName = $data->etiket_merek;
         if($request->hasFile('etiket_merek')){
-            if($fileName == null){
-                $fileName = $this->uploadFile($data->biodata_id, $request->file('etiket_merek'), 'Etiket_Merek_','/app/merek/etiket_merek');
-            }else{
-                $fileName = $this->updateUploadFile($fileName, $request->file('etiket_merek'), '/app/merek/etiket_merek');
+            if(File::exists(storage_path() . '/app/merek/etiket_merek/' . $data->etiket_merek)){
+                File::delete(storage_path() . '/app/merek/etiket_merek/' . $data->etiket_merek);
             }
+            $fileName = $this->uploadFile($data->biodata_id, $request->file('etiket_merek'), 'Etiket_Merek_','/app/merek/etiket_merek');
 
             $data->etiket_merek = $fileName;
         }

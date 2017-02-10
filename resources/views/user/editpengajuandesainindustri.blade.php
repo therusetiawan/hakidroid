@@ -18,7 +18,7 @@
 @section('content')
   <div class="container">
     <h2>Sunting "{{$data->judul_desain_industri}}" - Desain Industri</h2>
-    <form class="" action="/edit-pengajuan-industri" method="post" enctype="multirpart/form-data">
+    <form class="" action="/edit-pengajuan-industri" method="post" enctype="multipart/form-data">
       {{-- Beginning Box Form --}}
       <div class="box box-primary">
         <div class="box-header with-border">
@@ -113,7 +113,7 @@
                     Tanggal penerimaan permohonan pertama kali:
                   </label>
                   <div class="col-sm-12">
-                    <input class="datepicker form-control" type="text"  name="tanggal_permohonan_pertama_kali" placeholder="Tanggal penerimaan permohonan" value="$data->tanggal_penerimaan_permohonan_pertama_kali}}">
+                    <input class="datepicker form-control" type="text"  name="tanggal_permohonan_pertama_kali" placeholder="Tanggal penerimaan permohonan" value="{{$data->tanggal_penerimaan_permohonan_pertama_kali}}">
                   </div>
                 </div>
                 <div class="col-sm-4">
@@ -163,7 +163,7 @@
                 @foreach($kelas_desain_industri as $k)
                   @if($data->kelas_desain_industri_id == $k->id)
                     <option value="{{$k->id}}" selected>{{$k->nama_kelas_desain_industri}}</option>
-                  @lse
+                  @else
                     <option value="{{$k->id}}">{{$k->nama_kelas_desain_industri}}</option>
                   @endif
                 @endforeach
@@ -306,7 +306,7 @@
 
         </div>
       </div>
-
+      <input type="hidden" name="id" value="{{$data->id}}">
       {{csrf_field()}}
       <button class="btn btn-primary btn-lg" name="button">Sunting</button>
       <div style="margin-bottom: 20px"></div>

@@ -63,7 +63,7 @@ Route::group(array('prefix'=>'download'), function(){
 	Route::get('paten/surat-kuasa/{filename}', 'DownloadController@getPatenSuratKuasa');
 	Route::get('paten/surat-pengalihan-hak-penemuan/{filename}', 'DownloadController@getPatenSuratPengalihanHakPenemuan');
 	Route::get('paten/surat-kepemilikan-inventor/{filename}', 'DownloadController@getPatenSuratKepemilikanInventor');
-	Route::get('paten/surat-kepemilikan-lembaga/{filename}', 'DownloadController@getPatenSuratkepemilikanLembaga');
+	Route::get('paten/surat-pernyataan-invensi-oleh-lembaga/{filename}', 'DownloadController@getPatenSuratkepemilikanLembaga');
 	Route::get('paten/dokumen-terjemahan/{filename}', 'DownloadController@getPatenDokumenTerjemahan');
 
 	Route::get('paten/dokumen-subtantif-deskripsi/{filename}', 'DownloadController@getPatenDokumenSubtantifDeskripsi');
