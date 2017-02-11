@@ -18,12 +18,12 @@
           <tr>
             <td>Tanggal Pengajuan</td>
             <td>:</td>
-            <td>----------------</td>
+            <td>{{$data->tanggal_permohonan_string}}</td>
           </tr>
           <tr>
             <td>Nomor Permohonan</td>
             <td>:</td>
-            <td>----------------</td>
+            <td>{{$data->permohonan_paten_nomor}}</td>
           </tr>
         </table>
       </td>
@@ -34,39 +34,43 @@
     <tr>
       <td>Nama</td>
       <td>:</td>
-      <td>S</td>
+      <td>{{$data->biodata->nama}}</td>
     </tr>
     <tr>
       <td>Alamat</td>
       <td>:</td>
-      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit,</td>
+      <td>{{$data->biodata->alamat}}</td>
     </tr>
     <tr>
       <td>Warga Negara</td>
       <td>:</td>
-      <td>Indonesia</td>
+      <td>{{$data->biodata->alamat}}</td>
     </tr>
     <tr>
       <td>NPWP</td>
       <td>:</td>
-      <td>S</td>
+      <td>{{$data->biodata->npwp}}</td>
     </tr>
   </table>
   <table cellspacing='0'>
     <tr>
       <td>Mengajukan permohonan paten/paten sederhana</td>
-      <td></td>
+      <td>{{$data->jenis_paten}}</td>
     </tr>
   </table>
   <table cellspacing='0'>
     <tr>
       <td>Melalui/Tidak melalui *) Konsultan Paten</td>
-      <td></td>
+      @if($data->konsultan != null)
+      <td class="solid">Ya</td>
+      @else
+      <td class="solid">Tidak</td>
+      @endif
     </tr>
     <tr>
       <td>Nama Badan Hukum <sup>3)</sup></td>
       <td>:</td>
-      <td></td>
+      <td>{{$data->konsultan}}</td>
     </tr>
     <tr>
       <td>Alamat Badan Hukum <sup>2)</sup></td>
@@ -76,7 +80,7 @@
     <tr>
       <td>Nama Konsultan Paten</td>
       <td>:</td>
-      <td></td>
+      <td>{{$data->konsultan}}</td>
     </tr>
     <tr>
       <td>Alamat <sup>2)</sup></td>
@@ -95,23 +99,30 @@
       <td></td>
     </tr>
     <tr>
-      <td colspan="3">((Judul Invinsi Disini))</td>
+      <td colspan="3">{{$data->judul_invensi}}</td>
     </tr>
   </table>
   <table>
     <tr>
-      <td colspan="3">Permohonan Paten ini merupakan pecahan dari permohonan paten nomor:</td>
+      <td colspan="3">
+        Permohonan Paten ini merupakan pecahan dari permohonan paten nomor:
+        @if($data->paten_pecahan_nomor != null)
+          {{$data->paten_pecahan_nomor}}
+        @endif
+      </td>
     </tr>
   </table>
   <table>
     <tr>
       <td colspan="3">Nama dan Kewarganegaraan para Inventor :</td>
     </tr>
+    @foreach($data->inventor as $i)
     <tr>
-      <td>.....................</td>
+      <td>{{$i->nama}}</td>
       <td>Warga Negara</td>
-      <td>.....................</td>
+      <td>{{$i->kewarganegaraan}}</td>
     </tr>
+    @endforeach
   </table>
   <table>
     <tr>
@@ -122,11 +133,19 @@
       <td>Tanggal Penerimaan</td>
       <td>Nomor Prioritas</td>
     </tr>
+    @if($data->hak_prioritas_id != null)
+    <tr>
+      <td>{{$data->hak_prioritas->nama}}</td>
+      <td>{{$data->hak_prioritas->tanggal_penerimaan_permohonan_string}}</td>
+      <td>{{$data->hak_prioritas->nomor_prioritas}}</td>
+    </tr>
+    @else
     <tr>
       <td>...............</td>
       <td>...............</td>
       <td>...............</td>
     </tr>
+    @endif
   </table>
 
 
@@ -191,7 +210,7 @@
 
   <table>
     <tr>
-      <td>Saya/kami usuIkan, gambar nomor ........... dapat menyertai abstrak pada saat dilakukan pengumuman atas permohonan paten (UU No. 14 Tahun 2001)</td>
+      <td>Saya/kami usulkan, gambar nomor ........... dapat menyertai abstrak pada saat dilakukan pengumuman atas permohonan paten (UU No. 14 Tahun 2001)</td>
     </tr>
   </table>
 
@@ -204,7 +223,7 @@
     <br>
     <br>
     <br>
-    (Nama Lengkap)
+    {{$data->biodata->nama}}
   </p>
 
   <div class="clear: both">
@@ -222,8 +241,8 @@
       <li>Berilah tanda silang padajenis dokumen yang saudara lampirkan.</li>
       <li>Jika permohonan paten diajukan oleh :
           <ul>
-            <li>- Lebih dari satu orang, maka setiap orang ditunjuk oleh kelompok/group</li>
-            <li>- Konsultan Paten maka berhak menandatangani adalah konsultan yang terdaftar di</li>
+            <li>Lebih dari satu orang, maka setiap orang ditunjuk oleh kelompok/group</li>
+            <li>Konsultan Paten maka berhak menandatangani adalah konsultan yang terdaftar di</li>
           </ul>
       </li>
     </ol>

@@ -24,30 +24,99 @@ use App\Merek;
 use App\KelasBarangJasa;
 
 use PDF;
+use Session;
+use Carbon\Carbon;
 
 class GenerateFileController extends Controller
-{
-    public function getFileHakCipta(){
-    	$data = HakCipta::where('id', 1)->first();
-    	$pdf = PDF::loadView('formulir.cipta', $data);
-		return $pdf->download('test.pdf');
+{   
+    public function __construct(){
+        $this->middleware('auth:pengusul');
+    }
+    
+    public function getFileDesainIndustri($id){
+        $data = DesainIndustri::with('biodata')
+                                ->with('uraian')
+                                ->with('gambar_foto')
+                                ->with('kelas_desain_industri')
+                                ->with('pendesain')
+                                ->where('id', $id)->firstOrFail();
+
+        $data->tanggal_penerimaan_permohonan_pertama_kali_string = Carbon::parse($data->tanggal_penerimaan_permohonan_pertama_kali)->format('d F Y');
+        $data->tanggal_permohonan_string = Carbon::parse($data->tanggal_permohonan)->format('d F Y');
+        $data->tanggal_penerimaan_string = Carbon::parse($data->tanggal_penerimaan)->format('d F Y');
+
+        if($data->biodata->id != auth('pengusul')->user()->id){
+            return abort('404');
+        }
+
+        if($data->status != 1){
+            Session::flash('messageError', 'Pengajuan belum disetujui');
+            return redirect('/pengajuan');
+        }
+
+        $pdf = PDF::loadView('formulir.ajuanindustri', compact('data'));
+        return $pdf->download('PengajuanDesainIndustri.pdf');
     }
 
-    public function getFileMerek(){
-    	$data = HakCipta::where('id', 1)->first();
-    	$pdf = PDF::loadView('formulir.merk', $data);
-		return $pdf->download('test.pdf');
+    public function getFilePaten($id){
+        $data = Paten::with('biodata')
+                        ->with('dokumen_subtantif_gambar')
+                        ->with('dokumen_subtantif_deskripsi')
+                        ->where('id', $id)->firstOrFail();
+
+        $data->tanggal_permohonan_string = Carbon::parse($data->tanggal_permohonan)->format('d F Y');
+        $data->hak_prioritas->tanggal_penerimaan_permohonan_string = Carbon::parse($data->hak_prioritas->tanggal_penerimaan_permohonan)->format('d F Y');
+
+        if($data->biodata->id != auth('pengusul')->user()->id){
+            return abort('404');
+        }
+
+        if($data->status != 1){
+            Session::flash('messageError', 'Pengajuan belum disetujui');
+            return redirect('/pengajuan');
+        }
+
+        $pdf = PDF::loadView('formulir.paten', compact('data'));
+        return $pdf->download('PengajuanPaten.pdf');
     }
 
-    public function getFilePaten(){
-    	$data = HakCipta::where('id', 1)->first();
-    	$pdf = PDF::loadView('formulir.paten', $data);
-		return $pdf->download('test.pdf');
+    public function getFileHakCipta($id){
+    	$data = HakCipta::with('biodata')->with('jenis_hak_cipta')->where('id', $id)->firstOrFail();
+
+        $data->tanggal_sekarang_string = Carbon::now()->format('d F Y');
+        $data->tanggal_diumumkan_string = Carbon::parse($data->tanggal_diumumkan)->format('d F Y');
+
+    	if($data->biodata->id != auth('pengusul')->user()->id){
+            return abort('404');
+        }
+
+        if($data->status != 1){
+            Session::flash('messageError', 'Pengajuan belum disetujui');
+            return redirect('/pengajuan');
+        }
+
+        $pdf = PDF::loadView('formulir.cipta', compact('data'));
+		return $pdf->download('PengajuanHakCipta.pdf');
     }
 
-    public function getFileDesainIndustri(){
-    	$data = HakCipta::where('id', 1)->first();
-    	$pdf = PDF::loadView('formulir.ajuanindustri', $data);
-		return $pdf->download('test.pdf');
+    public function getFileMerek($id){
+    	$data = Merek::with('biodata')
+                        ->with('kelas_barang_jasa')
+                        ->where('id', $id)->firstOrFail();
+        $data->tanggal_masuk_string = Carbon::parse($data->tgl_masuk)->format('d F Y');
+        $data->tanggal_penerimaan_string = Carbon::parse($data->tgl_penerimaan_permohonan)->format('d F Y');
+        $data->tanggal_sekarang_string = Carbon::now()->format('d F Y');
+
+    	if($data->biodata->id != auth('pengusul')->user()->id){
+            return abort('404');
+        }
+
+        if($data->status != 1){
+            Session::flash('messageError', 'Pengajuan belum disetujui');
+            return redirect('/pengajuan');
+        }
+
+        $pdf = PDF::loadView('formulir.merk', compact('data'));
+		return $pdf->download('PengajuanMerek.pdf');
     }
 }

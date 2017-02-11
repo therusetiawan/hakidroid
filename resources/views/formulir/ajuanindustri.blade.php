@@ -4,27 +4,26 @@
 <h4>KEMENTERIAN HUKUM DAN HAK ASASI MANUSIA <br> DIREKTORAT JENDERAL HAK KEKAYAAN INTELEKTUAL</h4>
 <h3 align="center">FORMULIR PERMOHONAN PENDAFTARAN DESAIN INDUSTRI</h3>
 <hr> {{-- Table Pengajuan --}}
-<table style="margin-left: 3.75in; margin-bottom: 20px;  width: 3.5in">
+<table style="padding-left: 3.75in; margin-bottom: 20px;">
     <tr>
-        <td class="solid">
-            <table class="unsolid" cellpadding="2">
-                <tr>
-                    <td colspan="3">
-                        <u><b>Diisi oleh petugas</b></u>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Tanggal Pengajuan</td>
-                    <td>:</td>
-                    <td>----------------</td>
-                </tr>
-                <tr>
-                    <td>Nomor Permohonan</td>
-                    <td>:</td>
-                    <td>----------------</td>
-                </tr>
-            </table>
+        <td colspan="3">
+            <u><b>Diisi oleh petugas</b></u>
         </td>
+    </tr>
+    <tr>
+        <td>Tanggal Permohonan</td>
+        <td>:</td>
+        <td>{{$data->tanggal_permohonan_string}}</td>
+    </tr>
+    <tr>
+        <td>Tanggal Penerimaan</td>
+        <td>:</td>
+        <td>{{$data->tanggal_penerimaan_string}}</td>
+    </tr>
+    <tr>
+        <td>Nomor Permohonan</td>
+        <td>:</td>
+        <td>{{$data->nomor_permohonan}}</td>
     </tr>
 </table>
 <table cellspacing=0 style="width: 100%">
@@ -34,37 +33,37 @@
                 <tr>
                     <td>Nama</td>
                     <td>:</td>
-                    <td>S</td>
+                    <td>{{$data->biodata->nama}}</td>
                 </tr>
                 <tr>
                     <td>Alamat</td>
                     <td>:</td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit,</td>
+                    <td>{{$data->biodata->alamat}}</td>
                 </tr>
                 <tr>
                     <td>Warga Negara</td>
                     <td>:</td>
-                    <td>Indonesia</td>
+                    <td>{{$data->biodata->kewarganegaraan}}</td>
                 </tr>
                 <tr>
                     <td>Telepon</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{$data->biodata->telepon_fax}}</td>
                 </tr>
                 <tr>
                     <td>Fax</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{$data->biodata->telepon_fax}}</td>
                 </tr>
                 <tr>
                     <td>Nomor HP</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{$data->biodata->no_hp}}</td>
                 </tr>
                 <tr>
                     <td>NPWP</td>
                     <td>:</td>
-                    <td>S</td>
+                    <td>{{$data->biodata->npwp}}</td>
                 </tr>
             </table>
         </td>
@@ -81,13 +80,13 @@
         <td class="solid">
             <table>
                 <tr>
-                    <td>Melalui/Tidak melalui *) Konsultan Paten</td>
+                    <td>Melalui/Tidak melalui *) Konsultan HKI</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Nama Badan Hukum <sup>3)</sup></td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{$data->konsultan}}</td>
                 </tr>
                 <tr>
                     <td>Alamat Badan Hukum <sup>2)</sup></td>
@@ -95,9 +94,9 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Nama Konsultan Paten</td>
+                    <td>Nama Konsultan HKI</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{$data->konsultan}}</td>
                 </tr>
                 <tr>
                     <td>Alamat <sup>2)</sup></td>
@@ -114,20 +113,25 @@
         <td class="solid"></td>
     </tr>
     <tr>
-        <td class="solid">Judul desain industri: <br><br></td>
+        <td class="solid">
+            Judul desain industri: <br>
+            {{$data->judul_desain_industri}}<br>
+        </td>
         <td class="solid"></td>
     </tr>
     <tr>
         <td class="solid">
             <table>
                 <tr>
-                    <td colspan="3">Nama dan Kewarganegaraan para Inventor :</td>
+                    <td colspan="3">Nama dan kewarganegaraan pendesain-desainnya :</td>
                 </tr>
+                @foreach($data->pendesain as $p)
                 <tr>
-                    <td>.....................</td>
+                    <td>{{$p->nama}}</td>
                     <td>Warga Negara</td>
-                    <td>.....................</td>
+                    <td>{{$p->kewarganegaraan}}</td>
                 </tr>
+                @endforeach
             </table>
         </td>
         <td class="solid"></td>
@@ -136,18 +140,26 @@
         <td class="solid">
             <table>
                 <tr>
-                    <td colspan="3">Permohonan paten ini diajukan dengan/tidak dengan *) hak prioritas <sup>4</sup></td>
+                    <td colspan="3">Permohonan desain industri ini diajukan dengan/tidak dengan *) hak prioritas <sup>4</sup></td>
                 </tr>
                 <tr>
                     <td>Negara</td>
                     <td>Tanggal Penerimaan</td>
                     <td>Nomor Prioritas</td>
                 </tr>
+                @if($data->hak_prioritas_id == 1)
                 <tr>
-                    <td>...............</td>
-                    <td>...............</td>
-                    <td>...............</td>
+                  <td>{{$data->negara}}</td>
+                  <td>{{$data->tanggal_penerimaan_permohonan_pertama_kali_string}}</td>
+                  <td>{{$data->nomor_prioritas}}</td>
                 </tr>
+                @else
+                <tr>
+                  <td>...............</td>
+                  <td>...............</td>
+                  <td>...............</td>
+                </tr>
+                @endif
             </table>
         </td>
         <td class="solid"></td>
@@ -158,7 +170,7 @@
                 <tr>
                     <td>Kelas desain industri (kelas locarno)</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{$data->kelas_desain_industri->nama_kelas_desain_industri}}</td>
                 </tr>
             </table>
         </td>
@@ -169,8 +181,6 @@
             <table>
                 <tr>
                     <td colspan=2>Bersama ini saya/kami lampirkan <sup>5)</sup></td>
-                </tr>
-                <tr>
                 </tr>
                 <tr>
                     <td style="width: 30pt">[  V  ]</td>
@@ -218,19 +228,19 @@
     </tr>
 </table>
 
-<table style="margin-left: 3.9in; margin-bottom: 20px;  width: 3.15in">
+<table style="padding-left: 9.9cm; margin-bottom: 20px;">
     <tr>
         <td style="text-align: center"> 
             Yang mengajukan permohonan desain industri <sup>6)</sup>
             <br>
-            <b>Nama badan hukum</b> hapus jika perorangan
+            <!-- <b>Nama badan hukum</b> hapus jika perorangan -->
             <br>
             <br>
             <br>
             <br>
             <br>
-            <b>Nama orang</b><br>
-            <b>Jabatan</b> hapus jika perorangan
+            <b>{{$data->biodata->nama}}</b><br>
+            <!-- <b>Jabatan</b> hapus jika perorangan -->
         </td>
     </tr>
 </table>

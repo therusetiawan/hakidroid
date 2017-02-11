@@ -59,7 +59,7 @@
                         <td>{{ $c++ }}</td>
                         <td>{{ $d['judul']}}</td>
                         <td>{{ $d['jenis']}}</td>
-                        <td>{{ $d['tanggal']}}</td>
+                        <td>{{ $d['tanggal']->format('d F Y, H:i')}}</td>
                         @if($d['status'] == 1)
                           <td>Diterima</td>
                         @else
@@ -69,18 +69,40 @@
                           @if($d['jenis']  == 'Paten' )
                             <a href="/pengajuan-paten/{{$d['id']}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
                             <a href="/edit-pengajuan-paten/{{$d['id']}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                            <a href="#" class="btn btn-danger delete-pengajuan" data-id="{{$d['id']}}" data-jenis-pengajuan="{{$d['jenis']}}" data-judul="{{ $d['judul']}}"><i class="fa fa-remove"></i></a>
+                            @if($d['status'] == 1)
+                              <a href="/cetak/paten/{{$d['id']}}" class="btn btn-warning"><i class="fa fa-download"></i></a>
+                            @else
+                              <a href="/cetak/paten/{{$d['id']}}" class="btn btn-warning disabled"><i class="fa fa-download"></i></a>
+                            @endif
                           @elseif($d['jenis'] == 'Desain Industri')
                             <a href="/pengajuan-industri/{{$d['id']}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
                             <a href="/edit-pengajuan-industri/{{$d['id']}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                            <a href="#" class="btn btn-danger delete-pengajuan" data-id="{{$d['id']}}" data-jenis-pengajuan="{{$d['jenis']}}" data-judul="{{ $d['judul']}}"><i class="fa fa-remove"></i></a>
+                            @if($d['status'] == 1)
+                              <a href="/cetak/desain-industri/{{$d['id']}}" class="btn btn-warning"><i class="fa fa-download"></i></a>
+                            @else
+                              <a href="/cetak/desain_industri/{{$d['id']}}" class="btn btn-warning disabled"><i class="fa fa-download"></i></a>
+                            @endif
                           @elseif($d['jenis'] == 'Hak Cipta')
                             <a href="/pengajuan-hak-cipta/{{$d['id']}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
                             <a href="/edit-pengajuan-hak-cipta/{{$d['id']}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                            <a href="#" class="btn btn-danger delete-pengajuan" data-id="{{$d['id']}}" data-jenis-pengajuan="{{$d['jenis']}}" data-judul="{{ $d['judul']}}"><i class="fa fa-remove"></i></a>
+                            @if($d['status'] == 1)
+                              <a href="/cetak/hak-cipta/{{$d['id']}}" class="btn btn-warning"><i class="fa fa-download"></i></a>
+                            @else
+                              <a href="/cetak/hak_cipta/{{$d['id']}}" class="btn btn-warning disabled"><i class="fa fa-download"></i></a>
+                            @endif
                           @elseif($d['jenis'] == 'Merek')
                             <a href="/pengajuan-merek/{{$d['id']}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
                             <a href="/edit-pengajuan-merek/{{$d['id']}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                            <a href="#" class="btn btn-danger delete-pengajuan" data-id="{{$d['id']}}" data-jenis-pengajuan="{{$d['jenis']}}" data-judul="{{ $d['judul']}}"><i class="fa fa-remove"></i></a>
+                            @if($d['status'] == 1)
+                              <a href="/cetak/merek/{{$d['id']}}" class="btn btn-warning"><i class="fa fa-download"></i></a>
+                            @else
+                              <a href="/cetak/merek/{{$d['id']}}" class="btn btn-warning disabled"><i class="fa fa-download"></i></a>
+                            @endif
                           @endif
-                          
-                          <a href="#" class="btn btn-danger delete-pengajuan" data-id="{{$d['id']}}" data-jenis-pengajuan="{{$d['jenis']}}" data-judul="{{ $d['judul']}}"><i class="fa fa-remove"></i></a>
                         </td>
                       </tr>
                       @endforeach

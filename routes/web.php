@@ -82,6 +82,13 @@ Route::group(array('prefix'=>'download'), function(){
 	Route::get('merek/etiket-merek/{filename}', 'DownloadController@getMerekEtiketMerek');
 });
 
+Route::group(array('prefix'=>'cetak'), function(){
+	Route::get('paten/{id}', 'GenerateFileController@getFilePaten');
+	Route::get('desain-industri/{id}', 'GenerateFileController@getFileDesainIndustri');
+	Route::get('hak-cipta/{id}', 'GenerateFileController@getFileHakCipta');
+	Route::get('merek/{id}', 'GenerateFileController@getFileMerek');
+});
+
 // Administrator
 Route::get('/administrator', function() {
   	return view('admin.index');
@@ -122,8 +129,3 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
         Route::resource('paten', 'PatenController', ['except' => ['create', 'show', 'store']]);
 	});
 });
-
-Route::get('testhakcipta', "GenerateFileController@getFileHakCipta");
-Route::get('testmerek', "GenerateFileController@getFileMerek");
-Route::get('testpaten', "GenerateFileController@getFilePaten");
-Route::get('testdesainindustri', "GenerateFileController@getFileDesainIndustri");

@@ -8,6 +8,10 @@ use Response;
 
 class DownloadController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth:pengusul');
+    }
+    
 	// Paten
     public function getPatenSuratKuasa($filename){
 		$path = storage_path().'/app/paten/surat_kuasa';		
