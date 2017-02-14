@@ -190,7 +190,7 @@
           <div class="row form-group">
             <label class="col-sm-3">File Uraian</label>
             <div class="col-sm-9">
-              @if($data->dokumen_subtantif_deskripsi[0] != null)
+              @if($data->dokumen_subtantif_deskripsi->count() > 0)
                 <a href="/download/paten/dokumen-subtantif-deskripsi/{{$data->dokumen_subtantif_deskripsi[0]->nama_file}}" class="btn btn-success" target="_blank"><i class="fa fa-check"></i> Sudah terunggah</a>
               @else
                 <a href="#" class="btn btn-success disabled"><i class="fa fa-close"></i> Belum terunggah</a>  
@@ -201,7 +201,7 @@
           <div class="row form-group">
             <label class="col-sm-3">File Gambar</label>
             <div class="col-sm-9">
-              @if($data->dokumen_subtantif_gambar[0] != null)
+              @if($data->dokumen_subtantif_gambar->count() > 0)
                 <a href="/download/paten/dokumen-subtantif-gambar/{{$data->dokumen_subtantif_gambar[0]->nama_file}}" class="btn btn-success" target="_blank"><i class="fa fa-check"></i> Sudah terunggah</a>
               @else
                 <a href="#" class="btn btn-success disabled"><i class="fa fa-close"></i> Belum terunggah</a>

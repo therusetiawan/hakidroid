@@ -36,7 +36,7 @@ class CreateTableHakCipta extends Migration
             $table->string('tempat_diumumkan', 100);
 
             $table->text('uraian_ciptaan');
-            $table->boolean('status');
+            $table->boolean('status')->default(0);
             $table->integer('reviewer_id')->unsigned()->nullable();
             $table->timestamps();
 

@@ -520,7 +520,8 @@ class PengusulController extends Controller
 
             $paten->dokumen_prioritas_terjemahan = $fileName;
         }
-
+        
+        $paten->status = 0;
         $paten->save();
 
         if($request->hasFile('uraian_file')){
@@ -542,7 +543,6 @@ class PengusulController extends Controller
             $dokumen->save();
         }
 
-        $paten->status = 0;
         $paten->save();
 
         $inventor = $request->input('nama_inventor');

@@ -15,11 +15,11 @@ class DesainIndustri extends Model
     }
 
     public function uraian(){
-    	return $this->hasMany('App\DesainIndustriUraian');
+    	return $this->hasMany('App\DesainIndustriUraian')->orderBy('created_at', 'desc');
     }
 
     public function gambar_foto(){
-    	return $this->hasMany('App\DesainIndustriGambarFoto');
+    	return $this->hasMany('App\DesainIndustriGambarFoto')->orderBy('created_at', 'desc');
     }
 
     public function pendesain(){

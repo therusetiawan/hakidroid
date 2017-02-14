@@ -271,7 +271,7 @@
           <div class="row form-group">
             <label class="col-sm-3">Uraian desain industri atau keterangan gambar</label>
             <div class="col-sm-9">
-                @if($data->uraian != null)
+                @if($data->uraian->count() > 0)
                   <a href="/download/desain-industri/uraian/{{$data->uraian[0]->nama}}" class="btn btn-success" target="_blank"><i class="fa fa-download"></i></a>
                 @else
                   <a href="#" class="btn btn-success disabled"><i class="fa fa-download"></i></a>
@@ -289,7 +289,7 @@
           <div class="row form-group">
             <label class="col-sm-3">Gambar-gambar atau foto-foto desain industri:</label>
             <div class="col-sm-9">
-                @if($data->gambar_foto != null)
+                @if($data->gambar_foto->count() >0)
                   <a href="/download/desain-industri/gambar/{{$data->gambar_foto[0]->gambar_foto}}" class="btn btn-success" target="_blank"><i class="fa fa-download"></i></a>
                 @else
                   <a href="#" class="btn btn-success disabled"><i class="fa fa-download"></i></a>

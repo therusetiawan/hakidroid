@@ -33,7 +33,7 @@ class CreateTableMerek extends Migration
             $table->string('etiket_merek', 100);
             $table->integer('kelas_barang_jasa_id')->unsigned();
             $table->text('jenis');
-            $table->boolean('status');
+            $table->boolean('status')->default(0);
             $table->integer('reviewer_id')->unsigned()->nullable();
             $table->timestamps();
 

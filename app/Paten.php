@@ -25,10 +25,10 @@ class Paten extends Model
     }
 
     public function dokumen_subtantif_deskripsi(){
-        return $this->hasMany('App\PatenSubtantifDeskripsi');
+        return $this->hasMany('App\PatenSubtantifDeskripsi')->orderBy('created_at', 'desc');
     }
 
     public function dokumen_subtantif_gambar(){
-        return $this->hasMany('App\PatenSubtantifGambar');
+        return $this->hasMany('App\PatenSubtantifGambar')->orderBy('created_at', 'desc');
     }
 }

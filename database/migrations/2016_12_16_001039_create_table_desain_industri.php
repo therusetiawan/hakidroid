@@ -31,7 +31,7 @@ class CreateTableDesainIndustri extends Migration
             $table->string('lampiran_bukti_pemilikan_hak')->nullable();
             $table->string('lampiran_bukti_prioritas_dan_terjemahan')->nullable();
             $table->string('lampiran_dokumen_desain_industri')->nullable();
-            $table->boolean('status');
+            $table->boolean('status')->default(0);
             $table->integer('reviewer_id')->unsigned()->nullable();
             $table->timestamps();
 

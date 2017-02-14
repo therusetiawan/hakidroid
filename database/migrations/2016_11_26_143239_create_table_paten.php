@@ -30,7 +30,7 @@ class CreateTablePaten extends Migration
             $table->string('surat_pernyataan_invensi_oleh_lembaga')->nullable();
             $table->string('dokumen_prioritas_terjemahan')->nullable();
             $table->integer('reviewer_id')->unsigned()->nullable();
-            $table->boolean('status');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }
