@@ -15,8 +15,8 @@ class CreateTablePaten extends Migration
     {
         Schema::create('paten', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('tanggal_permohonan');
-            $table->date('tanggal_penerimaan');
+            $table->date('tanggal_permohonan')->nullable();
+            $table->date('tanggal_penerimaan')->nullable();
             $table->integer('biodata_id')->unsigned();
             $table->enum('jenis_paten', ['paten', 'paten_sederhana']);
             $table->string('permohonan_paten_nomor', 50);
