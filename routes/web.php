@@ -126,6 +126,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
 	   
         Route::get('home', 'HomeController@index')->name('home');
         Route::resource('desainindustri', 'DesainIndustriController', ['except' => ['create', 'store']]);
-        Route::resource('paten', 'PatenController', ['except' => ['create', 'show', 'store']]);
+        Route::resource('paten', 'PatenController', ['except' => ['create', 'store']]);
 	});
 });

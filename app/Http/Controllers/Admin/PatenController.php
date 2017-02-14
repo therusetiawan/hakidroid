@@ -25,6 +25,24 @@ class PatenController extends Controller
                 ->with('patens', $patens);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $paten = DB::table('paten')
+                    ->join('biodata', 'paten.biodata_id', '=', 'biodata.id')
+                    ->select('paten.*', 'biodata.nama', 'biodata.alamat', 'biodata.kewarganegaraan', 'biodata.npwp', 'biodata.no_hp')
+                    ->where('paten.id', $id)
+                    ->first();
+
+        return view('admin.paten.detail')
+                    ->with('paten', $paten);
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -38,23 +56,6 @@ class PatenController extends Controller
 
         return view('admin.mapel.edit')
                 ->with('mapel', $mapel);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $input = $request->all();
-        $data = Mapel::find($id);
-        $data->update($input);
-
-        return redirect()->route('admin.mapel.index')
-            ->with('successMessage', 'Berhasil Mengedit Data'); 
     }
 
     /**
