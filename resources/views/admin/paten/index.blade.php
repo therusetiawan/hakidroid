@@ -70,8 +70,10 @@
           <p>Apakah anda yakin akan menghapus?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn bg-red" data-dismiss="modal">Ya</button>
+          {{ Form::model($paten, ['route' => ['admin.paten.destroy', $paten->id], 'method'=>'DELETE', 'class' => 'form-inline']) }}
+          <button type="submit" class="btn bg-red">Ya</button>
           <button type="button" class="btn bg-green" data-dismiss="modal">Tidak</button>
+          {{ Form::close() }}
         </div>
       </div>
 

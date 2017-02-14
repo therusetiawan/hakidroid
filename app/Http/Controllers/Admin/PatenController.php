@@ -19,6 +19,7 @@ class PatenController extends Controller
         $patens = DB::table('paten')
                     ->select('paten.*', 'biodata.nama')
                     ->join('biodata', 'paten.biodata_id', '=', 'biodata.id')
+                    ->orderBy('id', 'DESC')
                     ->get();
 
         return view('admin.paten.index')
@@ -33,11 +34,10 @@ class PatenController extends Controller
      */
     public function show($id)
     {
-        $paten = DB::table('paten')
-                    ->join('biodata', 'paten.biodata_id', '=', 'biodata.id')
-                    ->select('paten.*', 'biodata.nama', 'biodata.alamat', 'biodata.kewarganegaraan', 'biodata.npwp', 'biodata.no_hp')
-                    ->where('paten.id', $id)
-                    ->first();
+        $paten = Paten::with('biodata')
+                        ->with('dokumen_subtantif_gambar')
+                        ->with('dokumen_subtantif_deskripsi')
+                        ->where('paten.id', $id)->firstOrFail();
 
         return view('admin.paten.detail')
                     ->with('paten', $paten);
@@ -52,10 +52,11 @@ class PatenController extends Controller
      */
     public function edit($id)
     {
-        $mapel = Mapel::findOrFail($id);
+        $input['status'] = '1';
+        $data = Paten::find($id);
+        $data->update($input);
 
-        return view('admin.mapel.edit')
-                ->with('mapel', $mapel);
+        return redirect()->route('admin.paten.index');
     }
 
     /**
@@ -66,9 +67,8 @@ class PatenController extends Controller
      */
     public function destroy($id)
     {
-        Mapel::destroy($id);
+        Paten::destroy($id);
 
-        return redirect()->route('admin.mapel.index')
-                ->with('successMessage', 'Berhasil Menghapus Data'); 
+        return redirect()->route('admin.paten.index'); 
     }
 }

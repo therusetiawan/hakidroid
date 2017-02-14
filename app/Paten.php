@@ -8,6 +8,8 @@ class Paten extends Model
 {
     protected $table = 'paten';
 
+    protected $fillable = ['tanggal_permohonan', 'tanggal_penerimaan', 'biodata_id', 'jenis_paten', 'permohonan_paten_nomor', 'konsultan', 'judul_invensi', 'hak_prioritas_id', 'paten_pecahan_nomor', 'surat_kuasa', 'surat_pengalihan_hak_atas_penemuan', 'surat_kepemilikan_invensi_oleh_inventor', 'surat_pernyataan_invensi_oleh_lembaga', 'dokumen_prioritas_terjemahan', 'reviewer_id', 'status'];
+
     public function biodata(){
     	return $this->belongsTo('App\Biodata');
     }

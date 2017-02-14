@@ -89,27 +89,6 @@ Route::group(array('prefix'=>'cetak'), function(){
 	Route::get('merek/{id}', 'GenerateFileController@getFileMerek');
 });
 
-// Administrator
-Route::get('/administrator', function() {
-  	return view('admin.index');
-})->name('admin_beranda');
-
-Route::get('/administrator/pengajuanindustri', function() {
-  	return view('admin.pengajuanindustri');
-})->name('admin_desain_industri');
-
-Route::get('/administrator/pengajuanpaten', function() {
-  return view('admin.pengajuanpaten');
-})->name('admin_paten');
-
-Route::get('/administrator/pengajuanindustri/1', function() {
-  	return view('admin.detailpengajuanindustri');
-})->name('admin_desain_industri_detail');
-
-Route::get('/administrator/pengajuanpaten/1', function() {
-  return view('admin.detailpengajuanpaten');
-})->name('admin_paten_detail');
-
 
 // Route list for admin by herusetiawan
 
