@@ -103,7 +103,7 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li class="treeview {{{ (Request::is('admin/desainindustri*' || Request::is('admin/paten')) ? 'active open' : '') }}}">
+        <li class="treeview {{{ (!Request::is('admin/home*') ? 'active open' : '') }}}">
           <a href="#">
             <i class="fa fa-cubes"></i> <span>Pengajuan</span>
             <ul class="treeview-menu">
@@ -118,8 +118,8 @@
                   <a href="{{ route('admin.hakcipta.index') }}"><i class="fa fa-circle-o">
                   </i>Hak Cipta</a>
                 </li>
-                <li {{{ (Request::is('admin/desainindustri*') ? 'class=active' : '') }}}>
-                  <a href="{{ route('admin.desainindustri.index') }}"><i class="fa fa-circle-o">
+                <li {{{ (Request::is('admin/merek*') ? 'class=active' : '') }}}>
+                  <a href="{{ route('admin.merek.index') }}"><i class="fa fa-circle-o">
                   </i>Merek</a>
                 </li>
                 
