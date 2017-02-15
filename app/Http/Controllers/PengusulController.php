@@ -103,7 +103,9 @@ class PengusulController extends Controller
     }
 
     public function getBeranda(){
-        return view('user.beranda');
+        $data = auth('pengusul')->user();
+
+        return view('user.beranda')->withData($data);
     }
 
     public function getPengajuan(){
@@ -672,7 +674,7 @@ class PengusulController extends Controller
             if(File::exists(storage_path() . '/app/paten/dokumen_prioritas_terjemahan/' . $paten->dokumen_prioritas_terjemahan)){
                 File::delete(storage_path() . '/app/paten/dokumen_prioritas_terjemahan/' . $paten->dokumen_prioritas_terjemahan);
             }
-            $file_dokumen_prioritas_terjemahan = $this->uploadFile($paten->biodata_id, $request->file('dokumen_prioritas_terjemahan'), 'Dokimen_Prioritas_Terjemahan_','/app/paten/dokumen_prioritas_terjemahan');
+            $file_dokumen_prioritas_terjemahan = $this->uploadFile($paten->biodata_id, $request->file('dokumen_prioritas_terjemahan'), 'Dokumen_Prioritas_Terjemahan_','/app/paten/dokumen_prioritas_terjemahan');
 
             $paten->dokumen_prioritas_terjemahan = $file_dokumen_prioritas_terjemahan;
         }
@@ -998,13 +1000,17 @@ class PengusulController extends Controller
             return $fileName;
     }
 
-    public function updateUploadFile($filename, $file, $path){
-            $path = storage_path().$path;
+    public function postEditBiodata(Request $request){
+        $data = auth('pengusul')->user();
 
-            $extension = $file->getClientOriginalExtension();
+        $data->nama = $request->input('nama');
+        $data->kewarganegaraan = $request->input('kewarganegaraan');
+        $data->npwp = $request->input('npwp');
+        $data->alamat = $request->input('alamat');
+        $data->telepon_fax = $request->input('telepon_fax');
+        $data->save();
 
-            $file->move($path, $filename);
-
-            return $filename;
+        Session::flash('messageSuccess', 'Update biodata berhasil');
+        return redirect('/beranda');
     }
 }

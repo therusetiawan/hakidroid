@@ -23,13 +23,13 @@
               <a href="#" class="btn btn-default btn-edit-profile"><i class="fa fa-pencil"></i> Sunting Profil</a>
             </div>
             <div id="sunting-profil" class="box-body">
-              <form class="" action="index.html" method="post">
+              <form class="" action="/edit-biodata" method="post">
                 <div class="row form-group">
                   <label class="col-sm-12 control-label">
                     Nama :
                   </label>
                   <div class="col-sm-12">
-                    <input type="text" class="form-control" name="" value="">
+                    <input type="text" class="form-control" name="nama" value="{{$data->nama}}">
                   </div>
                 </div>
                 <div class="row form-group">
@@ -37,7 +37,7 @@
                     Alamat :
                   </label>
                   <div class="col-sm-12">
-                    <input type="text" class="form-control" name="" value="">
+                      <textarea class="form-control" name="alamat">{{$data->alamat}}</textarea>
                   </div>
                 </div>
                 <div class="row form-group">
@@ -45,7 +45,7 @@
                     Kewarganegaraan :
                   </label>
                   <div class="col-sm-12">
-                    <input type="text" class="form-control" name="" value="">
+                    <input type="text" class="form-control" name="kewarganegaraan" value="{{$data->kewarganegaraan}}">
                   </div>
                 </div>
                 <div class="row form-group">
@@ -53,7 +53,7 @@
                     Telepon :
                   </label>
                   <div class="col-sm-12">
-                    <input type="text" class="form-control" name="" value="">
+                    <input type="text" class="form-control" name="telepon_fax" value="{{$data->telepon_fax}}">
                   </div>
                 </div>
                 <div class="row form-group">
@@ -61,10 +61,10 @@
                     NPWP :
                   </label>
                   <div class="col-sm-12">
-                    <input type="text" class="form-control" name="" value="">
+                    <input type="text" class="form-control" name="npwp" value="{{$data->npwp}}">
                   </div>
                 </div>
-
+                {{csrf_field()}}
                 <button type="submit" name="button" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Perubahan</button>
               </form>
             </div>
