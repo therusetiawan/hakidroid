@@ -107,18 +107,18 @@
           <a href="#">
             <i class="fa fa-cubes"></i> <span>Pengajuan</span>
             <ul class="treeview-menu">
-                <li {{{ (Request::is('admin/paten') ? 'class=active' : '') }}}>
+                <li {{{ (Request::is('admin/paten*') ? 'class=active' : '') }}}>
                   <a href="{{ route('admin.paten.index') }}"><i class="fa fa-circle-o"></i>Paten</a>
                 </li>
-                <li {{{ (Request::is('admin/desainindustri') ? 'class=active' : '') }}}>
+                <li {{{ (Request::is('admin/desainindustri*') ? 'class=active' : '') }}}>
                   <a href="{{ route('admin.desainindustri.index') }}"><i class="fa fa-circle-o">
                   </i>Desain Industri</a>
                 </li>
-                <li {{{ (Request::is('admin/desainindustri') ? 'class=active' : '') }}}>
-                  <a href="{{ route('admin.desainindustri.index') }}"><i class="fa fa-circle-o">
+                <li {{{ (Request::is('admin/hakcipta*') ? 'class=active' : '') }}}>
+                  <a href="{{ route('admin.hakcipta.index') }}"><i class="fa fa-circle-o">
                   </i>Hak Cipta</a>
                 </li>
-                <li {{{ (Request::is('admin/desainindustri') ? 'class=active' : '') }}}>
+                <li {{{ (Request::is('admin/desainindustri*') ? 'class=active' : '') }}}>
                   <a href="{{ route('admin.desainindustri.index') }}"><i class="fa fa-circle-o">
                   </i>Merek</a>
                 </li>

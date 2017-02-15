@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Paten;
+use App\HakCipta;
 
-class PatenController extends Controller
+class HakCiptaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,14 +16,14 @@ class PatenController extends Controller
      */
     public function index()
     {
-        $patens = DB::table('paten')
-                    ->select('paten.*', 'biodata.nama')
-                    ->join('biodata', 'paten.biodata_id', '=', 'biodata.id')
+        $hakciptas = DB::table('hak_cipta')
+                    ->select('hak_cipta.*', 'biodata.nama')
+                    ->join('biodata', 'hak_cipta.biodata_id', '=', 'biodata.id')
                     ->orderBy('id', 'DESC')
                     ->get();
 
-        return view('admin.paten.index')
-                ->with('patens', $patens);
+        return view('admin.hakcipta.index')
+                ->with('hakciptas', $hakciptas);
     }
 
     /**
@@ -34,13 +34,13 @@ class PatenController extends Controller
      */
     public function show($id)
     {
-        $paten = Paten::with('biodata')
-                        ->with('dokumen_subtantif_gambar')
-                        ->with('dokumen_subtantif_deskripsi')
-                        ->where('paten.id', $id)->firstOrFail();
+        $hakcipta = HakCipta::with('biodata')
+                        ->with('jenis_hak_cipta')
+                        ->where('id', $id)
+                        ->firstOrFail();
 
-        return view('admin.paten.detail')
-                    ->with('paten', $paten);
+        return view('admin.hakcipta.detail')
+                    ->with('hakcipta', $hakcipta);
     }
 
 
@@ -53,10 +53,10 @@ class PatenController extends Controller
     public function edit($id)
     {
         $input['status'] = '1';
-        $data = Paten::find($id);
+        $data = HakCipta::find($id);
         $data->update($input);
 
-        return redirect()->route('admin.paten.index');
+        return redirect()->route('admin.hakcipta.index');
     }
 
     /**
@@ -67,8 +67,8 @@ class PatenController extends Controller
      */
     public function destroy($id)
     {
-        Paten::destroy($id);
+        HakCipta::destroy($id);
 
-        return redirect()->route('admin.paten.index'); 
+        return redirect()->route('admin.hakcipta.index'); 
     }
 }
