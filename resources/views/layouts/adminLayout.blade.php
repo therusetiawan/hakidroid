@@ -114,6 +114,14 @@
                   <a href="{{ route('admin.desainindustri.index') }}"><i class="fa fa-circle-o">
                   </i>Desain Industri</a>
                 </li>
+                <li {{{ (Request::is('admin/desainindustri') ? 'class=active' : '') }}}>
+                  <a href="{{ route('admin.desainindustri.index') }}"><i class="fa fa-circle-o">
+                  </i>Hak Cipta</a>
+                </li>
+                <li {{{ (Request::is('admin/desainindustri') ? 'class=active' : '') }}}>
+                  <a href="{{ route('admin.desainindustri.index') }}"><i class="fa fa-circle-o">
+                  </i>Merek</a>
+                </li>
                 
             </ul>
           </a>

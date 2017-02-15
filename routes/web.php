@@ -104,7 +104,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
     Route::group(['middleware' => 'auth:web'], function () {
 	   
         Route::get('home', 'HomeController@index')->name('home');
-        Route::resource('desainindustri', 'DesainIndustriController', ['except' => ['create', 'store']]);
         Route::resource('paten', 'PatenController', ['except' => ['create', 'store']]);
+        Route::resource('desainindustri', 'DesainIndustriController', ['except' => ['create', 'store']]);
+        Route::resource('hakcipta', 'HakCiptaController', ['except' => ['create', 'store']]);
 	});
 });

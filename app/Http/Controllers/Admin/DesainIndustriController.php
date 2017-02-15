@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\DesainIndustri;
 
 class DesainIndustriController extends Controller
@@ -15,10 +16,33 @@ class DesainIndustriController extends Controller
      */
     public function index()
     {
-        $desainindustris = DesainIndustri::all();
+        $desainindustris = DB::table('desain_industri')
+                    ->select('desain_industri.*', 'biodata.nama')
+                    ->join('biodata', 'desain_industri.biodata_id', '=', 'biodata.id')
+                    ->orderBy('id', 'DESC')
+                    ->get();
 
         return view('admin.desainindustri.index')
                 ->with('desainindustris', $desainindustris);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $desainindustri = DesainIndustri::with('biodata')
+                                ->with('uraian')
+                                ->with('gambar_foto')
+                                ->with('kelas_desain_industri')
+                                ->with('pendesain')
+                                ->where('id', $id)->firstOrFail();
+
+        return view('admin.desainindustri.detail')
+                    ->with('desainindustri', $desainindustri);
     }
 
 
@@ -30,27 +54,11 @@ class DesainIndustriController extends Controller
      */
     public function edit($id)
     {
-        $mapel = Mapel::findOrFail($id);
-
-        return view('admin.mapel.edit')
-                ->with('mapel', $mapel);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $input = $request->all();
-        $data = Mapel::find($id);
+        $input['status'] = '1';
+        $data = DesainIndustri::find($id);
         $data->update($input);
 
-        return redirect()->route('admin.mapel.index')
-            ->with('successMessage', 'Berhasil Mengedit Data'); 
+        return redirect()->route('admin.desainindustri.index');
     }
 
     /**
@@ -61,9 +69,8 @@ class DesainIndustriController extends Controller
      */
     public function destroy($id)
     {
-        Mapel::destroy($id);
+        DesainIndustri::destroy($id);
 
-        return redirect()->route('admin.mapel.index')
-                ->with('successMessage', 'Berhasil Menghapus Data'); 
+        return redirect()->route('admin.desainindustri.index'); 
     }
 }
