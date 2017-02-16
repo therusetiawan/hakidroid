@@ -6,49 +6,43 @@
 
 @section('content')
   <div class="content-header">
-    <h3>Berita</h3>
+    <h3>Daftar Pengusul</h3>
   </div>
   <div class="content body">
     <div class="row">
       <div class="col-xs-12">
         <div class="box box-success">
-          <div class="clearfix">
-          <br>
-          <div class="pull-right tableTools-container">
-            <a href="{{ route('admin.berita.create') }}" role="button">
-              <button class="btn btn-sm btn-primary" >
-                <i class="fa fa-plus"></i>
-                Tambah Berita
-              </button>
-            </a>
-          </div>
-        </div>
+          <!-- <div class="box-header">
+            test
+          </div> -->
           <div class="box-body">
             <table id="tableindustri" class="table table-bordered">
               <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Judul</th>
-                  <th>Foto</th>
-                  <th></th>
-                  <th></th>
+                  <th>Nama</th>
+                  <th>Kewarganegaraan</th>
+                  <th>NPWP</th>
+                  <th>Alamat</th>
+                  <th>Email</th>
+                  <th>No HP</th>
+                  <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php $i = 1; ?>
-                @foreach($beritas as $berita)
+                @foreach($pengusuls as $pengusul)
                   <tr>
                     <td>{{ $i++ }}</td>
-                    <td>{{ $berita->judul_berita }}</td>
+                    <td>{{ $pengusul->nama }}</td>
+                    <td>{{ $pengusul->kewarganegaraan }}</td>
+                    <td>{{ $pengusul->npwp }}</td>
+                    <td>{{ $pengusul->alamat }}</td>
+                    <td>{{ $pengusul->email }}</td>
+                    <td>{{ $pengusul->no_hp }}</td>
                     <td>
-                      <img src="{{ asset('berita/'.$berita->foto) }}" width="40px">
-                    </td>
-                    <td>
-                      <a data-id="1" href="{{Route('admin.berita.edit', $berita->id)}}" class="btn-view btn bg-green"><i class="fa fa-pencil"></i></a>
-                      </td>
-                    <td>
-                      {{ Form::model($berita, ['route' => ['admin.berita.destroy', $berita->id], 'method'=>'DELETE', 'class' => 'form-inline', 'id' => 'form-hapus-'.$i]) }}
-                      <a href="#" class="btn-delete btn bg-red" onclick="confirmHapus('{{ $i }}','{{ $berita->judul_berita }}')"><i class="fa fa-trash"></i></a>
+                      {{ Form::model($pengusul, ['route' => ['admin.pengusul.destroy', $pengusul->id], 'method'=>'DELETE', 'class' => 'form-inline', 'id' => 'form-hapus-'.$i]) }}
+                      <a href="#" class="btn-delete btn bg-red" onclick="confirmHapus('{{ $i }}','{{ $pengusul->nama }}')"><i class="fa fa-trash"></i></a>
                       {{ Form::close() }}
                     </td>
                   </tr>
@@ -72,7 +66,7 @@
 
     function confirmHapus(id,data) {
     // return false;
-    bootbox.confirm("Hapus Berita '" + data + "' ?", function(result) {
+    bootbox.confirm("Hapus Paten '" + data + "' ?", function(result) {
       if(result) {
         document.getElementById('form-hapus-'+id).submit();
       }

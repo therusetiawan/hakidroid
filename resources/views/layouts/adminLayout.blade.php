@@ -103,7 +103,7 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li class="treeview {{{ (!Request::is('admin/home*') && !Request::is('admin/berita*') ? 'active open' : '') }}}">
+        <li class="treeview {{{ (!Request::is('admin/home*') && !Request::is('admin/berita*') && !Request::is('admin/pengusul*') && !Request::is('admin/admin*') ? 'active open' : '') }}}">
           <a href="#">
             <i class="fa fa-cubes"></i> <span>Pengajuan</span>
             <ul class="treeview-menu">
@@ -129,6 +129,16 @@
         <li class="treeview {{{ (Request::is('admin/berita*') ? 'active' : '') }}}" >
           <a href="{{ route('admin.berita.index') }}">
             <i class="fa fa-file"></i> <span>Berita</span>
+          </a>
+        </li>
+        <li class="treeview {{{ (Request::is('admin/pengusul*') ? 'active' : '') }}}" >
+          <a href="{{ route('admin.pengusul.index') }}">
+            <i class="fa fa-male"></i> <span>User Pengusul</span>
+          </a>
+        </li>
+        <li class="treeview {{{ (Request::is('admin/admin*') ? 'active' : '') }}}" >
+          <a href="{{ route('admin.admin.index') }}">
+            <i class="fa fa-male"></i> <span>User Pengusul</span>
           </a>
         </li>
       </ul>
