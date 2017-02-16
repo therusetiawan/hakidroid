@@ -109,5 +109,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
         Route::resource('desainindustri', 'DesainIndustriController', ['except' => ['create', 'store']]);
         Route::resource('hakcipta', 'HakCiptaController', ['except' => ['create', 'store']]);
         Route::resource('merek', 'MerekController', ['except' => ['create', 'store']]);
+        Route::resource('berita', 'BeritaController');
 	});
 });
