@@ -111,5 +111,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin'], fu
         Route::resource('merek', 'MerekController', ['except' => ['create', 'store']]);
         Route::resource('berita', 'BeritaController');
         Route::resource('pengusul', 'PengusulController', ['except' => ['create', 'store', 'edit', 'update', 'show']]);
+        Route::resource('admin', 'AdminController', ['except' => ['edit', 'update', 'show']]);
 	});
 });

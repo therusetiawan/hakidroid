@@ -138,7 +138,7 @@
         </li>
         <li class="treeview {{{ (Request::is('admin/admin*') ? 'active' : '') }}}" >
           <a href="{{ route('admin.admin.index') }}">
-            <i class="fa fa-male"></i> <span>User Pengusul</span>
+            <i class="fa fa-user"></i> <span>User Admin</span>
           </a>
         </li>
       </ul>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 class AdminController extends Controller
@@ -16,10 +17,26 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $pengusuls = Biodata::all();
+        $users = User::all();
 
-        return view('admin.pengusul.index')
-                ->with('pengusuls', $pengusuls);
+        return view('admin.admin.index')
+                ->with('users', $users);
+    }
+
+    public function create()
+    {
+        return view('admin.admin.create');
+    }
+
+    public function store(Request $request)
+    {
+        $input = $request->all();
+
+        $input['password'] = Hash::make($request->input('password'));
+        User::create($input);
+
+        return redirect()->route('admin.admin.index')
+            ->with('successMessage', 'Berhasil Menambahkan Data Baru'); 
     }
 
     /**
@@ -30,8 +47,8 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        Biodata::destroy($id);
+        User::destroy($id);
 
-        return redirect()->route('admin.pengusul.index'); 
+        return redirect()->route('admin.admin.index'); 
     }
 }

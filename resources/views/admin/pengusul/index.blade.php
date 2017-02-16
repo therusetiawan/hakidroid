@@ -66,7 +66,7 @@
 
     function confirmHapus(id,data) {
     // return false;
-    bootbox.confirm("Hapus Paten '" + data + "' ?", function(result) {
+    bootbox.confirm("Hapus Pengusul '" + data + "' ?", function(result) {
       if(result) {
         document.getElementById('form-hapus-'+id).submit();
       }
