@@ -37,6 +37,9 @@
                 </div>
               </div>
               @endforeach
+              <div class="pages text-center">
+                {{$berita->links()}}
+              </div>
             @else
               <h4>Berita tidak ditemukan.</h4>
             @endif
