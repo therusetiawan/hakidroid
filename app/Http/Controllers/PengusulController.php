@@ -23,6 +23,8 @@ use App\JenisHakCipta;
 use App\Merek;
 use App\KelasBarangJasa;
 
+use App\Berita;
+
 use Auth;
 use Hash;
 use Session;
@@ -32,7 +34,7 @@ use File;
 class PengusulController extends Controller
 {
     public function __construct(){
-        $sites = array('getIndex', 'getLogin', 'postLogin', 'getRegister', 'postRegister');
+        $sites = array('getIndex', 'getLogin', 'postLogin', 'getRegister', 'postRegister', 'getBerita', 'getDetailBerita');
         $this->middleware('auth:pengusul', ['except' => $sites]);
     }
 
@@ -40,7 +42,22 @@ class PengusulController extends Controller
         if(auth('pengusul')->check()){
             return redirect(Route('pengusul_beranda'));
         }
-        return view('user.index');
+
+        $berita = Berita::orderBy('created_at', 'desc')->paginate(5);
+
+        return view('user.index')->withBerita($berita);
+    }
+
+    public function getBerita(){
+        $berita = Berita::orderBy('created_at', 'desc')->get();
+
+        return view('user.berita')->withBerita($berita);   
+    }
+
+    public function getDetailBerita($id){
+        $data = Berita::where('id', $id)->firstOrFail();
+
+        return view('user.detail_berita')->withData($data);
     }
 
     public function getRegister(){

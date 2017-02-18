@@ -41,7 +41,7 @@
                     <td>{{ $i++ }}</td>
                     <td>{{ $berita->judul_berita }}</td>
                     <td>
-                      <img src="{{ asset('berita/'.$berita->foto) }}" width="40px">
+                      <img src="{{ asset('foto_berita/'.$berita->foto) }}" width="40px">
                     </td>
                     <td>
                       <a data-id="1" href="{{Route('admin.berita.edit', $berita->id)}}" class="btn-view btn bg-green"><i class="fa fa-pencil"></i></a>

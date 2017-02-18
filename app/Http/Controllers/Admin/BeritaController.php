@@ -33,7 +33,7 @@ class BeritaController extends Controller
     {
         $input = $request->all();
 
-        $path = public_path('berita/');
+        $path = public_path('foto_berita/');
 
         $file = $request->file('foto');
         $file->move($path, $file->getClientOriginalName());
@@ -73,7 +73,7 @@ class BeritaController extends Controller
         $input['foto'] = $request->input('foto_lama');
 
         if($request->hasFile('foto')){
-            $path = public_path('berita/');
+            $path = public_path('foto_berita/');
 
             $file = $request->file('foto');
             $file->move($path, $file->getClientOriginalName());

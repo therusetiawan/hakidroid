@@ -24,6 +24,10 @@ Route::group(array('prefix'=>'/'), function(){
 	Route::get('beranda', 'PengusulController@getBeranda')->name('pengusul_beranda');
 	Route::post('edit-biodata', 'PengusulController@postEditBiodata');
 
+	// Berita
+	Route::get('berita', 'PengusulController@getBerita');
+	Route::get('berita/{id}', 'PengusulController@getDetailBerita');
+
 	// Daftar Pengajuan
 	Route::get('pengajuan', 'PengusulController@getPengajuan')->name('pengusul_pengajuan');
 
