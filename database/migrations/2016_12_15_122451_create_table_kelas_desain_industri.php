@@ -15,6 +15,7 @@ class CreateTableKelasDesainIndustri extends Migration
     {
         Schema::create('kelas_desain_industri', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nomor_kelas');
             $table->string('nama_kelas_desain_industri', 100);
             $table->text('deskripsi');
             $table->timestamps();
