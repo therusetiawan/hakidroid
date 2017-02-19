@@ -35,6 +35,12 @@
     <a href="#">IPON UNY</a>
   </div>
   <!-- /.login-logo -->
+  @if(Session::has('messageError'))
+  <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>Registrasi Gagal!</strong> {{Session::get('messageError')}}.
+  </div>
+  @endif
   <div class="login-box-body">
     <p class="login-box-msg">Daftar akun untuk menggunakan IPON</p>
 
@@ -63,7 +69,7 @@
         <select name="kewarganegaraan" class="form-control">
           <option>-- Pilih Kewarganegaraan --</option>
           <option value="WNI">WNI (Warga Negara Indonesia)</option>
-          <option value="WNA">WNI (Warga Negara Asing)</option>
+          <option value="WNA">WNA (Warga Negara Asing)</option>
         </select>
       </div>
       <div class="form-group has-feedback">

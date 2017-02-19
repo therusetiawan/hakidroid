@@ -19,7 +19,7 @@ class CreateTableBiodata extends Migration
             $table->string('kewarganegaraan', 50);
             $table->string('npwp', 50)->nullable();
             $table->text('alamat');
-            $table->string('email', 80);
+            $table->string('email', 80)->unique();
             $table->string('no_hp', 12);
             $table->string('telepon_fax', 20)->nullable();
             $table->string('username', 50)->nullable();

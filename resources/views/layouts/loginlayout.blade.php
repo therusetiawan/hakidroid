@@ -35,6 +35,17 @@
     <a href="#">IPON UNY</a>
   </div>
   <!-- /.login-logo -->
+  @if(Session::has('messageRegister'))
+  <div class="alert alert-success alert-dismissable" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Registrasi Berhasil!</strong> {{Session::get('messageRegister')}}
+  </div>
+  @elseif(Session::has('loginFailed'))
+  <div class="alert alert-danger alert-dismissable" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Login Gagal!</strong> {{Session::get('loginFailed')}}
+  </div>
+  @endif
   <div class="login-box-body">
     <p class="login-box-msg">Masuk untuk menggunakan IPON</p>
 

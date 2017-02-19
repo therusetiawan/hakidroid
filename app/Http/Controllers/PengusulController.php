@@ -30,6 +30,7 @@ use Hash;
 use Session;
 use Carbon\Carbon;
 use File;
+use Validator;
 
 class PengusulController extends Controller
 {
@@ -49,7 +50,7 @@ class PengusulController extends Controller
     }
 
     public function getBerita(){
-        $berita = Berita::orderBy('created_at', 'desc')->get();
+        $berita = Berita::orderBy('created_at', 'desc')->paginate(5);
 
         return view('user.berita')->withBerita($berita);   
     }
@@ -69,6 +70,16 @@ class PengusulController extends Controller
     }
 
     public function postRegister(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|unique:biodata,email|max:80'
+        ]);
+
+        if($validator->fails()){
+            Session::flash('messageError', 'Email sudah terdaftar');
+            return redirect('/register');
+        }
+
         $biodata = new Biodata;
         $biodata->nama = $request->input('nama');
         $biodata->kewarganegaraan = $request->input('kewarganegaraan');
@@ -106,7 +117,7 @@ class PengusulController extends Controller
             Session::flash('loginSuccess', 'Login berhasil');
             return redirect(Route('pengusul_beranda'));
         }else{
-            Session::flash('loginFailed', 'Login Gagal');
+            Session::flash('loginFailed', 'Email atau password salah');
             return redirect(Route('pengusul_login'));
         }
         return redirect(Route('pengusul_login'));
